@@ -11,8 +11,8 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <h1 className="hero__title">FNSV</h1>
-        <p className="hero__subtitle">Passwordless Security Authentication Technology</p>
+        <h1 className="hero__title">FNS value - Guardian CCS</h1>
+          <p className="hero__subtitle">안전한 인증을 위한 쉽고 빠른 보안 인증 솔루션</p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"

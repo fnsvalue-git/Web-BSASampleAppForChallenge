@@ -4,7 +4,8 @@ import styles from './HomepageFeatures.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
+    title: 'Android',
+    // Svg: 'https://upload.wikimedia.org/wikipedia/commons/6/64/Android_logo_2019_%28stacked%29.svg',
     Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
@@ -12,9 +13,10 @@ const FeatureList = [
         used to get your website up and running quickly.
       </>
     ),
+    link: 'docs/FNSV/fnsv',
   },
   {
-    title: 'Focus on What Matters',
+    title: 'iOS',
     Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
@@ -22,6 +24,7 @@ const FeatureList = [
         ahead and move your docs into the <code>docs</code> directory.
       </>
     ),
+    link: 'docs/tutorial-basics/create-a-page',
   },
   {
     title: 'Powered by React',
@@ -32,14 +35,17 @@ const FeatureList = [
         be extended while reusing the same header and footer.
       </>
     ),
+    link: 'docs/tutorial-basics/create-a-document',
   },
 ];
 
-function Feature({Svg, title, description}) {
+function Feature({Svg, title, description, link}) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} alt={title} />
+        <button style={{backgroundColor : "transparent", borderWidth : 0}} onClick={()=>{location.href = link}}>
+            <Svg className={styles.featureSvg} alt={title}/>
+        </button>
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
@@ -48,6 +54,8 @@ function Feature({Svg, title, description}) {
     </div>
   );
 }
+
+
 
 export default function HomepageFeatures() {
   return (

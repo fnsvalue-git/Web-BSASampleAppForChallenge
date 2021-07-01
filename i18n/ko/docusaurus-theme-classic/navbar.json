@@ -1,0 +1,10 @@
+{
+  "title": {
+    "message": "Guardian-CCS",
+    "description": "The title in the navbar"
+  },
+  "item.label.Tutorial": {
+    "message": "문서",
+    "description": "Navbar item with label Tutorial"
+  }
+}

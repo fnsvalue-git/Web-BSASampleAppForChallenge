@@ -28,6 +28,10 @@ module.exports = {
           position: 'left',
           label: 'Tutorial',
         },
+        {
+          type: 'localeDropdown',
+          position: 'right',
+        },
         // {to: '/blog', label: 'Blog', position: 'left'},
         // {
         //   href: 'https://github.com/facebook/docusaurus',
@@ -108,4 +112,8 @@ module.exports = {
       },
     ],
   ],
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'ko'],
+  },
 };

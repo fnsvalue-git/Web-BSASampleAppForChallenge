@@ -1,0 +1,18 @@
+{
+  "version.label": {
+    "message": "다음",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Tutorial - Basics": {
+    "message": "기본 기능 가이드",
+    "description": "The label for category Tutorial - Basics and Other in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Tutorial - Extras": {
+    "message": "추가 기능 설명",
+    "description": "The label for category Tutorial - Extras in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.FNS Value documentation": {
+    "message": "에프엔에스벨류",
+    "description": "The label for category 에프엔에스 in sidebar tutorialSidebar"
+  }
+}
