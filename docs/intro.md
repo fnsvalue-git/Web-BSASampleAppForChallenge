@@ -2,34 +2,12 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# 소개
 
-Let's discover **Docusaurus in less than 5 minutes**.
+## Guardian SDK for Android
 
-## Getting Started
+Guardian SDK for Android 는 Android Application 에
+Guardian-CCS 인증을 사용하기 위해 제공됩니다.  
+이 문서는 Android SDK 사용 방법을 안내 합니다.
 
-Get started by **creating a new site**.
 
-Or **try Docusaurus immediately** with **[new.docusaurus.io](https://new.docusaurus.io)**.
-
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**:
-
-```shell
-npx @docusaurus/init@latest init my-website classic
-```
-
-## Start your site
-
-Run the development server:
-
-```shell
-cd my-website
-
-npx docusaurus start
-```
-
-Your site starts at `http://localhost:3000`.
-
-Open `docs/intro.md` and edit some lines: the site **reloads automatically** and display your changes.
