@@ -1,133 +1,129 @@
 ---
 sidebar_position: 1
 ---
-# GCCS 인증
+# GCCS Authentication
 
 ## Android
-이 문서는 Guardian SDK for Android 에서 GCCS 인증 기능 구현 방법을 안내합니다.
-
+This document introduces the way to implement GCCS authentication features with Guardian SDK for Android.
 <br/>
 
-## 기능 설명
-GCCS 인증 기능은 별도의 패스워드 없이 가입 된 GCCS 회원 검증을 위한 인증 기능을 제공하며, 
-인증 요청부터 노드 검증 등 정상적으로 회원 검증 및 인증 완료 시 토큰을 제공합니다. 토큰은 인증 이력 조회 등 API 기능에 활용 시 사용됩니다.
+## Feature Description
+The GCCS authentication feature provides the authentication technology to verify GCCS member without any password.
+A token will be provided when the member proceed the authentication from authentication request until node verification  properly. The token is used for API functions such as authentication history inquiry.
 
-## 인증 요청
-GCCS 인증 요청을 합니다. `GuardianSdk` 의 `requestAuth()` 로 API를 요청합니다.   
-GCCS 에 가입 된 기기만 요청이 가능합니다.
+## Authentication Request
+As for GCCS authentication request, we have to use the `requestAuth()` function from `GuardianSdk` to request the API. In addition, we can only request to the devices that are subscribed to GCCS.
 ### Parameter
 - none
 ### Example
 ```java
-// 인증 요청
+// Authentication Request
 GuardianSdk.getInstance().requestAuth(new GuardianResponseCallback<AuthRequestResponse>() {
     @Override
     public void onSuccess(AuthRequestResponse result) {
-        Log.i(TAG, "결과코드 : " + result.rtCode);
+        Log.i(TAG, "Result code : " + result.rtCode);
     }
 
     @Override
     public void onFailed(ErrorResult errorResult) {
-        Log.e(TAG, "에러코드 : " + errorResult.getErrorCode());
-        Log.e(TAG, "에러코드 : " + errorResult.getErrorMessage());
+        Log.e(TAG, "Error code : " + errorResult.getErrorCode());
+        Log.e(TAG, "Error code : " + errorResult.getErrorMessage());
     }
 });
 ```
 ### AuthRequestResponse
 |Key|Value|Description|
 |------|---|---|
-|rtCode|0|결과코드|
-|rtMsg|String|결과 메시지|
-인증 요청 호출 성공 시 `rtCode` 로 `0`이 수신 됩니다.
+|rtCode|0|Result code|
+|rtMsg|String|Result message|
+The `rtCode` will be `0` if the authentication request is successful.
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
-|errorCode|Int|에러코드|
-|ErrorMessage|String|에러메시지|
+|errorCode|Int|Error code|
+|ErrorMessage|String|Error message|
 
-인증 요청 호출 실패 시 에러코드가 수신 됩니다. 에러 코드에 대한 정보는 **[에러 코드](http://localhost:3000/docs/auth/errorcode)** 를 참조 바랍니다.
+When the authentication request fails, we will receive the error code. Please refer to the **[error code](http://localhost:3000/docs/auth/errorcode)** for more information.
 
 ---
 
-## 인증 시작
-인증 요청이 완료 된 후 인증 시작을 요청합니다. `GuardianSdk` 의 `startAuth()` 로 API를 호출합니다.   
-인증 요청 상태를 확인할 수 있습니다.
+## Authentication Start
+After completing authentication request, we have to request for authentication start. We can call the API by using the `startAuth()` function from `GuardianSdk`.   
+We can check the status of the authentication request.
 ### Parameter
 - none
 ### Example
 ```java
-// 인증 시작
+// Authentication Start
 GuardianSdk.getInstance().startAuth(new GuardianAuthResponseCallback<AuthStartResponse>() {
     @Override
     public void onSuccess(AuthStartResponse result) {
-        Log.i(TAG, "결과코드 : " + result.rtCode);
-        Log.i(TAG, "추가 인증 타입 : " + result.data.authType);
+        Log.i(TAG, "Result code : " + result.rtCode);
+        Log.i(TAG, "Additional authentication type : " + result.data.authType);
     }
 
     @Override
     public void onProcess(AuthProcessResponse process) {
-        Log.i(TAG, "인증상태 : " + process.status);
+        Log.i(TAG, "Authentication status : " + process.status);
     }
 
     @Override
     public void onFailed(ErrorResult errorResult) {
-        Log.e(TAG, "에러코드 : " + errorResult.getErrorCode());
-        Log.e(TAG, "에러코드 : " + errorResult.getErrorMessage());
+        Log.e(TAG, "Error code : " + errorResult.getErrorCode());
+        Log.e(TAG, "Error message : " + errorResult.getErrorMessage());
     }
 });
 ```
 ### AuthProcessResponse
 |Key|Value|Description|
 |------|---|---|
-|status|String|인증 진행 상태|
-인증 시작 호출 후 GCCS 인증 진행 상태 값을 확인할 수 있습니다.   
-상태 값에 대한 설명은 다음과 같습니다.
-- CreateChannel : 채널 생성
-- SelectNodes : 노드 선정
-- StartVerificationOfNodes : 노드 검증 시작
-- CompleteVerificationOfNodes : 노드 검증 완료
+|status|String|Authentication progress status|
+After calling the authentication start, we will recieve the GCCS authentication progress status.   
+The explanations for the status value are as follows:
+- CreateChannel : The channel is created.
+- SelectNodes : The nodes are selected.
+- StartVerificationOfNodes : The verification of nodes is started
+- CompleteVerificationOfNodes : The verification of nodes is completed.
 
 ### AuthStartResponse
 |Key|Value|Description|
 |------|---|---|
-|rtCode|0|결과코드|
-|rtMsg|String|결과 메시지|
-|authType|Int|2차 인증 타입|
+|rtCode|0|Result code|
+|rtMsg|String|Result message|
+|authType|Int|Secondary authentication type|
 
-인증 시작 호출 성공 시 `rtCode` 로 `0`이 수신 되며,   
-사용자가 설정한 추가 인증 타입 값을 확인 합니다.   
-인증 타입 값에 따라 추가 인증 진행 여부를 확인합니다.
+The `rtCode` will be `0` if the authentication start API is being called succesfully. We can check the authentication type and, with that, we can proceed the authentication process accordingly.
 - 작성 중.
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
-|errorCode|Int|에러코드|
-|ErrorMessage|String|에러메시지|
+|errorCode|Int|Error code|
+|ErrorMessage|String|Error message|
 
-인증 시작 호출 실패 시 에러코드가 수신 됩니다. 에러 코드에 대한 정보는 **[에러 코드](http://localhost:3000/docs/auth/errorcode)** 를 참조 바랍니다.
+When the authentication start api call fails, we will receive the error code. Please refer to the  **[Error code](http://localhost:3000/docs/auth/errorcode)** for more information.
 
-## 인증 완료
-인증 완료를 호출합니다. `GuardianSdk` 의 `completeAuth()` 로 API를 호출합니다.   
-추가 인증을 진행 후 인증 완료를 요청하며, 추가 인증이 없는 경우에도 요청이 필요합니다.
+## Authentication Completion
+This will check if the authentication is completed.We can call this API by using the `completeAuth()` function from `GuardianSdk`.    
+We call this Authentication Completion API after proceeding the additional/secondary authentication. We will need to call this API even though there is no additional authentication.
 ### Parameter
 |Key|Value|Description|
 |------|---|---|
-|isAuth|Boolean|추가 인증이 없는 경우 또는 성공 한 경우 true, 추가 인증에 실패한 경우 false|
+|isAuth|Boolean|When there is no additional authentication or when the additional authentication is successful, it will return as `true`; otherwise, when the additional authentication fails, it will return as `false`|
 ### Example
 ```java
-// 인증 완료
+// Authentication Completion
 GuardianSdk.getInstance().completeAuth(true, new GuardianResponseCallback<AuthCompleteResponse>() {
     @Override
     public void onSuccess(AuthCompleteResponse result) {
-        Log.i(TAG, "결과코드 : " + result.rtCode);
+        Log.i(TAG, "Result code : " + result.rtCode);
     }
 
     @Override
     public void onFailed(ErrorResult errorResult) {
-        Log.e(TAG, "에러코드 : " + errorResult.getErrorCode());
-        Log.e(TAG, "에러코드 : " + errorResult.getErrorMessage());
+        Log.e(TAG, "Error code : " + errorResult.getErrorCode());
+        Log.e(TAG, "Error message : " + errorResult.getErrorMessage());
     }
 });
 ```
@@ -135,40 +131,40 @@ GuardianSdk.getInstance().completeAuth(true, new GuardianResponseCallback<AuthCo
 ### AuthCompleteResponse
 |Key|Value|Description|
 |------|---|---|
-|rtCode|0|결과코드|
-|rtMsg|String|결과 메시지|
+|rtCode|0|Result code|
+|rtMsg|String|Result message|
 
-인증 완료 호출 성공 시 `rtCode` 로 `0`이 수신 됩니다.
+The `rtCode` will be `0` if the authentication completion API is being called succesfully.
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
-|errorCode|Int|에러코드|
-|ErrorMessage|String|에러메시지|
+|errorCode|Int|Error code|
+|ErrorMessage|String|Error message|
 
-인증 완료 호출 실패 시 에러코드가 수신 됩니다. 에러 코드에 대한 정보는 **[에러 코드](http://localhost:3000/docs/auth/errorcode)** 를 참조 바랍니다.
+When the authentication completion API call fails, we will receive the error code. Please refer to the  **[Error Code](http://localhost:3000/docs/auth/errorcode)** for more information.
 
 ---
 
-## 인증 결과
-인증 결과를 호출합니다. `GuardianSdk` 의 `resultAuth()` 로 API를 호출합니다.
-요청 성공 시 토큰을 받습니다.
+## Authentication Result
+This will return the authentication result. We can call this API by using the `resultAuth()` function from `GuardianSdk`.
+When successful, we will recieve a token.
 ### Parameter
 - none
 ### Example
 ```java
-// 인증 결과
+// Authentication Rresult
 GuardianSdk.getInstance().resultAuth(new GuardianResponseCallback<AuthResultResponse>() {
     @Override
     public void onSuccess(AuthResultResponse result) {
-        Log.i(TAG, "결과코드 : " + result.rtCode);
-        Log.i(TAG, "토큰 : " + result.data);
+        Log.i(TAG, "Result code : " + result.rtCode);
+        Log.i(TAG, "Token : " + result.data);
     }
 
     @Override
     public void onFailed(ErrorResult errorResult) {
-        Log.e(TAG, "에러코드 : " + errorResult.getErrorCode());
-        Log.e(TAG, "에러코드 : " + errorResult.getErrorMessage());
+        Log.e(TAG, "Error code : " + errorResult.getErrorCode());
+        Log.e(TAG, "Error message : " + errorResult.getErrorMessage());
     }
 });
 ```
@@ -176,41 +172,41 @@ GuardianSdk.getInstance().resultAuth(new GuardianResponseCallback<AuthResultResp
 ### AuthResultResponse
 |Key|Value|Description|
 |------|---|---|
-|rtCode|0|결과코드|
-|rtMsg|String|결과 메시지|
-|data|String|토큰|
+|rtCode|0|Result code|
+|rtMsg|String|Result message|
+|data|String|Token|
 
-인증 결과 호출 성공 시 `rtCode` 로 `0`이 수신 되며, 토큰 값을 받을 수 있습니다.
-토큰은 인증 이력 조회 등 API 호출 시 사용 됩니다.
+If the authentication result API is being called succesfully, the `rtCode` will be `0` and a token will be provided.
+This token will be used to call the other APIs such as authentication history inquiry.
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
-|errorCode|Int|에러코드|
-|ErrorMessage|String|에러메시지|
+|errorCode|Int|Error code|
+|ErrorMessage|String|Error message|
 
-인증 결과 호출 실패 시 에러코드가 수신 됩니다. 에러 코드에 대한 정보는 **[에러 코드](http://localhost:3000/docs/auth/errorcode)** 를 참조 바랍니다.
+When the authentication result API call fails, we will receive the error code. Please refer to the  **[Error Code](http://localhost:3000/docs/auth/errorcode)** for more information.
 
 ---
 
-## 인증 취소
-인증 취소를 호출합니다. `GuardianSdk` 의 `cancelAuth()` 로 API를 호출합니다.
-잘못 된 인증 요청이나 진행 중일 때 취소를 위해 사용합니다.
+## Authentication Cancellation
+This will cancel the authentication. We can call this API by using `cancelAuth()` from `GuardianSdk`.
+We use this in order to cancel the invalid authentication or ongoing authentication process overall.
 ### Parameter
 - none
 ### Example
 ```java
-// 인증 취소
+// Authentication Cancellation
 GuardianSdk.getInstance().cancelAuth(new GuardianResponseCallback<AuthCancelResponse>() {
     @Override
     public void onSuccess(AuthCancelResponse result) {
-        Log.i(TAG, "결과코드 : " + result.rtCode);
+        Log.i(TAG, "Result code : " + result.rtCode);
     }
 
     @Override
     public void onFailed(ErrorResult errorResult) {
-        Log.e(TAG, "에러코드 : " + errorResult.getErrorCode());
-        Log.e(TAG, "에러코드 : " + errorResult.getErrorMessage());
+        Log.e(TAG, "Error code : " + errorResult.getErrorCode());
+        Log.e(TAG, "Error message : " + errorResult.getErrorMessage());
     }
 });
 ```
@@ -218,18 +214,18 @@ GuardianSdk.getInstance().cancelAuth(new GuardianResponseCallback<AuthCancelResp
 ### AuthCancelResponse
 |Key|Value|Description|
 |------|---|---|
-|rtCode|0|결과코드|
-|rtMsg|String|결과 메시지|
+|rtCode|0|Result code|
+|rtMsg|String|Result message|
 
-인증 취소 호출 성공 시 `rtCode` 로 `0`이 수신 되며, 진행 중인 인증이 취소 됩니다.
+If the authentication cancellation API is being called succesfully, the `rtCode` will be `0` and the ongoing authentication process will be cancelled.
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
-|errorCode|Int|에러코드|
-|ErrorMessage|String|에러메시지|
+|errorCode|Int|Error code|
+|ErrorMessage|String|Error code|
 
-인증 취소 호출 실패 시 에러코드가 수신 됩니다. 에러 코드에 대한 정보는 **[에러 코드](http://localhost:3000/docs/auth/errorcode)** 를 참조 바랍니다.
+When the authentication cancellationlation API call fails, we will receive the error code. Please refer to the  **[Error Code](http://localhost:3000/docs/auth/errorcode)** for more information.
 
 ---
 

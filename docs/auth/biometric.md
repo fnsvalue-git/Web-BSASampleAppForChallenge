@@ -64,7 +64,7 @@ GuardianSdk.getInstance().registerBiometric(this, new GuardianResponseCallback<A
 ---
 
 ## 생체 인증
-생체 인증을 호출합니다. `GuardianSdk` 의 `completeAuth()` 로 API를 호출합니다.   
+생체 인증을 호출합니다. `GuardianSdk` 의 `authenticateBiometric()` 로 API를 호출합니다.   
 사용자 디비아스에 등록 된 지문 또는 얼굴 등록 정보로 인증을 사용합니다.  
 사용자가 생체 정보를 사용하지 않는 경우 등록 된 패턴 또는 비밀번로를 사용하여 인증합니다.
 ### Parameter

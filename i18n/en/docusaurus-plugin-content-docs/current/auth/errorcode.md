@@ -1,65 +1,65 @@
 ---
 sidebar_position: 3
 ---
-# 에러 코드
+# Error code
 
-## 설명
-GCCS 인증 및 생체 인증 구현 중 발생할 수 있는 에러를 설명합니다.
+## Description
+This description explains different possible errors during GCCS authentication and biometric authentication implementation.
 
 <br/>
 
-### 인증 시 사용자 관련 에러
+### User related error during authentication
 |Error Code|Description|Solution|
 |------|---|---|
-|2000|클라이언트 키가 잘못 된 경우|발급 받은 클라이언트 키를 확인합니다. <br/> SDK 초기화 시 클라이언트 사용했는지 확인합니다.|
-|2008|가입 되어 있지 않은 사용자 인 경우|GCCS 가입 여부를 확인바랍니다. <br/> 가입 여부는 `GuardianSdk` 에 `me()` 로 확인할 수 있습니다. |
-|5001|인증 시간이 만료 된 경우|설정 된 인증 시간이 만료 된 경우로 인증 재 요청이 필요합니다.|
-|5005|승인 되지 않은 사용자|승인 되지 않은 사용자로 관리자에게 문의바랍니다.|
-|5006|일시 정지 된 사용자|일시 정지 된 사용자로 관리자에게 문의바랍니다.|
-|5007|영구 정지 된 사용자|영구 정지 된 사용자로 관리자에게 문의바랍니다.|
-|5008|탈퇴 사용자|탈퇴 된 사용자로 일정 기간 내에 계정 복구 기능을 통해 복구가 가능합니다.|
+|2000|Invalid Client Key|Please check the issued clienty key. <br/> During SDK initialization, it will verify if the client key has been used.|
+|2008|Unregistered user|Please check if the user has been registered with GCCS. <br/> We can check if the user has been registered by using the `me` function from `GuardianSdk`. |
+|5001|The authentication has expired|When the designated authentication time has expired, we need to send another request for authentication.|
+|5005|Unauthorized user|We would like to recommend the unauthorized user contact the administrator.|
+|5006|Temporary suspended user|We would like to recommend the temporary suspended user contact the administrator.|
+|5007|Permanently suspanded user|We would like to recommend the permanently suspanded user contact the administrator.|
+|5008|Withdrawn user|We would like to recommend the withdrawn user to recover his/her account via the account recovery feature within a certain period of time.|
 
 ---
 
 <br/>
 
-### 인증 관련 에러
+### Authentication related error
 |Error Code|Description|Solution|
 |------|---|---|
-|2004|채널이 존재하지 않는 경우|초기화 설정한 서버 URL 를 확인합니다. <br/>계속 발생하는 경우 관리자에게 문의바랍니다.|
-|2010|인증이 진행 중인 사용자 인 경우|인증이 진행 중인 사용자로 상황에 따라 인증취소 후 재 인증 요청 바랍니다. |
-|5010|인증 실패|관리자에게 문의 바랍니다.|
-|5011|인증이 취소 된 경우|재 인증 요청 바랍니다.|
-|5015|채널 생성 실패|파라미터가 부족한 경우 발생할 수 있습니다. <br/>계속 발생하는 경우 관리자에게 문의바랍니다.|
-|5017|푸시 알림 전송 실패|등록한 FCM Server Key 에 문제가 있거나 업데이트 한 FCM 토큰이 올바른지 확인합니다.|
-|5022|검증이 실패 한 경우|노드 검증이 실패 한 경우 발생 할 수 있습니다. <br/>계속 발생하는 경우 관리자에게 문의바랍니다.|
+|2004|The channel doesn't exist|Please check the url that you have initialized. <br/>If error continues to occur, please contact the administrator.|
+|2010|User whose authentication is in progress|As for the user whose authentication is in progress, please cancel the authentication request and then request for another authentication according to the situation.|
+|5010|Authentication Failed|Please contact the administrator|
+|5011|The authentication has been cancelled|Please request for a re-authentication|
+|5015|Channel creation failed|This occurs when there is not enough parameter. <br/>If error continues to occur, please contact the administrator.|
+|5017|Push notification delivery failed|Please check if therre is any problem with the registered FCM Server Key, or if the updated token is correct.|
+|5022|Verification failed|This occurs when we fail to verificate the authentication node.<br/>If error continues to occur, please contact the administrator.|
 
 ---
 <br/>
 
-### 생체 인증 관련 에러
+### Biometric authentication related error
 |Error Code|Description|Solution|
 |------|---|---|
-|9001|생채인증을 지원하지 않는 안드로이드 버전입니다|사용 중인 기기가 Android 6.0 이하 인 경우 발생할 수 있습니다. <br/> 생체인증을 사용할 수 없는 패턴 or 비밀번호가 사용됩니다. |
-|9002|생체인증 권한이 존재하지 않습니다|작성중|
-|9003|생체인증을 지원하지 않는 기기입니다|사용 중인 기기가 생체인증 인식 모듈을 지원하지 않습니다. <br/> 생체인증을 사용할 수 없는 패턴 or 비밀번호가 사용됩니다.|
-|9004|생체인증 정보를 등록하지 않은 기기 입니다|사용 중인 기기에 생체 정보가 등록되어 있지 않습니다. <br/> 생체인증을 사용할 수 없는 패턴 or 비밀번호가 사용됩니다.|
-|9005|앱에 등록 된 생체인증 정보가 존재하지 않습니다|Android SDK 에 생체정보를 등록하지 않은 기기입니다. <br/> `GuardianSdk` 에 `registerBiometric()` 로 생체정보를 등록바랍니다.|
-|9006|생체인증 정보가 변경 되었습니다|사용 중인 기기 사용자가 생체 정보를 변경 할 경우 발생합니다. <br/> `GuardianSdk` 에 `resetBiometricChange()` 로 생체정보를 초기화바랍니다.|
-|9007|등록되어 있는 생체인증 정보가 존재합니다|생체정보 등록 시 이미 등록 된 생체정보가 있는 경우 발생합니다.|
-|9008|생체인증 정보가 일치하지 않습니다|생체 인증 시 생체정보를 인식하지 못하는 경우 발생합니다. 올바른 생체 정보를 인식바랍니다.|
-|9009|생체인증 오류|기타 오류로 생체 인증을 사용할 수 없습니다. 관리자에게 문의바랍니다.|
+|9001|Biometric authentication is not supported in this particular android version.|This occurs when the android version is 6.0 or lower.<br/> If biometric authenticaiton is not supported, we will use the device pattern or password authentication. |
+|9002|Biometric authorization does not exist.|작성중|
+|9003|Biometric authentication is not supported in this particular device.|The device does not support biometric recognition modules. <br/> If biometric authenticaiton is not supported, we will use the device pattern or password authentication.|
+|9004|This device does not register biometric information.|This device does not register biometric information. <br/> If biometric authenticaiton is not supported, we will use the device pattern or password authentication.|
+|9005|Biometric information registered with the app does not exist.|This device does not register biometric information in Android SDK. <br/> Please use the `registerBiometric()` function from  `GuardianSdk` to register the biometric authentication.|
+|9006|The biometric information has been changed.|This occurs when the biometric information in the device has been changed. <br/> Please use the `resetBiometricChange()` function from `GuardianSdk` to reset the biometric information.|
+|9007|The registered biometric information already exists|This occurs when the registered biometric information already exists|
+|9008|Biometric information does not match.|This occur when the biometric information is not recognized during biometric authentication. Please use the correct biometric information.|
+|9009|Biometric authentication error|Biometric authentication cannot be use due to other errors. Please contact the administrator.|
 
 ---
 
 <br/>
 
-### 기타 에러
+### Other error
 |Error Code|Description|Solution|
 |------|---|---|
-|10002|SDK 에서 에러가 발생|SDK 내에서 Exception이 발생, 관리자에게 문의바랍니다.|
-|10003|서버에서 에러가 발생|API 서버에서 Exception이 발생, 관리자에게 문의바랍니다.|
-|10004|서버와 접속이 되지 않습니다|서버와 연결이 되지 않습니다. 인터넷 연결 확인 및 초기화 시 사용한 서버주소를 확인바랍니다.|
+|10002|An error occurred in the SDK|An Exception occurs in the SDK. Please contact the administrator.|
+|10003|An error occurred in the server|An Exception occurs in the API server. Please contact the administrator.|
+|10004|Cannot connect with the server|The server cannot be connected. Please check the internet connection and also check the server address when initializing.|
 
 
 
