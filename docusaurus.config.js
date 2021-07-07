@@ -10,16 +10,17 @@ module.exports = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'https://lab.fnsvalue.co.kr/static/media/logo_img.655347c1.png',
-  // favicon: 'img/favicon.ico',
   organizationName: 'fns', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
   themeConfig: {
 
     navbar: {
       title: 'Guardian-CCS',
+      style: 'dark',
       logo: {
         alt: 'My Site Logo',
-        src: 'https://yt3.ggpht.com/ytc/AKedOLT-8fz2-9UU546LzEXgLXQfRkHmuQ_FcA4Q4BV_=s88-c-k-c0x00ffffff-no-rj', //  https://fnsvalue.co.kr/resources/images/orange-dark.png
+        src: 'https://yt3.ggpht.com/ytc/AKedOLT-8fz2-9UU546LzEXgLXQfRkHmuQ_FcA4Q4BV_=s88-c-k-c0x00ffffff-no-rj',
+        srcDark: 'https://lh3.googleusercontent.com/proxy/yvkBFQmf5LZhEn7a_qNrR2X6QxlCy9wIZHD8eT1NTwVgIiMgWE1l7Sm2igkKJBxPPGgl4AUv9s9AOGN3hViAFxpUyi4YBSw',
       },
       items: [
         {
@@ -32,12 +33,6 @@ module.exports = {
           type: 'localeDropdown',
           position: 'right',
         },
-        // {to: '/blog', label: 'Blog', position: 'left'},
-        // {
-        //   href: 'https://github.com/facebook/docusaurus',
-        //   label: 'GitHub',
-        //   position: 'right',
-        // },
       ],
     },
     footer: {
