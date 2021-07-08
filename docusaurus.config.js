@@ -9,7 +9,7 @@ module.exports = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/fnsv/logo.png',
+  favicon: '/img/fnsv/logo.png',
   organizationName: 'fns', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
   themeConfig: {
@@ -52,15 +52,15 @@ module.exports = {
           items: [
             {
               label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              href: '',
             },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              href: '',
+            },
+            {
+              label: 'YouTube',
+              href: 'https://www.youtube.com/channel/UCSZiiW4v3LI_ZsfQT6wRXoQ',
             },
           ],
         },
@@ -69,11 +69,11 @@ module.exports = {
           items: [
             {
               label: 'Blog',
-              to: '/blog',
+              to: 'https://blog.naver.com/fnsvalue',
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: '',
             },
           ],
         },
