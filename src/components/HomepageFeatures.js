@@ -5,57 +5,43 @@ import styles from './HomepageFeatures.module.css';
 const FeatureList = [
   {
     title: 'Android',
-    // Svg: 'https://upload.wikimedia.org/wikipedia/commons/6/64/Android_logo_2019_%28stacked%29.svg',
-    Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
+    Svg: require('../../static/img/fnsv/android_img.svg').default,
     description: (
       <>
         Docusaurus was designed from the ground up to be easily installed and
         used to get your website up and running quickly.
       </>
     ),
-    link: 'docs/FNSV/fnsv',
+    link: 'docs/intro',
   },
   {
     title: 'iOS',
-    Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
+    Svg: require('../../static/img/fnsv/ios_img.svg').default,
     description: (
       <>
         Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
         ahead and move your docs into the <code>docs</code> directory.
       </>
     ),
-    link: 'docs/tutorial-basics/create-a-page',
-  },
-  {
-    title: 'Powered by React',
-    Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
-    description: (
-      <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
-      </>
-    ),
-    link: 'docs/tutorial-basics/create-a-document',
+    link: 'docs/intro',
   },
 ];
 
 function Feature({Svg, title, description, link}) {
   return (
-    <div className={clsx('col col--4')}>
+    <div className={clsx('col col--6')}>
       <div className="text--center">
         <button style={{backgroundColor : "transparent", borderWidth : 0}} onClick={()=>{location.href = link}}>
             <Svg className={styles.featureSvg} alt={title}/>
         </button>
       </div>
-      <div className="text--center padding-horiz--md">
+      <div className="text--center padding-horiz--xl">
         <h3>{title}</h3>
         <p>{description}</p>
       </div>
     </div>
   );
 }
-
-
 
 export default function HomepageFeatures() {
   return (
