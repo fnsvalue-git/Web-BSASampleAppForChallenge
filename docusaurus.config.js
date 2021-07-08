@@ -3,13 +3,13 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'My Site',
+  title: 'FNSV Docs',
   tagline: 'Dinosaurs are cool',
   url: 'https://your-docusaurus-test-site.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'https://lab.fnsvalue.co.kr/static/media/logo_img.655347c1.png',
+  favicon: 'img/fnsv/logo.png',
   organizationName: 'fns', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
   themeConfig: {
@@ -19,15 +19,15 @@ module.exports = {
       style: 'dark',
       logo: {
         alt: 'My Site Logo',
-        src: 'https://yt3.ggpht.com/ytc/AKedOLT-8fz2-9UU546LzEXgLXQfRkHmuQ_FcA4Q4BV_=s88-c-k-c0x00ffffff-no-rj',
-        srcDark: 'https://lh3.googleusercontent.com/proxy/yvkBFQmf5LZhEn7a_qNrR2X6QxlCy9wIZHD8eT1NTwVgIiMgWE1l7Sm2igkKJBxPPGgl4AUv9s9AOGN3hViAFxpUyi4YBSw',
+        src: 'img/fnsv/logo.png',
+        srcDark: 'img/fnsv/logo.png',
       },
       items: [
         {
           type: 'doc',
           docId: 'intro',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Documentation',
         },
         {
           type: 'localeDropdown',
@@ -42,7 +42,7 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Tutorial',
+              label: 'Documentation',
               to: '/docs/intro',
             },
           ],
@@ -78,7 +78,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} FNSVALUE All rights reserved.`,
     },
     prism: {
       theme: lightCodeTheme,
