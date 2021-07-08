@@ -57,8 +57,8 @@ This description explains different possible errors during GCCS authentication a
 ### Other error
 |Error Code|Description|Solution|
 |------|---|---|
-|10002|An error occurred in the SDK|An Exception occurs in the SDK. Please contact the administrator.|
-|10003|An error occurred in the server|An Exception occurs in the API server. Please contact the administrator.|
+|10002|SDK error|An Exception occurs in the SDK. Please contact the administrator.|
+|10003|Server error|An Exception occurs in the API server. Please contact the administrator.|
 |10004|Cannot connect with the server|The server cannot be connected. Please check the internet connection and also check the server address when initializing.|
 
 

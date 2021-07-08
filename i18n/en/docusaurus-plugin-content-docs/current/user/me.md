@@ -1,65 +1,64 @@
 ---
 sidebar_position: 2
 ---
-# 회원 여부 및 상태 조회
+# Member status and status inquiry
 
 ## Android
-이 문서는 Guardian SDK for Android 에서 회원 여부 및 상태 조회 방법을 안내합니다.
+This document introduces the way to implement member status and status inquiry with Guardian SDK for Android.
 
 <br/>
 
-## 회원 상태 조회
-사용자에 상태를 조회합니다. `GuardianSdk` 의 `me()` 로 API를 요청합니다.   
-등록 된 회원 여부, 탈퇴, 일시정지 등 상태 등 사용자 상태를 조회합니다.
+## Member status inquiry
+As for inquiring the user's status, please use the `me()` from `GuardianSdk` to call the API.   
+The user status can be as follows: registered member or non-registered user, withdrawn member, temporary suspended user...etc.
 ### Parameter
 - none
 
 ### Example
 ```java
-// 회원 상태 조회
+// Member status inquiry
 GuardianSdk.getInstance().me(new GuardianResponseCallback<MeResponse>() {
     @Override
     public void onSuccess(MeResponse result) {
-        Log.i(TAG, "결과코드 : " + result.rtCode);
-        Log.i(TAG, "회원 아이디 : " + result.data.userKey);
-        Log.i(TAG, "회원 이름 : " + result.data.name);
-        Log.i(TAG, "회원 이메일 : " + result.data.email);
-        Log.i(TAG, "회원 핸드폰 번호 : " + result.data.phoneNum);
-        Log.i(TAG, "회원 추가 인증 타입 : " + result.data.authType);
-        Log.i(TAG, "회원 마지막 업데이트 일자 : " + result.data.uptDt);
+        Log.i(TAG, "Result code : " + result.rtCode);
+        Log.i(TAG, "Member ID : " + result.data.userKey);
+        Log.i(TAG, "Member's name : " + result.data.name);
+        Log.i(TAG, "Member's email : " + result.data.email);
+        Log.i(TAG, "Member's phone number : " + result.data.phoneNum);
+        Log.i(TAG, "Member's additional authentication type : " + result.data.authType);
+        Log.i(TAG, "Member last updated date : " + result.data.uptDt);
     }
 
     @Override
     public void onFailed(ErrorResult errorResult) {
-        Log.e(TAG, "에러코드 : " + errorResult.getErrorCode());
-        Log.e(TAG, "에러코드 : " + errorResult.getErrorMessage());
+        Log.e(TAG, "Error code : " + errorResult.getErrorCode());
+        Log.e(TAG, "Error message : " + errorResult.getErrorMessage());
     }
 });
 ```
 ### MeResponse
 |Key|Value|Description|
 |------|---|---|
-|rtCode|0|결과코드|
-|rtMsg|String|결과 메시지|
-|data|map|. 사용자 아이디<br/>. 이름<br/>. 이메일<br/>. 핸드폰번호<br/>. 추가인증타입<br/>. 마지막 업데이트 일자|
+|rtCode|0|Result code|
+|rtMsg|String|Result message|
+|data|map|. User ID<br/>. User's name<br/>. Email<br/>. Phone number<br/>. Additional authentication type<br/>. Last updated date|
 
-정상으로 가입 된 회읜 인 경우 `rtCode` 로 `0`이 반환되며, `data` 에 회원 정보가 반환됩니다.   
-회원이 없거나 탈퇴 등에 결과코드는 다음과 같습니다.
+If the user is a proper user, the `rtCode` will be `0`, and user information will be returned in `data`.   
+If the user does not exist, or has withdrawn his/her account, the result code will be as follows:
 
 ### ResultCode
 |Result Code|Description|Solution|
 |------|---|---|
-|2007 or 2008|가입되지 않은 회원이거나 기기가 변경 된 경우|가입이 되지 않은 경우 가입을 진행, 기기 변경 된 재등록을 진행합니다.|
-|5005|승인 되지 않은 사용자|승인 되지 않은 사용자로 관리자에게 문의바랍니다.|
-|5006|일시 정지 된 사용자|일시 정지 된 사용자로 관리자에게 문의바랍니다.|
-|5007|영구 정지 된 사용자|영구 정지 된 사용자로 관리자에게 문의바랍니다.|
-|5008|탈퇴 사용자|탈퇴 된 사용자로 일정 기간 내에 계정 복구 기능을 통해 복구가 가능합니다.|
+|2007 or 2008|Non-registered member or the device has been changed|- In case of non-registered member, membership registration is required. <br/> - In case the device has been changed, device registration is required.|
+|5005|Unauthorized user|We would like to recommend the unauthorized user contact the administrator.|
+|5006|Temporary suspended user|We would like to recommend the temporary suspended user contact the administrator.|
+|5007|Permanently suspanded user|We would like to recommend the permanently suspanded user contact the administrator.|
+|5008|Withdrawn user|We would like to recommend the withdrawn user to recover his/her account via the account recovery feature within a certain period of time.|
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
-|errorCode|Int|에러코드|
-|ErrorMessage|String|에러메시지|
+|errorCode|Int|Error code|
+|ErrorMessage|String|Error message|
 
-회원 상태 조회 호출 실패 시 `errorCode` 가 수신되며, 에러코드는 다음과 같습니다
-
+If we fail to call the member status inquiry API, we will recieve an `errorCode`. The error code can be as follows.
