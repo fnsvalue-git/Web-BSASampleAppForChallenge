@@ -52,11 +52,11 @@ module.exports = {
           items: [
             {
               label: 'Stack Overflow',
-              href: '',
+              href: '.',
             },
             {
               label: 'Twitter',
-              href: '',
+              href: '.',
             },
             {
               label: 'YouTube',
@@ -73,7 +73,7 @@ module.exports = {
             },
             {
               label: 'GitHub',
-              href: '',
+              href: '.',
             },
           ],
         },
