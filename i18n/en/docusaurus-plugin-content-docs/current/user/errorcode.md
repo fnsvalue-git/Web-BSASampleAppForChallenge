@@ -1,34 +1,34 @@
 ---
 sidebar_position: 4
 ---
-# 에러 코드
+# Error code
 
-## 설명
-GCCS 회원 관리 구현 중 발생할 수 있는 에러를 설명합니다.
+## Description
+This is the description about possible error codes when implementing GCCS membership management system.
 
 <br/>
 
-### 회원 관리 관련 에러
+### Membership management related error
 |Error Code|Description|Solution|
 |------|---|---|
-|2000|클라이언트 키가 잘못 된 경우|발급 받은 클라이언트 키를 확인합니다. <br/> SDK 초기화 시 클라이언트 사용했는지 확인합니다.|
-|2002|필수 파라미터가 존재 하지 않는 경우|SDK 호출 시 파라미터를 확인바랍니다.|
-|2008|가입 되어 있지 않은 사용자 인 경우|GCCS 가입 여부를 확인바랍니다. <br/> 가입 여부는 `GuardianSdk` 에 `me()` 로 확인할 수 있습니다. |
-|5005|승인 되지 않은 사용자|승인 되지 않은 사용자로 관리자에게 문의바랍니다.|
-|5006|일시 정지 된 사용자|일시 정지 된 사용자로 관리자에게 문의바랍니다.|
-|5007|영구 정지 된 사용자|영구 정지 된 사용자로 관리자에게 문의바랍니다.|
-|5008|탈퇴 사용자|탈퇴 된 사용자로 일정 기간 내에 계정 복구 기능을 통해 복구가 가능합니다.|
+|2000|Invalid Client Key|Please check the issued clienty key. <br/> During SDK initialization, it will verify if the client key has been used.|
+|2002|Required parameter not found|When calling the SDK, please check the parameter requirement.|
+|2008|Unregistered user|Please check if the user has been registered with GCCS. <br/> We can check if the user has been registered by using the `me` function from `GuardianSdk`. |
+|5005|Unauthorized user|We would like to recommend the unauthorized user contact the administrator.|
+|5006|Temporary suspended user|We would like to recommend the temporary suspended user contact the administrator.|
+|5007|Permanently suspanded user|We would like to recommend the permanently suspanded user contact the administrator.|
+|5008|Withdrawn user|We would like to recommend the withdrawn user to recover his/her account via the account recovery feature within a certain period of time.|
 
 ---
 
 <br/>
 
-### 기타 에러
+### Other error
 |Error Code|Description|Solution|
 |------|---|---|
-|10002|SDK 에서 에러가 발생|SDK 내에서 Exception이 발생, 관리자에게 문의바랍니다.|
-|10003|서버에서 에러가 발생|API 서버에서 Exception이 발생, 관리자에게 문의바랍니다.|
-|10004|서버와 접속이 되지 않습니다|서버와 연결이 되지 않습니다. 인터넷 연결 확인 및 초기화 시 사용한 서버주소를 확인바랍니다.|
+|10002|SDK error|An Exception occurs in the SDK. Please contact the administrator.|
+|10003|Server error|An Exception occurs in the API server. Please contact the administrator.|
+|10004|Cannot connect with the server|The server cannot be connected. Please check the internet connection and also check the server address when initializing.|
 
 
 
