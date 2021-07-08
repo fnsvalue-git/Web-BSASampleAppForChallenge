@@ -64,6 +64,24 @@ android {
 ```
 ---
 
+### 런타임 퍼미션
+Android 6.0 Marshmallow (API 23) 이상부터는 디바이스에 자원을 사용하기 위해 런타임 퍼미션(runtime permissions) 이 필요합니다.   
+Guardian SDK for Android 에서 요구하는 퍼미션은 다음과 같습니다.
+```java
+if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+    if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED ||
+        ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
+        ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+        ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+    }
+}
+```
+권한의 사용용도는 다음과 같습니다.
+- READ_PHONE_STATE : 사용자 인증과 모바일기기가 변경 되었을 경우 사용.
+- ACCESS_FINE_LOCATION or ACCESS_COARSE_LOCATION : 위치 정보를 통한 회원가입 및 기기 재등록 시 사용.
+- CAMERA : QR 인증을 위한 스캐너 실행 시 사용.
+---
+
 ### 초기화
 Android SDK를 사용하기 위해서는 초기화를 해야 합니다. Application 을 사용할 경우  
 다음과 같이 초기화할 수 있습니다.
