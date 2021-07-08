@@ -1,4 +1,12 @@
-# Website
+# 사이트 화면 보기 위한 명령어
+
+```console
+npm run build
+npm run serve
+```
+
+
+## Website
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
@@ -23,6 +31,13 @@ yarn build
 ```
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
+
+## 사이트 화면 보기 위한 명령어
+
+```console
+npm run build
+npm run serve
+```
 
 ## Deployment
 
