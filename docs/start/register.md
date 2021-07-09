@@ -11,7 +11,7 @@ Please contact the FNS manager about this matter.
 The minimum information for issuing requests is as follows.
 - Company's name
 - Android 
-  - Pakage Name
+  - Package Name
     
 - ios
   - Bundle ID

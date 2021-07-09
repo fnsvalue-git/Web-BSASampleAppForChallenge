@@ -26,5 +26,9 @@
   "sidebar.tutorialSidebar.category.Membership Management": {
     "message": "회원관리",
     "description": "The label for category 회원관리 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Client Registration": {
+    "message": "클라이언트 요청",
+    "description": "The label for category 클라이언트 요청 in sidebar tutorialSidebar"
   }
 }
