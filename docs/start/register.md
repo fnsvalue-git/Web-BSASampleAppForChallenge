@@ -1,29 +1,29 @@
 ---
 sidebar_position: 1
 ---
-# 애플리케이션 등록
+# Application Registration
 
 ## Overview
-Guardian SDK 를 사용하려면 애플리케이션 등록 요청 및 클라이언트 키 발급이 필요합니다.   
-이와 관련 된 사항은 FNS 관리자에게 문의 바랍니다.
+In order to use Guardian SDK, we need the application registration requests and client key issuance.   
+Please contact the FNS manager about this matter.
 
-## 발급 요청
-발급 요청을 위한 최소 정보는 다음과 같습니다.
-- 회사 이름
+## Issue Request
+The minimum information for issuing requests is as follows.
+- Company's name
 - Android 
-  - 패키지명
+  - Pakage Name
     
 - ios
-  - 번들 ID
+  - Bundle ID
   
 <pre>
-모바일 아닌 타 플랫폼 (Web, Window ...) 에서 인증을 할 경우
+In case of non-mobile platforms (Web, Window...) authentication
 
-Firebase Cloud Messaging(FCM) 등록 요청 필요합니다.
+Firebase Cloud Messaging (FCM) registration request is required.
 </pre>
 
-## 클라이언트 키 발급
-요청 완료 후 정상적으로 발급 된 클라이언트 예시는 다음과 같습니다.
+## Client Key Issurance
+The following is an example of a client , which has been issued properly, after completing the request.
 ``` json
 {
     "clientKey" : "ea3aca8g59354cff908tu7fae6849d06"
