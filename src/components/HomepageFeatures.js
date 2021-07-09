@@ -8,8 +8,8 @@ const FeatureList = [
     Svg: require('../../static/img/fnsv/android_img.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+          This guide for SDK installation and usage provides
+          instructions on how to use GCCS features on <strong>Android</strong> devices.
       </>
     ),
     link: 'docs/intro',
@@ -19,11 +19,11 @@ const FeatureList = [
     Svg: require('../../static/img/fnsv/ios_img.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+          Check out this guide for SDK installation and usage
+          to learn how to use GCCS features on <strong>iOS</strong> devices.
       </>
     ),
-    link: 'docs/intro',
+    link: '/',
   },
 ];
 
