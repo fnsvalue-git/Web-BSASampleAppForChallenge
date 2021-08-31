@@ -30,6 +30,12 @@ module.exports = {
           label: 'Android',
         },
         {
+          type: 'doc',
+          docId: 'web/intro',
+          position: 'left',
+          label: 'Web',
+        },
+        {
           type: 'localeDropdown',
           position: 'right',
         },
@@ -44,6 +50,10 @@ module.exports = {
             {
               label: 'Android',
               to: '/docs/android/intro',
+            },
+            {
+              label: 'Web',
+              to: '/docs/web/intro',
             },
           ],
         },
