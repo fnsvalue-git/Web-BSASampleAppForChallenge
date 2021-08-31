@@ -25,9 +25,9 @@ module.exports = {
       items: [
         {
           type: 'doc',
-          docId: 'intro',
+          docId: 'android/intro',
           position: 'left',
-          label: 'Documentation',
+          label: 'Android',
         },
         {
           type: 'localeDropdown',
@@ -42,22 +42,14 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Documentation',
-              to: '/docs/intro',
+              label: 'Android',
+              to: '/docs/android/intro',
             },
           ],
         },
         {
           title: 'Community',
           items: [
-            {
-              label: 'Stack Overflow',
-              href: '.',
-            },
-            {
-              label: 'Twitter',
-              href: '.',
-            },
             {
               label: 'YouTube',
               href: 'https://www.youtube.com/channel/UCSZiiW4v3LI_ZsfQT6wRXoQ',
@@ -70,10 +62,6 @@ module.exports = {
             {
               label: 'Blog',
               to: 'https://blog.naver.com/fnsvalue',
-            },
-            {
-              label: 'GitHub',
-              href: '.',
             },
           ],
         },
@@ -92,15 +80,9 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

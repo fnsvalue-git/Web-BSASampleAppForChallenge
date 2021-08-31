@@ -12,7 +12,7 @@ const FeatureList = [
           instructions on how to use GCCS features on <strong>Android</strong> devices.
       </>
     ),
-    link: 'docs/intro',
+    link: 'docs/android/intro',
   },
   {
     title: 'iOS',

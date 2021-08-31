@@ -3,31 +3,31 @@
     "message": "다음",
     "description": "The label for version current"
   },
-  "sidebar.tutorialSidebar.category.Tutorial - Basics": {
+  "sidebar.androidSidebar.category.Tutorial - Basics": {
     "message": "기본 기능 가이드",
     "description": "The label for category Tutorial - Basics and Other in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.Tutorial - Extras": {
+  "sidebar.androidSidebar.category.Tutorial - Extras": {
     "message": "추가 기능 설명",
     "description": "The label for category Tutorial - Extras in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.FNS Value documentation": {
+  "sidebar.androidSidebar.category.FNS Value documentation": {
     "message": "에프엔에스벨류 문서",
     "description": "The label for category 에프엔에스 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.Authentication": {
+  "sidebar.androidSidebar.category.Authentication": {
     "message": "인증하기",
     "description": "The label for category 인증하기 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.Start": {
+  "sidebar.androidSidebar.category.Start": {
     "message": "시작하기",
     "description": "The label for category 시작하기 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.Membership Management": {
+  "sidebar.androidSidebar.category.Membership Management": {
     "message": "회원관리",
     "description": "The label for category 회원관리 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.Client Registration": {
+  "sidebar.androidSidebar.category.Client Registration": {
     "message": "클라이언트 요청",
     "description": "The label for category 클라이언트 요청 in sidebar tutorialSidebar"
   }
