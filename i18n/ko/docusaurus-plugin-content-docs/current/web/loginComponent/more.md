@@ -24,4 +24,5 @@ sidebar_position: 2
 
 |버전|변경 날짜|변경 이력|Asset URL|
 |---|---|---|---|
+|1.0.1| 2021.09.10 | - 버그 수정 및 안정화 | `https://developers.fnsvalue.co.kr/login-component/1.0.1/guardian.js` |
 |1.0.0| 2021.07.30 | - 초기 배포<br/>- 패스워드 리스 인증 제공<br/> - QR 인증 제공 | `https://developers.fnsvalue.co.kr/login-component/1.0.0/guardian.js` |
