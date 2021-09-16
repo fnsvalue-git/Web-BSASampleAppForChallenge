@@ -6,7 +6,7 @@ sidebar_position: 3
 # QR 인증
 이 문서는 Guardian-JS 에서 QR 인증을 사용하기 위한 방법을 안내합니다.   
 
-# 기능 설명
+## 기능 설명
 아이디를 입력하지 않고 모바일을 이용한 QR 인증 구현 방법을 설명합니다.   
 `guardian.js` 로 구현한 QR 코드 생성 후    
 `Guardian-CCS` 앱에서 메인화면 => `QR 인증` 을 선택하여 QR 스캐너를 활성화 하여 QR 코드를 스캔합니다.
