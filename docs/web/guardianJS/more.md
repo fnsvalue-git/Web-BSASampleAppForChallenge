@@ -1,18 +1,18 @@
 ---
-sidebar_label: See More
-sidebar_position: 2
+sidebar_label: 더보기
+sidebar_position: 4
 ---
-# See More GuardianJS
+# GuardianJS 더보기
 
-## Demo Page
-[Demo Page](https://developers.fnsvalue.co.kr/guardian-js/demo/)
+## 데모 페이지
+[데모 페이지 링크](https://developers.fnsvalue.co.kr/guardian-js/demo/)
 를 통해 GuardianJS에 포함된 기능 일부를 확인할 수 있습니다.
 
 데모 페이지는 가장 최신 버전의 GuardianJS를 사용합니다.
 - Asset URL
-  ```
-  https://developers.fnsvalue.co.kr/guardian-js/guardian.js
-  ```
+```
+https://developers.fnsvalue.co.kr/guardian-js/guardian.js
+```
 
 ## 변경 이력
 버전별 변경 이력은 다음과 같습니다.
