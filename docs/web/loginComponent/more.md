@@ -1,19 +1,19 @@
 ---
-sidebar_label: See More
+sidebar_label: 더보기
 sidebar_position: 2
 ---
-# See More LoginComponent
+# LoginComponent 더보기
 
-## Demo Page
+## 데모 페이지
 
-[Demo Page](https://developers.fnsvalue.co.kr/login-component/demo/)
+[데모 페이지](https://developers.fnsvalue.co.kr/login-component/demo/)
 를 통해 LoginComponent의 기능을 확인할 수 있습니다.
 
 데모 페이지는 가장 최신 버전의 LoginComponent를 사용합니다.
-  - Asset URL
-    ```
-    https://developers.fnsvalue.co.kr/login-component/guardian.js
-    ```
+- Asset URL
+  ```
+  https://developers.fnsvalue.co.kr/login-component/guardian.js
+  ```
 - [Simple 데모 페이지](https://developers.fnsvalue.co.kr/login-component/demo/simple.html)
   : 기본적인 기능을 사용한 데모 페이지입니다.
 - [Custom 데모 페이지](https://developers.fnsvalue.co.kr/login-component/demo/custom.html)
