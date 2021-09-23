@@ -1,23 +1,23 @@
 ---
-sidebar_label: 시작하기
+sidebar_label: Outline
 sidebar_position: 1
 ---
 # Guardian-JS
 
-GuardianCCS를 사용하여 인증을 하기 위한 GuardianJS 에 대한 설명입니다.   
-GuardianJS 는 web에서 쉽게 인증 기능을 구현하기 위해 만들어진 script 기반 library 입니다.
+Introducing the Guardian-JS used for Guardian CCS Authentication.   
+Guardian-JS is a JavaScript library built for easy authentication on the web.
 
-## Guardian-JS 시작하기
+## Load Guardian-JS 
 
-최신 버전에 `Guardian-JS` 에 사용할 수 있습니다.
+Latest version of `Guardian-JS` is available.
 
 ```html
 <script type="text/javascript" src="https://developers.fnsvalue.co.kr/guardian-js/guardian.js"></script>
 ```
 
-### 특정 버전 사용하기
+### Specify the version
 
-특정 버전을 사용할 경우 `Guardian-JS` URL 에 VERSION 을 기입합니다.
+If necessary, specify the version on the `Guardian-JS` URL as below.
 
 ```html
 <script type="text/javascript" src="https://developers.fnsvalue.co.kr/guardian-js/{VERSION}/guardian.js"></script>
@@ -27,29 +27,28 @@ GuardianJS 는 web에서 쉽게 인증 기능을 구현하기 위해 만들어�
 <script type="text/javascript" src="https://developers.fnsvalue.co.kr/guardian-js/1.0.5/guardian.js"></script>
 ```
 
-## 지원기능
-Guardian-JS 에서 제공하는 method
+## Functions provided
+Below are the methods provided by the Guardian-JS
 
 |Name|Description|
 |---|---|
-|constructor| Guardian-JS 생성자입니다.|
-|requestAuth| GuardianCCS 인증 요청을 진행하며, 인증 성공 후 설정 URL 로 redirect 합니다. |
-|requestAuthCallback| GuardianCCS 인증 요청을 진행하며, 인증 성공 후 설정 CallBack 으로 결과를 리턴합니다. |
-|onCancel| GuardianCCS 인증 요청을 취소합니다. |
-|setAuthTimer| 남은 인증 시간을 제공합니다. |
-|setAuthMessage| 인증 진행 메시지를 제공합니다. |
-|requestQr| GuardianCCS QR 인증 요청을 진행하며, 인증 성공 후 설정 URL 로 redirect 합니다. |
-|requestQrCallback| GuardianCCS QR 인증 요청을 진행하며, 인증 성공 후 설정 CallBack 으로 결과를 리턴합니다. |
-|onQrCancel| GuardianCCS QR 인증 요청을 취소합니다. |
-|setQrTimer| 남은 QR 인증 시간을 제공합니다. |
-|setQrMessage| QR 인증 메시지를 제공합니다. |
+|constructor|Constructor of the Guardian-JS|
+|requestAuth|Handles the Guardian CCS Authentication request, and redirect to the setup URL after authenticated|
+|requestAuthCallback|Handles the Guardian CCS Authentication request, and returns the result to the setup CallBack function after authenticated|
+|onCancel|Cancel the Guardian CCS Authentication request |
+|setAuthTimer| Provides remaining time for authentication |
+|setAuthMessage| Provides authentication process message |
+|requestQr|Handles the Guardian CCS QR Authentication request, and redirect to the setup URL after authenticated|
+|requestQrCallback| Handles the Guardian CCS QR Authentication request, and returns the result to the setup CallBack function after authenticated|
+|onQrCancel| Cancel the Guardian CCS QR Authentication request |
+|setQrTimer| Provides remaining time for QR Authentication |
+|setQrMessage| Provides QR authentication process message |
 
-## 기능 설명 및 예시
+## Function Description and Example
 
-### constructor
-Guardian-JS 를 사용하기 위한 생성자이며, `필수 요소` 입니다.
-Guardian-JS 를 사용하기 위해 clientKey가 필요합니다.   
-Guardian-JS 에서 사용하는 clientKey 는 GuardianCCS 관리자에게 문의 또는 GuardianCCS Portal 에서 확인 할 수 있습니다.
+### Constructor
+A constructor is an `essential element` for the Guardian-JS. 
+The client key which is necessary to utilize the Guardian-JS, can be confirmed by inquiring the Guardian CCS management team or directly at the Guardian CCS Portal.
 
 
 ```
@@ -59,7 +58,7 @@ constructor(clientKey)
 #### Parameter
 |Name|Type|Description|
 |---|---|---|
-|clientKey|String|GuardianCCS 를 사용하는 Client Key|
+|clientKey|String|Client Key needed to utilize the Guardian CCS|
 
 #### Code Example
 ```javascript

@@ -1,19 +1,19 @@
 ---
-sidebar_label: QR 인증
+sidebar_label: QR Authentication
 sidebar_position: 3
 ---
 
-# QR 인증
-이 문서는 Guardian-JS 에서 QR 인증을 사용하기 위한 방법을 안내합니다.   
+# QR Authentication
+This document describes how to utilize the GCCS Authentication in the Guardian-JS
 
-## 기능 설명
-아이디를 입력하지 않고 모바일을 이용한 QR 인증 구현 방법을 설명합니다.   
-`guardian.js` 로 구현한 QR 코드 생성 후    
-`Guardian-CCS` 앱에서 메인화면 => `QR 인증` 을 선택하여 QR 스캐너를 활성화 하여 QR 코드를 스캔합니다.
+## Function Description
+QR Authentication can be used via mobile devices without an ID.   
+First, create a QR code which can be implemented by `guardian.js` then choose `QR Authentication` on the main screen of `Guardian-CCS` application to activate a QR Scanner to scan the QR code. 
 
-## QR 인증 요청
-QR 인증을 요청합니다. `requestQrCallback()` 로 API를 호출합니다.   
-QR 인증을 요청하면 사용자가 설정한 `<canvas />` 태그에 QR 코드가 생성 되며, 앱을 통해 QR 코드를 스캔하여 인증 성공 시 `onSuccess` 통해 결과가 반환됩니다.
+
+## QR Authentication Request
+When the authentication is requested, API calls are made with `requestQrCallback`
+Upon the request of QR Authentication, QR code will be created on `<canvas/> tag` which the user has set up, and the result will be returned through onSuccess if the QR Authentication is successful.
 
 ```
 requestQrCallback(qrCanvas, successCallback, errCallback)
@@ -22,7 +22,7 @@ requestQrCallback(qrCanvas, successCallback, errCallback)
 ### Parameter
 |Name|Type|Description|
 |---|---|---|
-|qrCanvas|Element|GuardianCCS QR을 생성할 `<canvas/>` element|
+|qrCanvas|Element|`<canvas/>` element to create GuardianCCS QR code|
 
 ### Code Example
 ```javascript
@@ -42,40 +42,40 @@ gccs.requestQrCallback(qrCanvas, (result) => {
 |------|---|---|
 |data|String|token|
 
-인증이 성공 하면 `토큰`이 반환 되며, 토큰은 GCCS 기능 활용 시 사용 됩니다.
+The token will be returned if the authentication succeeds, and it can be utilized for the GCCS authentication.
 
 ### onError
 |Key|Type|Description|
 |------|---|---|
-|errorCode|0|에러코드|
-|errorMsg|String|에러 메시지|
+|errorCode|0|Error code|
+|errorMsg|String|Error message|
 
-인증 실패 시 에러코드와 에러메시지가 반환됩니다. 
-반환 될 수 있는 에러코드는 다음과 같습니다.
+If authentication fails, error code and error message will be returned.   
+Possible error codes are as follows.
 
 |ErrorCode|Description|Solution|
 |------|---|---|
-|2000|클라이언트 키가 잘못 된 경우|발급 받은 클라이언트 키를 확인합니다.|
-|2008|가입 되어 있지 않은 사용자 인 경우|GCCS 가입 여부를 확인바랍니다.|
-|3201|클라이언트 연동이 되어 있지 않은 경우|GCCS 가입 완료 후 메뉴 => 사이트 연동을 통해 연동을 진행해주시기 바립니다.|
-|5001|인증 시간이 만료 된 경우|인증 시간이 만료 된 경우로 인증 재 요청이 필요합니다.|
-|5005|승인 되지 않은 사용자|승인 되지 않은 사용자로 관리자에게 문의바랍니다.|
-|5006|일시 정지 된 사용자|일시 정지 된 사용자로 관리자에게 문의바랍니다.|
-|5007|영구 정지 된 사용자|영구 정지 된 사용자로 관리자에게 문의바랍니다.|
-|5008|탈퇴 사용자|탈퇴 된 사용자로 일정 기간 내에 계정 복구 기능을 통해 복구가 가능합니다.|
-|2010|인증이 진행 중인 사용자 인 경우|인증이 진행 중인 사용자로 상황에 따라 인증취소 후 재 인증 요청 바랍니다. |
-|5011|인증이 취소 된 경우|재 인증 요청 바랍니다.|
-|5015|채널 생성 실패|파라미터가 부족한 경우 발생할 수 있습니다. <br/>지속적으로 경우문의바랍니다.|
-|5017|푸시 알림 전송 실패|FCM 등에 문제가 발생한 경우입니다. <br/>지속적으로 문의바랍니다.|
-|5022|검증이 실패 한 경우|노드 검증이 실패 한 경우 발생 할 수 있습니다. <br/>지속적으로 발생하는 경우 문의바랍니다.|
-|5023|QR ID 불일치|인증 시간이 만료 되었을 시 발생되며 재 인증 요청이 필요합니다|
-|5024|QR URL CLIENT 불일치|타 앱으로 QR 스캔시 발생되며 Guardian-CCS 앱으로 QR 코드 스캔 확인합니다.|
+|2000|Invalid client key|Check the client key|
+|2008|Unregistered user|Check GCCS sign up status|
+|3201|Not properly linked client|After signing up for GCCS, select Menu => My BSA => Trusted Website => Site Link and link the client website|
+|5001|Authentication timeout|Make request for authentication once again because previous authentication is no longer valid|
+|5005|Unauthorized user|Contact with the FNS management team to solve this matter|
+|5006|Temporarily suspended user|Contact with the FNS management team to solve this matter|
+|5007|Permanently suspended user|Contact with the FNS management team to solve this matter|
+|5008|Withdrawn user|Accounts can be reactivated within certain period of time by reactivation|
+|2010|User authentication in-progress|Depending on the circumstances, cancel previous authentication and request for new one |
+|5011|User authentication canceled|Make request for re-authentication|
+|5015|Fail to create channel|Can occur when the parameters are not enough <br/>If it happens constantly, please inquire at the FNS management team|
+|5017|Fail to send push notification|Problems occurred with FCM, etc. <br/>If it happens constantly, please inquire at the FNS management team|
+|5022|Authentication failure|If node verification fails, this error can occur <br/>If it happens constantly, please inquire at the FNS management team|
+|5023|Invalid QR ID|Can occur when authentication has expired. In this case, re-authentication should be requested|
+|5024|Invalid QR URL CLIENT|Can occur when scanned through another application. It must be scanned through Guardian-CCS application |
 
 ---
 
-## QR 인증 취소
-QR 인증 취소를 요청합니다. 인증 취소를 한 경우 진행 중인 인증이 취소되며  
-다시 재인증을 요청할 수 있습니다.
+## Cancel QR Authentication
+Cancel QR Authentication request.   
+Authentication in progress will be canceled if requested. Users can try to request authentication again.
 
 ```
 onQrCancel(qrCanvas, errCallback)
@@ -84,7 +84,7 @@ onQrCancel(qrCanvas, errCallback)
 ### Parameter
 |Name|Type|Description|
 |---|---|---|
-|qrCanvas|Element|GuardianCCS QR을 생성할 `<canvas/>` element|
+|qrCanvas|Element|`<canvas/>` element to create Guardian CCS QR code|
 
 ### Example
 ```html
@@ -102,32 +102,29 @@ gccs.onQrCancel(qrCanvas, (errorCode, errorMsg) => {
 ### onSuccess
 |Key|Type|Description|
 |------|---|---|
-|result|0|인증 취소 성공|
+|result|0|Authentication canceled successfully|
 
-QR 인증 취소 요청이 성공 시 `0` 이 반환됩니다.
-
-인증 취소 요청 실패 시 에러코드와 에러메시지가 반환됩니다.
-반환 될 수 있는 에러코드는 다음과 같습니다.
+If successful, `0` will be returned.
 
 ### onError
 |Key|Type|Description|
 |------|---|---|
-|errorCode|Int|에러코드|
-|errorMsg|String|에러 메시지|
+|errorCode|Int|Error code|
+|errorMsg|String|Error message|
 
-인증 취소 요청 실패 시 에러코드와 에러메시지가 반환됩니다.
-반환 될 수 있는 에러코드는 다음과 같습니다.
+If failed, error code and error message will be returned.  
+Possible error codes are like below.
 
 |ErrorCode|Description|Solution|
 |------|---|---|
-|3100|가입 된 유저가 아닌 경우|요청한 유저키를 확인바랍니다.|
-|5019|진행 중인 인증이 없는 경우|이미 취소 된 인증이거나 해당 유저로 진행 중인 인증이 없습니다.|
+|3100|Unregistered user|Please check the user key requested|
+|5019|No authentication in progress|Authentication has been already canceled, or not in progress now|
 
 ---
 
-## QR 인증 타이머 등록
-QR 인증에 유효시간을 확인할 수 있는 Callback 을 등록합니다.   
-인증에 남은 시간을 확인할 수 있으며 유효 시간이 끝난 후에는 재 인증을 요청해야 합니다.
+## Set QR Authentication Timer
+Add Callback function to check valid GCCS QR Authentication time.   
+The remaining time for authentication will be displayed and if expired, authentication should be requested again.
 
 ```
 setQrTimer(onCallBack)
@@ -147,15 +144,15 @@ gccs.setQrTimer((time) => {
 ### onTime
 |Key|Value|Description|
 |------|---|---|
-|time|String|인증 유효 시간|
+|time|String|Valid authentication time|
 
-인증 유효 시간이 callback 으로 반환됩니다.
+Valid authentication time will be returned as a result of callback function.
 
 ---
 
-## QR 인증 상태 등록
-QR 인증 상태 확인할 수 있는 Callback 을 등록합니다.   
-인증 요청 부터 완료 까지에 인증 상태를 확인할 수 있습니다.
+## Set QR Authentication Status
+Add callback function to check GCCS authentication status.
+Possible to check authentication status from the beginning till the end.
 
 ```
 setQrMessage(onCallBack)
@@ -175,6 +172,6 @@ gccs.setQrMessage((message) => {
 ### onMessage
 |Key|Value|Description|
 |------|---|---|
-|message|String|인증 진행 상태|
+|message|String|Authentication progress status|
 
-인증 진행 상태가 callback 으로 반환됩니다.
+Authentication progress status will be returned as a result of callback function.

@@ -1,13 +1,12 @@
 ---
-sidebar_label: 개발 가이드
+sidebar_label: Guide for development
 sidebar_position: 1
 ---
 # Login-Component
+This document describes how to utilize the login-component.
 
-이 문서는 login-component 에 를 사용하기 위한 방법을 안내합니다.
-
-## 시작하기
-최신 버전에 `Login-Component` 에 사용할 수 있습니다.
+## Get Started
+`Login-Component` can be used for latest version of Guardian-JS
 
 ```html
 <head>
@@ -19,9 +18,9 @@ sidebar_position: 1
 </body>
 ```
 
-### 특정 버전 사용하기
+### Specify the version
 
-특정 버전을 사용할 경우 `Login-Component` URL에 VERSION 을 기입합니다.
+If necessary, specify the version on the `Login-Component` URL as below.
 
 ```html
 <script type="text/javascript" src="https://developers.fnsvalue.co.kr/login-component/{VERSION}/guardian.js"></script>
@@ -32,10 +31,10 @@ sidebar_position: 1
 <script type="text/javascript" src="https://developers.fnsvalue.co.kr/login-component/1.0.5/guardian.js"></script>
 ```
 
-## 지원 기능
-Login-Component 에서 인증 결과 값(토큰) 을 받기 위한 방법을 안내합니다.   
-인증에 성공 후 결과 값을 받기 위한 방법으로 `예약 함수 선언` 방식과 `callcack 등록` 방식이 있습니다.   
-자세한 방법은 아래를 참조바랍니다.
+## Functions provided
+It is a description of how to get the authentication result(token) from Login-Component.
+`Reserved function declaration` and `Callback function setup` are two ways to get the result after the authentication is successful.   
+Please refer to the following for more detailed information 
 
 <!-- 
 ### 예약 함수 추가
@@ -55,11 +54,10 @@ Login-Component 에서 인증 결과 값(토큰) 을 받기 위한 방법을 안
 |constructor| LoginComponent에 콜백 함수를 등록 하기 위한 생성자 |
 |setSuccessCallback| GuardianCCS 인증 성공 시 CallBack을 호출 | -->
 
-### 예약 함수 선언
+### Declaration of Reserved Function
 
-인증 결과 받기 위한 script 에 `onGuardianSuccess` 함수를 추가합니다.   
-인증에 성공하면 `onGuardianSuccess` 에 인증 결과 및 토큰을 받을 수 있습니다.
-토큰은 GCCS 기능 활용 시 사용됩니다.
+Add `onGuardSuccess` function on the script for authentication result.   
+If successful, the result of authentication and a token will be given on `onGuardianSuccess` so that token can be used for GCCS functions.
 ```
 onGuardianSuccess(token)
 ```
@@ -76,10 +74,10 @@ function onGuardianSuccess(token) {
 |---|---|---|
 |token|String|token|
 
-### callback 등록
+### Set Callback Function
 
-#### constructor
-LoginComponent 에 콜백 함수를 등록 하기 위한 생성자입니다.
+#### Constructor
+A constructor to add callback function on the LoginComponent.
 
 ```
 constructor()
@@ -92,9 +90,10 @@ const gccs = new Guardian();
 
 ---
 
-#### callback 설정
-인증 결과 값을 받기 위한 콜백 함수를 등록합니다.   
-인증 완료 후에는 토큰이 리턴되며 해당 토큰은 GCCS 기능에 활용됩니다.
+#### Callback Function Setup
+Set callback function to retrieve the result of authentication.
+After authentication is complete, the token will be returned and used for GCCS functions.
+
 
 ```
 setSuccessCallback(successCallback)

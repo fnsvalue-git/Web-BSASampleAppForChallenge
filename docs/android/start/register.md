@@ -7,6 +7,8 @@ sidebar_position: 1
 In order to use Guardian SDK, we need the application registration requests and client key issuance.   
 Please contact the FNS manager about this matter.
 
+
+
 ## Issue Request
 The minimum information for issuing requests is as follows.
 - Company's name

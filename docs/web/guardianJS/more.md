@@ -1,23 +1,24 @@
 ---
-sidebar_label: 더보기
+sidebar_label: Learn more
 sidebar_position: 4
 ---
-# GuardianJS 더보기
+# Learn more about Guardian-JS
 
-## 데모 페이지
-[데모 페이지 링크](https://developers.fnsvalue.co.kr/guardian-js/demo/)
-를 통해 GuardianJS에 포함된 기능 일부를 확인할 수 있습니다.
+## Demo page
 
-데모 페이지는 가장 최신 버전의 GuardianJS를 사용합니다.
+Some of its functions are available to experience in the [Demo page link](https://developers.fnsvalue.co.kr/guardian-js/demo/)
+
+The demo page uses the latest version of Guardian-JS
+
 - Asset URL
 ```
 https://developers.fnsvalue.co.kr/guardian-js/guardian.js
 ```
 
-## 변경 이력
-버전별 변경 이력은 다음과 같습니다.
+## Version history
+The changes made in each version is as illustrated below
 
-|버전|변경 날짜|변경 이력|Asset URL|
+|Version|Release Date|Change log|Asset URL|
 |---|---|---|---|
-|1.0.6| 2021.09.10 | - 버그 수정 및 안정화 | `https://developers.fnsvalue.co.kr/guardian-js/1.0.6/guardian.js` |
-|1.0.5| 2021.07.29 | - 패스워드 리스 인증 제공<br/> - QR 인증 제공 | `https://developers.fnsvalue.co.kr/guardian-js/1.0.5/guardian.js` |
+|1.0.6| 2021.09.10 | - Fixed a bug and stabilized the code| `https://developers.fnsvalue.co.kr/guardian-js/1.0.6/guardian.js` |
+|1.0.5| 2021.07.29 | - Added a new feature : Passwordless Authentication<br/> - QR Authentication | `https://developers.fnsvalue.co.kr/guardian-js/1.0.5/guardian.js` |
