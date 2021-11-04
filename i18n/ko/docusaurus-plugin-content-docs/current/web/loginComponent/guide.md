@@ -4,10 +4,10 @@ sidebar_position: 1
 ---
 # Login-Component
 
-이 문서는 login-component 에 를 사용하기 위한 방법을 안내합니다.
+이 문서는 Login-Component 를 사용하기 위한 방법을 안내합니다.
 
 ## 시작하기
-최신 버전에 `Login-Component` 에 사용할 수 있습니다.
+최신 버전의 `Login-Component` 를 사용할 수 있습니다.
 
 ```html
 <head>
@@ -29,7 +29,7 @@ sidebar_position: 1
 
  - Example
 ```html
-<script type="text/javascript" src="https://developers.fnsvalue.co.kr/login-component/1.0.5/guardian.js"></script>
+<script type="text/javascript" src="https://developers.fnsvalue.co.kr/login-component/1.0.2/guardian.js"></script>
 ```
 
 ## 지원 기능

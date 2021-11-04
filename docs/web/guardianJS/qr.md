@@ -24,12 +24,12 @@ requestQrCallback(qrCanvas, successCallback, errCallback)
 |---|---|---|
 |qrCanvas|Element|`<canvas/>` element to create GuardianCCS QR code|
 
-### Code Example
+### Example
 ```javascript
 const gccs = new Guardian("{Client Key}");
-gccs.requestQrCallback(qrCanvas, (result) => {
+gccs.requestQrCallback(qrCanvas, (data) => {
   console.log('onSuccess');
-  console.log('result.data : ', result.data);
+  console.log('data : ', data);
 }, (errorCode, errorMsg) => {
   console.log('onError');
   console.log('errorCode : ', errorCode);
@@ -47,7 +47,7 @@ The token will be returned if the authentication succeeds, and it can be utilize
 ### onError
 |Key|Type|Description|
 |------|---|---|
-|errorCode|0|Error code|
+|errorCode|Int|Error code|
 |errorMsg|String|Error message|
 
 If authentication fails, error code and error message will be returned.   
@@ -77,6 +77,8 @@ Possible error codes are as follows.
 Cancel QR Authentication request.   
 Authentication in progress will be canceled if requested. Users can try to request authentication again.
 
+인증 취소 요청 성공 시 [인증 요청의 onError](#onerror)에 `5011` errorCode가 반환됩니다.
+
 ```
 onQrCancel(qrCanvas, errCallback)
 ```
@@ -95,16 +97,11 @@ onQrCancel(qrCanvas, errCallback)
 ```javascript
 const gccs = new Guardian("{Client Key}");
 gccs.onQrCancel(qrCanvas, (errorCode, errorMsg) => {
-
+    console.log('onError');
+    console.log('errorCode : ', errorCode);
+    console.log('errorCode : ', errorMsg);
 });
 ```
-
-### onSuccess
-|Key|Type|Description|
-|------|---|---|
-|result|0|Authentication canceled successfully|
-
-If successful, `0` will be returned.
 
 ### onError
 |Key|Type|Description|
@@ -144,7 +141,7 @@ gccs.setQrTimer((time) => {
 ### onTime
 |Key|Value|Description|
 |------|---|---|
-|time|String|Valid authentication time|
+|time|Int|Valid authentication time|
 
 Valid authentication time will be returned as a result of callback function.
 

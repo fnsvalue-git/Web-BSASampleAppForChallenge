@@ -3,7 +3,7 @@ sidebar_label: Guide for development
 sidebar_position: 1
 ---
 # Login-Component
-This document describes how to utilize the login-component.
+This document describes how to utilize the Login-Component.
 
 ## Get Started
 `Login-Component` can be used for latest version of Guardian-JS
@@ -28,7 +28,7 @@ If necessary, specify the version on the `Login-Component` URL as below.
 
  - Example
 ```html
-<script type="text/javascript" src="https://developers.fnsvalue.co.kr/login-component/1.0.5/guardian.js"></script>
+<script type="text/javascript" src="https://developers.fnsvalue.co.kr/login-component/1.0.2/guardian.js"></script>
 ```
 
 ## Functions provided

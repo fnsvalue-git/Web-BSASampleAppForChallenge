@@ -9,7 +9,7 @@ GuardianJS 는 web에서 쉽게 인증 기능을 구현하기 위해 만들어�
 
 ## Guardian-JS 시작하기
 
-최신 버전에 `Guardian-JS` 에 사용할 수 있습니다.
+최신 버전의 `Guardian-JS` 를 사용할 수 있습니다.
 
 ```html
 <script type="text/javascript" src="https://developers.fnsvalue.co.kr/guardian-js/guardian.js"></script>
@@ -24,7 +24,7 @@ GuardianJS 는 web에서 쉽게 인증 기능을 구현하기 위해 만들어�
 ```
  - Example
 ```html
-<script type="text/javascript" src="https://developers.fnsvalue.co.kr/guardian-js/1.0.5/guardian.js"></script>
+<script type="text/javascript" src="https://developers.fnsvalue.co.kr/guardian-js/1.0.7/guardian.js"></script>
 ```
 
 ## 지원기능
@@ -43,6 +43,13 @@ Guardian-JS 에서 제공하는 method
 |onQrCancel| GuardianCCS QR 인증 요청을 취소합니다. |
 |setQrTimer| 남은 QR 인증 시간을 제공합니다. |
 |setQrMessage| QR 인증 메시지를 제공합니다. |
+|requestOtp| GuardianCCS OTP 인증 요청을 진행하며, 인증 성공 후 URL 로 redirect 합니다. |
+|requestOtpCallback| GuardianCCS OTP 인증 요청을 진행하며, 인증 성공 후 설정 CallBack 으로 결과를 리턴합니다. |
+|onOtpCancel| GuardianCCS OTP 인증 요청을 취소합니다. |
+|setOtpTimer| 남은 OTP 인증 시간을 제공합니다. |
+|setOtpMessage| OTP 인증 메시지를 제공합니다. |
+|requestTotpCallback| GuardianCCS TOTP 인증 요청을 진행하며, 인증 성공 후 설정 CallBack 으로 결과를 리턴합니다. |
+
 
 ## 기능 설명 및 예시
 
@@ -61,7 +68,7 @@ constructor(clientKey)
 |---|---|---|
 |clientKey|String|GuardianCCS 를 사용하는 Client Key|
 
-#### Code Example
+#### Example
 ```javascript
 const gccs = new Guardian("{Client Key}");
 ```

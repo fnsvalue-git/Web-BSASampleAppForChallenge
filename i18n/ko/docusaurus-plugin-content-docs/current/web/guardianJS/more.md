@@ -1,6 +1,6 @@
 ---
 sidebar_label: 더보기
-sidebar_position: 4
+sidebar_position: 6
 ---
 # GuardianJS 더보기
 
@@ -19,5 +19,6 @@ https://developers.fnsvalue.co.kr/guardian-js/guardian.js
 
 |버전|변경 날짜|변경 이력|Asset URL|
 |---|---|---|---|
+|1.0.7| 2021.11.05 | - 버그 수정 및 안정화<br/>- OTP 인증 제공<br/>- TOTP 인증 제공 | `https://developers.fnsvalue.co.kr/guardian-js/1.0.7/guardian.js` |
 |1.0.6| 2021.09.10 | - 버그 수정 및 안정화 | `https://developers.fnsvalue.co.kr/guardian-js/1.0.6/guardian.js` |
-|1.0.5| 2021.07.29 | - 패스워드 리스 인증 제공<br/> - QR 인증 제공 | `https://developers.fnsvalue.co.kr/guardian-js/1.0.5/guardian.js` |
+|1.0.5| 2021.07.29 | - 패스워드 리스 인증 제공<br/>- QR 인증 제공 | `https://developers.fnsvalue.co.kr/guardian-js/1.0.5/guardian.js` |

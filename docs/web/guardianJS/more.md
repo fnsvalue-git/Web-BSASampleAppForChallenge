@@ -1,6 +1,6 @@
 ---
 sidebar_label: Learn more
-sidebar_position: 4
+sidebar_position: 6
 ---
 # Learn more about Guardian-JS
 
@@ -20,5 +20,6 @@ The changes made in each version is as illustrated below
 
 |Version|Release Date|Change log|Asset URL|
 |---|---|---|---|
+|1.0.7| 2021.11.05 | - Fixed a bug and stabilized the code<br/>- OTP 인증 제공<br/>- TOTP 인증 제공 | `https://developers.fnsvalue.co.kr/guardian-js/1.0.7/guardian.js` |
 |1.0.6| 2021.09.10 | - Fixed a bug and stabilized the code| `https://developers.fnsvalue.co.kr/guardian-js/1.0.6/guardian.js` |
 |1.0.5| 2021.07.29 | - Added a new feature : Passwordless Authentication<br/> - QR Authentication | `https://developers.fnsvalue.co.kr/guardian-js/1.0.5/guardian.js` |

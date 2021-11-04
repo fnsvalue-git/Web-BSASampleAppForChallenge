@@ -24,7 +24,7 @@ If necessary, specify the version on the `Guardian-JS` URL as below.
 ```
  - Example
 ```html
-<script type="text/javascript" src="https://developers.fnsvalue.co.kr/guardian-js/1.0.5/guardian.js"></script>
+<script type="text/javascript" src="https://developers.fnsvalue.co.kr/guardian-js/1.0.7/guardian.js"></script>
 ```
 
 ## Functions provided
@@ -43,6 +43,12 @@ Below are the methods provided by the Guardian-JS
 |onQrCancel| Cancel the Guardian CCS QR Authentication request |
 |setQrTimer| Provides remaining time for QR Authentication |
 |setQrMessage| Provides QR authentication process message |
+|requestOtp| GuardianCCS OTP 인증 요청을 진행하며, 인증 성공 후 URL 로 redirect 합니다. |
+|requestOtpCallback| GuardianCCS OTP 인증 요청을 진행하며, 인증 성공 후 설정 CallBack 으로 결과를 리턴합니다. |
+|onOtpCancel| GuardianCCS OTP 인증 요청을 취소합니다. |
+|setOtpTimer| 남은 OTP 인증 시간을 제공합니다. |
+|setOtpMessage| OTP 인증 메시지를 제공합니다. |
+|requestTotpCallback| GuardianCCS TOTP 인증 요청을 진행하며, 인증 성공 후 설정 CallBack 으로 결과를 리턴합니다. |
 
 ## Function Description and Example
 
@@ -60,7 +66,7 @@ constructor(clientKey)
 |---|---|---|
 |clientKey|String|Client Key needed to utilize the Guardian CCS|
 
-#### Code Example
+#### Example
 ```javascript
 const gccs = new Guardian("{Client Key}");
 ```

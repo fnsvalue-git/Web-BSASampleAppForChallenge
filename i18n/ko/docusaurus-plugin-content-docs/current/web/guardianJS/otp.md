@@ -1,81 +1,68 @@
 ---
-sidebar_label: GCCS 인증
-sidebar_position: 2
+sidebar_label: OTP 인증
+sidebar_position: 4
 ---
 
-# GCCS 인증
-이 문서는 Guardian-JS 에서 GCCS 인증을 사용하기 위한 방법을 안내합니다.
+# OTP 인증
+이 문서는 Guardian-JS 에서 OTP 인증을 사용하기 위한 방법을 안내합니다.
 
-<!-- ### requestAuth
-인증 요청을 합니다.
-인증에 성공하였을 경우 설정한 링크로 이동합니다.
-설정한 링크에서 사용자 정보를 확인 한 후 사이트 로그인 처리를 합니다.
+## 기능 설명
+아이디를 입력하지 않고 otp code를 입력하여 인증하는 구현 방법을 설명합니다.   
+`Guardian-CCS` 앱에서 메인화면 => `OTP 인증` 을 선택하여 otp code를 생성 후  
+otp code를 입력하여 인증을 진행합니다.
 
-```
-requestAuth(userKey, successCallLink, errCallback)
-```
-
-#### Parameter
-|Name|Type|Description|
-|---|---|---|
-|userKey|String|GuardianCCS 사용자 계정|
-|redirect url|String|인증 성공 후 redirect 할 경로| 
-
-#### Code Example
-```javascript
-const gccs = new Guardian("{Client Key}");
-gccs.requestAuth('fnsvalue', 'https://www.fnsvalue.co.kr', 
-(errorCode, errorMsg) => {
-  console.log('onError');
-  console.log('errorCode : ', errorCode);
-  console.log('errorCode : ', errorMsg);
-});
-```
-
---- -->
-
-## 인증 요청
-인증 요청을 합니다.
-`requestAuthCallback()` 으로 API를 호출합니다.
-인증을 요청하면 앱으로 푸시 알림이 전달 되며, 앱을 통해 인증 성공 시 onSuccess 통해 결과가 반환됩니다.
+## OTP 인증 요청
+OTP 인증을 요청합니다.
+사용자가 otp code를 입력하면 `requestOtpCallback()` 으로 API를 호출합니다.
+OTP 인증을 요청하면 앱으로 푸시 알림이 전달 되며, 앱을 통해 인증 성공 시 onSuccess 통해 결과가 반환됩니다.
 
 ```
-requestAuthCallback(userKey, successCallback, errCallback)
+requestOtpCallback(otpInput, successCallback, errCallback, codeSuccessCallback, codeErrCallback)
 ```
-
+ 
 ### Parameter
 |Name|Type|Description|
 |---|---|---|
-|userKey|String|GuardianCCS 사용자 계정|
+|otpInput|Element|사용자가 OTP CODE를 입력한 `<input/>` element|
 
 ### Example
+```html
+<div>
+  <Input />
+</div>
+```
 ```javascript
 const gccs = new Guardian("{Client Key}");
-gccs.requestAuthCallback(userKey, (data) => {
+gccs.requestOtpCallback(otpInput, (data) => {
   console.log('onSuccess');
   console.log('data : ', data);
 }, (errorCode, errorMsg) => {
   console.log('onError');
   console.log('errorCode : ', errorCode);
   console.log('errorCode : ', errorMsg);
+}, () => {
+  console.log('onCodeSuccess');
+}, (errorCode, errorMsg) => {
+  console.log('onCodeError');
+  console.log('errorCode : ', errorCode);
+  console.log('errorCode : ', errorMsg);
 });
 ```
 
 ### onSuccess
-|Name|Type|Description|
-|---|---|---|
+|Key|Type|Description|
+|------|---|---|
 |data|String|token|
 
-인증이 성공하면 토큰이 반환되며, 토큰은 GCCS 기능 활용 시 사용됩니다.
+인증이 성공 하면 `토큰`이 반환 되며, 토큰은 GCCS 기능 활용 시 사용 됩니다.
 
 ### onError
-|Name|Type|Description|
-|---|---|---|
+|Key|Type|Description|
+|------|---|---|
 |errorCode|Int|에러코드|
 |errorMsg|String|에러 메시지|
 
-
-인증 실패 시 에러코드와 에러메시지가 반환됩니다. 
+인증 실패 시 에러코드와 에러메시지가 반환됩니다.
 반환 될 수 있는 에러코드는 다음과 같습니다.
 
 |ErrorCode|Description|Solution|
@@ -95,30 +82,55 @@ gccs.requestAuthCallback(userKey, (data) => {
 |5017|푸시 알림 전송 실패|FCM 등에 문제가 발생한 경우입니다. <br/>지속적으로 발생하는 경우 문의바랍니다.|
 |5022|검증이 실패 한 경우|노드 검증이 실패 한 경우 발생 할 수 있습니다. <br/>지속적으로 발생하는 경우 문의바랍니다.|
 
+### onCodeSuccess
+otp code 검증에 성공하면 해당 함수를 호출합니다.
+null값 또는 생략이 가능합니다.
+
+### onCodeError
+|Key|Type|Description|
+|------|---|---|
+|errorCode|Int|에러코드|
+|errorMsg|String|에러 메시지|
+
+otp code 검증 실패 시 에러코드와 에러메시지가 반환됩니다.
+null값 또는 생략이 가능합니다.  
+반환 될 수 있는 에러코드는 다음과 같습니다.
+
+|ErrorCode|Description|Solution|
+|------|---|---|
+|2000|클라이언트 키가 잘못 된 경우|발급 받은 클라이언트 키를 확인합니다.|
+|3005|OTP CODE 검증에 실패할 경우|OTP CODE 재 검증 요청 바랍니다.|
+|3201|클라이언트 연동이 되어 있지 않은 경우|GCCS 가입 완료 후 메뉴 => 사이트 연동을 통해 연동을 진행해주시기 바립니다.|
+
 ---
 
-## 인증 취소
-인증 취소를 요청합니다. `onCancel()` 으로 API를 호출합니다.   
-인증 취소를 한 경우 진행 중인 인증이 취소되며 다시 재인증을 요청할 수 있습니다.
+## OTP 인증 취소
+OTP 인증 취소를 요청합니다. 인증 취소를 한 경우 진행 중인 인증이 취소되며  
+다시 재인증을 요청할 수 있습니다.
 
 인증 취소 요청 성공 시 [인증 요청의 onError](#onerror)에 `5011` errorCode가 반환됩니다.
 
 ```
-onCancel(userKey, errCallback)
+onOtpCancel(otpInput, errCallback)
 ```
 
 ### Parameter
 |Name|Type|Description|
 |---|---|---|
-|userKey|String|GuardianCCS 사용자 계정|
+|otpInput|Element|사용자가 otp code를 입력한 `<input/>` element|
 
 ### Example
+```html
+<div>
+  <Input />
+</div>
+```
 ```javascript
 const gccs = new Guardian("{Client Key}");
-gccs.onCancel(userKey, (errorCode, errorMsg) => {
-  console.log('onError');
-  console.log('errorCode : ', errorCode);
-  console.log('errorCode : ', errorMsg);
+gccs.onOtpCancel(otpInput, (errorCode, rtMsg) => {
+    console.log('onError');
+    console.log('errorCode : ', errorCode);
+    console.log('errorCode : ', errorMsg);
 });
 ```
 
@@ -138,41 +150,12 @@ gccs.onCancel(userKey, (errorCode, errorMsg) => {
 
 ---
 
-## 인증 타이머 등록
-GCCS 인증 유효시간을 확인할 수 있는 Callback 을 등록합니다.
+## OTP 인증 타이머 등록
+OTP 인증 유효시간을 확인할 수 있는 Callback 을 등록합니다.   
 인증에 남은 시간을 확인할 수 있으며 유효 시간이 끝난 후에는 재 인증을 요청해야 합니다.
 
 ```
-setAuthTimer(onCallBack)
-```
-
-### Parameter
- - none
-
-### Example
-```javascript
-const gccs = new Guardian("{Client Key}");
-gccs.setAuthTimer((time) => {
-  console.log('onTime');
-  console.log('time : ' + time);
-});
-```
-
-### onTime
-|Key|Type|Description|
-|------|---|---|
-|time|Int|인증 유효 시간|
-
-인증 유효 시간이 callback 으로 반환됩니다.
-
----
-
-## 인증 상태 등록
-GCCS 인증 상태를 확인할 수 있는 Callback 을 등록합니다.
-인증 요청 부터 완료 까지에 인증 상태를 확인할 수 있습니다.
-
-```
-setAuthMessage(onCallBack)
+setOtpTimer(onCallBack)
 ```
 
 ### Parameter
@@ -181,14 +164,42 @@ setAuthMessage(onCallBack)
 ### Example
 ```javascript
 const gccs = new Guardian("{Client Key}");
-gccs.setAuthMessage((message) => {
-  console.log('onMessage');
-  console.log('AuthStatus : ' + message);
+gccs.setOtpTimer((time) => {
+    console.log('onTime');
+    console.log('time : ' + time);
+});
+```
+
+### onTime
+|Key|Value|Description|
+|------|---|---|
+|time|Int|인증 유효 시간|
+
+인증 유효 시간이 callback 으로 반환됩니다.
+
+---
+
+## OTP 인증 상태 등록
+OTP 인증 상태 확인할 수 있는 Callback 을 등록합니다. 인증 요청 부터 완료 까지에 인증 상태를 확인할 수 있습니다.
+
+```
+setOtpMessage(onCallBack)
+```
+
+### Parameter
+- none
+
+### Example
+```javascript
+const gccs = new Guardian("{Client Key}");
+gccs.setOtpMessage((message) => {
+    console.log('onMessage');
+    console.log('AuthStatus : ' + message);
 });
 ```
 
 ### onMessage
-|Key|Type|Description|
+|Key|Value|Description|
 |------|---|---|
 |message|String|인증 진행 상태|
 

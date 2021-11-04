@@ -52,9 +52,9 @@ requestAuthCallback(userKey, successCallback, errCallback)
 ### Example
 ```javascript
 const gccs = new Guardian("{Client Key}");
-gccs.requestAuthCallback(userKey, (result) => {
+gccs.requestAuthCallback(userKey, (data) => {
   console.log('onSuccess');
-  console.log('result.data : ', result.data);
+  console.log('data : ', data);
 }, (errorCode, errorMsg) => {
   console.log('onError');
   console.log('errorCode : ', errorCode);
@@ -85,6 +85,7 @@ Possible error codes are as follows.
 |2000|Invalid Client Key|Check the client key|
 |2008|Unregistered user|Check GCCS sign up status|
 |3201|Not properly linked client|After signing up for GCCS, select Menu => My BSA => Trusted Website => Site Link and link the client website|
+|3301|클라이언트 로그인 타입이 정해져 있지 않은 경우|클라이언트 설정 오류인 경우로 관리자에게 문의바랍니다.|
 |5001|Authentication timeout|Make request for authentication once again because previous authentication is no longer valid|
 |5005|Unauthorized user|Contact with the FNS management team to solve this matter|
 |5006|Temporarily suspended user|Contact with the FNS management team to solve this matter|
@@ -93,7 +94,7 @@ Possible error codes are as follows.
 |2010|User authentication in-progress|Depending on the circumstances, cancel previous authentication an request for new one|
 |5011|User authentication canceled|Request for re-authentication|
 |5015|Fail to create channel|Can occur when the parameters are not enough <br/>If it happens constantly, please inquire at the FNS management team|
-|5017|Fail to send push notification|Problems occurred with FCM, etc. <br/>If it happens constantly, please inquire the FNS at management team|
+|5017|Fail to send push notification|Problems occurred with FCM, etc. <br/>If it happens constantly, please inquire at the FNS management team|
 |5022|Authentication failure|If node verification fails, this error can occur <br/>If it happens constantly, please inquire at the FNS management team|
 
 ---
@@ -101,6 +102,8 @@ Possible error codes are as follows.
 ## Cancel Authentication
 Cancel Authentication request. Call API using `onCancel()`
 Authentication in progress will be canceled if requested. Users can try to request authentication again.
+
+인증 취소 요청 성공 시 [인증 요청의 onError](#onerror)에 `5011` errorCode가 반환됩니다.
 
 ```
 onCancel(userKey, errCallback)
@@ -120,17 +123,11 @@ gccs.onCancel(userKey, (errorCode, errorMsg) => {
   console.log('errorCode : ', errorMsg);
 });
 ```
-### onSuccess
-|Key|Type|Description|
-|------|---|---|
-|result|Int|Authentication canceled successfully|
-
-If successful, `0` will be returned.
 
 ### onError
 |Key|Type|Description|
 |------|---|---|
-|errorCode|0|Error code|
+|errorCode|Int|Error code|
 |errorMsg|String|Error message|
 
 If failed, error code and error message will be returned.  
@@ -165,7 +162,7 @@ gccs.setAuthTimer((time) => {
 ### onTime
 |Key|Type|Description|
 |------|---|---|
-|time|String|Valid authentication time|
+|time|Int|Valid authentication time|
 
 Valid authentication time will be returned as a result of callback function.
 
