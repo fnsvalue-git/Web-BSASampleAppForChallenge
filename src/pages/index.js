@@ -12,8 +12,8 @@ function HomepageHeader() {
       <div className="container">
         <h1 className="hero__title">FNSVALUE - Guardian CCS</h1>
           <p className="subtitle" style={{fontSize: '20px'}}>
-              비밀번호 없는 다자간 분산 검증 방식의 간편 보안 인증 기술<br/>
-              Passwordless Security Authentication Technology</p>
+              비밀번호 없이 다자간 분산 검증이 가능한 간편 보안 인증 기술<br/>
+              Passwordless Secure Authentication Technology</p>
       </div>
     </header>
   );

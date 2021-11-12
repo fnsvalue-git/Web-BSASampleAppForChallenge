@@ -3,26 +3,29 @@ sidebar_position: 3
 ---
 # Device Re-registration
 
-## Android
-This document introduces the wau to implement GCCS device re-registration with Guardian SDK for Android.
-
+## Overview
+This document describes how to implement GCCS device re-registration and integrate with the Android SDK.
 <br/>
 
 ## Feature Description
-GuardianSDK provides the device re-registration feature where we can verify the user information and re-register your device in case the current users change their devices. With this, the user can proceed the GCCS authentication in a different device.
-The feature will check the user information and then send the OTP number to the user's email or phone number in order to proceed the re-registration.
+What can be done if the user wishes to continue using GCCS after changing his/her mobile device?   
+It is viable to start using GCCS features like before by user information verification and re-registration.   
+In this way, the user can use the GCCS with a new mobile device.   
+To do so, the Android SDK will first check the user history and then verify the user by sending the OTP code to their email or phone number.
 
-## User check and OTP delivery
-As for user check and OTP delivery, please use the `verityUserToOtp()` function from `GuardianSdk` to call the API.   
-If the user information is correct, an OTP code will be sent to the user email or phone number.
+## User verification and OTP delivery
+Use `verityUserToOtp()` from `GuardianSdk` to call the API.  
+If the user has been verified in the history, he/she will receive the OTP code via email or SMS. 
+
 ### Parameter
 |Key|Value|Description|
 |------|---|---|
 |userKey|String|User ID/Key|
 |name|String|Name|
 |verifyType|String|- CMMDUP001 : Email<br/> - CMMDUP002 : SMS|
-|verifyData|String|This is depending on the `verifyType`.<br/>- CMMDUP001 refers email, <br/>- CMMDUP002 refers to phone number|
-The data type of the value should be in form of `Map<String, Object>`.
+|verifyData|String|Depends on the `verifyType`<br/>- If verifyType is CMMDUP001, verifyData is email <br/>- If verifyType is CMMDUP002, verifyData is phone number|
+
+The value must be in `Map<String, Object>` type.
 
 ### Example
 ```java
@@ -53,30 +56,37 @@ GuardianSdk.getInstance().verityUserToOtp(params, new GuardianResponseCallback<V
 |rtCode|0|Result code|
 |rtMsg|String|Result message|
 |seq|Int|seq|
-If the user check and OTP delivery API is being called successfully, the `rtCode` will be `0`. The value of `seq` will be use to verify with the `verityOtp()` function.
+
+When the API call to verify the user and deliver OTP code is successful, the `rtCode` will be `0`.   
+The `seq` value will be used for `verityOtp()`.
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
 |errorCode|Int|Error code|
-|ErrorMessage|String|Error message|
+|errorMessage|String|Error message|
+
+If API call fails, the user will receive an `errorCode`.
 
 ---
 
 ## OTP Verification
-As for OTP code verification, please use the `verityOtp()` function from `GuardianSdk` to call the API to verify the OTP code delivered using `verityUserToOtp()`.
+Use `verityUserToOtp()` from `GuardianSdk` to call the API that can send OTP code to the user.  
+Then with `verityOtp()`, verify the user by comparing the OTP code.
+
 ### Parameter
 |Key|Value|Description|
 |------|---|---|
-|authNum|String|OTP code (6 digits) in the user email or SMS |
+|authNum|String|OTP code (6 digits) delivered to the user's email or phone number |
 |name|String|`verityUserToOtp()` result value - seq|
 |verifyType|String|- CMMDUP001 : Email<br/> - CMMDUP002 : SMS|
-|verifyData|String|This is depending on the `verifyType`.<br/>- CMMDUP001 refers email, <br/>- CMMDUP002 refers to phone number|
-The data type of the value should be in form of `Map<String, Object>`.
+|verifyData|String|Depends on the `verifyType`<br/>- If verifyType is CMMDUP001, verifyData is email <br/>- If verifyType is CMMDUP002, verifyData is phone number|
+
+The value must be in `Map<String, Object>` type.
 
 ### Example
 ```java
-// OTP Verificaiton
+// OTP Verification
 Map<String, Object> params = new HashMap<>();
 params.put("authNum", "567232");
 params.put("seq", 3);
@@ -102,26 +112,32 @@ GuardianSdk.getInstance().verityOtp(params, new GuardianResponseCallback<VerityO
 |------|---|---|
 |rtCode|0|Result code|
 |rtMsg|String|Result message|
-|data|String|Token to verify re-registration OTP|
-If the user check and OTP delivery is being called correctly, the `rtCode` will be `0`.  
-The token value in `data` will be used to re-register the device with the `reRegisterClientUser()` function.
+|data|String|Token to verify OTP code for re-registration|
+
+When the API call to verify the user and deliver OTP code is successful, the `rtCode` will be `0`   
+The `data` value will be used for re-registration with the `reRegisterClientUser()`
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
 |errorCode|Int|Error code|
 |ErrorMessage|String|Error message|
+
+If API call fails, the user will receive an `errorCode`
+
 ---
 
 ## Device re-registration
-As for device registration, please use the `reRegisterClientUser()` function from `GuardianSdk` to call the API. 
-The token verified with `verityOtp()` is required and when the device re-registration is complete, the user can use GCCS authentication as normal.
+Use `reRegisterClientUser()` from `GuardianSdk` to call the API.   
+The token verified with `verityOtp()` is required and when the re-registration is complete, the user can utilize GCCS authentication as usual. 
+
 ### Parameter
 |Key|Value|Description|
 |------|---|---|
 |disposeToken|String|Token resulted from `verityOtp()`|
 |otpType|String|Verification type when calling `verityUserToOtp()` <br/>- CMMDUP001 : Email<br/> - CMMDUP002 : SMS|
-The data type of the value should be in form of `Map<String, Object>`.
+
+The value must be in `Map<String, Object>` type.
 
 ### Example
 ```java
@@ -148,13 +164,17 @@ GuardianSdk.getInstance().reRegisterClientUser(params, new GuardianResponseCallb
 |------|---|---|
 |rtCode|0|Result code|
 |rtMsg|String|Result message|
-If re-registration is being call successfully, the `rtCode` will be `0`.
+
+When the API call to re-register is successful, the `rtCode` will be `0`
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
 |errorCode|Int|Error code|
-|ErrorMessage|String|Error message|
+|errorMessage|String|Error message|
+
+If API call fails, the user will receive an `errorCode`
+
 ---
 
 

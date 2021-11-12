@@ -5,15 +5,15 @@ sidebar_position: 1
 
 ## Overview
 
-In order to fully utilize the Guardian Web, registration for application and client key generation must be requested.   
-Please contact with the FNS management team regarding this matter.
+In order to fully utilize the Guardian Web, the client must be registered to generate the client key.   
+Please contact the person in charge regarding this matter.
 
-## Request for issuance
-When the client key generation is requested, a minimum information will be collected as follows.
+## Request for Issuance
+Only the minimum information will be collected in the process of client key generation as follows.
  - Company name
  
 ## Client Key Generation
-The following is a good example of client key generated after the request is complete.
+If the request is successfully completed, the client key will be generated like below.
 
 ``` json
 {
@@ -23,14 +23,14 @@ The following is a good example of client key generated after the request is com
 
 ## Prerequisites for Authentication
 
-Pre-registration process below is required if a client wishes to activate the Guardian CCS Authentication.
+If the actual user wishes to activate the Guardian CCS authentication, pre-registration process is required as described below.
 
-1. Download the Guardian CCS mobile application and sign up for it
-   1. Search for 'Guardian CCS' or 'fnsvalue' at the Play Store/App Store and download the application
-   2. In case of new user, sign up is required.
-2. Connect to the client website   
-   1. Menu > My information > Connect to the site
-   2. Search for client websites' name
-   3. Click the button to connect with the client site
-3. Now can authenticate using Guardian CCS information
+1. Download the Guardian CCS mobile app and sign in
+   1. Search for the 'Guardian CCS' or 'fnsvalue' at the Play Store/App Store and download the app
+   2. In case of new user, sign in is required
+2. Link to the client website   
+   1. Go through Menu > My information > Trusted Website
+   2. Search for the client websites' name
+   3. Click the [Link] button to connect with the client site
+3. Now the user can authenticate with the Guardian CCS information
 

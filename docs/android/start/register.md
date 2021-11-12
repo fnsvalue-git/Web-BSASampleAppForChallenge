@@ -1,31 +1,30 @@
 ---
 sidebar_position: 1
 ---
-# Application Registration
+# App Registration
 
 ## Overview
-In order to use Guardian SDK, we need the application registration requests and client key issuance.   
-Please contact the FNS manager about this matter.
 
+In order to fully utilize the Android SDK, the client application must be registered to generate the client key.   
+Please contact the person in charge regarding this matter.
 
+<br/>
 
-## Issue Request
-The minimum information for issuing requests is as follows.
-- Company's name
+## Request for Issuance
+Only the minimum information will be collected in the process of a client key generation as follows.
+- Company name
 - Android 
   - Package Name
-    
-- ios
+- IOS
   - Bundle ID
   
 <pre>
-In case of non-mobile platforms (Web, Window...) authentication
-
-Firebase Cloud Messaging (FCM) registration request is required.
+For non-mobile platform authentication (Web, Window...), Firebase Cloud Messaging (FCM) is required.
 </pre>
 
-## Client Key Issurance
-The following is an example of a client , which has been issued properly, after completing the request.
+## Client Key Generation
+If the request is successfully completed, a client key like below will be created.
+
 ``` json
 {
     "clientKey" : "ea3aca8g59354cff908tu7fae6849d06"

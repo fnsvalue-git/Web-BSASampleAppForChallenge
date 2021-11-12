@@ -5,7 +5,7 @@ sidebar_position: 2
 
 # GCCS Authentication
 
-This document describes how to utilize GCCS Authentication in the Guardian-JS
+This document describes how to utilize GCCS authentication in the Guardian-JS
 
 <!-- ### requestAuth
 인증 요청을 합니다.
@@ -36,8 +36,8 @@ gccs.requestAuth('fnsvalue', 'https://www.fnsvalue.co.kr',
 --- -->
 
 ## Authentication Request
-When the authentication is requested, API calls are made with `requestAuthCallback`   
-Along with the push notification sent to the app, the result will be returned through onSuccess if the authentication is successful.
+When the authentication is requested, the API call will be made with `requestAuthCallback()` .  
+Push notification will be sent to the app, and the result will be returned through `onSuccess` if successfully authenticated.
 
 
 ```
@@ -47,7 +47,7 @@ requestAuthCallback(userKey, successCallback, errCallback)
 ### Parameter
 |Name|Type|Description|
 |---|---|---|
-|userKey|String|Guardian CCS User Account|
+|userKey|String|Guardian CCS user account|
 
 ### Example
 ```javascript
@@ -67,43 +67,41 @@ gccs.requestAuthCallback(userKey, (data) => {
 |---|---|---|
 |data|String|Token|
 
-The token will be returned if the authentication succeeds, and it can be utilized for the GCCS authentication.
+The token will be returned if authentication succeeds, and it can be utilized for the GCCS authentication.
 
 
 ### onError
 |Name|Type|Description|
 |---|---|---|
-|errorCode|Int|Error Code|
-|errorMsg|String|Error Message|
+|errorCode|Int|Error code|
+|errorMsg|String|Error message|
 
-If authentication fails, error code and error message will be returned.   
+If authentication fails, the error code and error message will be returned.   
 Possible error codes are as follows.
 
 
 |ErrorCode|Description|Solution|
 |------|---|---|
-|2000|Invalid Client Key|Check the client key|
-|2008|Unregistered user|Check GCCS sign up status|
-|3201|Not properly linked client|After signing up for GCCS, select Menu => My BSA => Trusted Website => Site Link and link the client website|
-|3301|클라이언트 로그인 타입이 정해져 있지 않은 경우|클라이언트 설정 오류인 경우로 관리자에게 문의바랍니다.|
+|2000|Invalid client key|Check the client key|
+|2008|Unregistered user|Check GCCS sign in status|
+|3201|Not properly linked client|After signing up for GCCS, go through Menu => My BSA => Trusted Website => Site Link and then connect with the client website|
+|3301|Unspecified client login type|Error in specifying the client, contact the person in charge to solve this matter|
 |5001|Authentication timeout|Make request for authentication once again because previous authentication is no longer valid|
-|5005|Unauthorized user|Contact with the FNS management team to solve this matter|
-|5006|Temporarily suspended user|Contact with the FNS management team to solve this matter|
-|5007|Permanently suspended user|Contact with the FNS management team to solve this matter|
-|5008|Withdrawn user|Accounts can be reactivated within certain period of time by reactivation|d
-|2010|User authentication in-progress|Depending on the circumstances, cancel previous authentication an request for new one|
-|5011|User authentication canceled|Request for re-authentication|
-|5015|Fail to create channel|Can occur when the parameters are not enough <br/>If it happens constantly, please inquire at the FNS management team|
-|5017|Fail to send push notification|Problems occurred with FCM, etc. <br/>If it happens constantly, please inquire at the FNS management team|
-|5022|Authentication failure|If node verification fails, this error can occur <br/>If it happens constantly, please inquire at the FNS management team|
+|5005|Unauthorized user|Contact the person in charge to solve this matter|
+|5006|Temporarily suspended user|Contact the person in charge to solve this matter|
+|5007|Permanently suspended user|Contact the person in charge to solve this matter|
+|5008|Withdrawn user|User accounts can be reactivated within a certain period of time|
+|2010|User authentication in-progress|Depending on the circumstances, cancel previous authentication and request for new one|
+|5011|User authentication canceled|Make request for re-authentication|
+|5015|Failed to create channel|It can occur when the parameters are not enough <br/>If it happens constantly, please inquire the person in charge|
+|5017|Failed to send push notification|Problems have occurred with the FCM(Firebase Cloud Messaging), etc. <br/>If it happens constantly, please inquire the person in charge|
+|5022|Verification failure|Node verification failed<br/>If it happens constantly, please inquire the person in charge|
 
 ---
 
 ## Cancel Authentication
-Cancel Authentication request. Call API using `onCancel()`
-Authentication in progress will be canceled if requested. Users can try to request authentication again.
-
-인증 취소 요청 성공 시 [인증 요청의 onError](#onerror)에 `5011` errorCode가 반환됩니다.
+Authentication in progress will be canceled if requested. The API call will be made with `onCancel()` and users can request for authentication again any time.    
+If the cancel request is successful, `5011` errorCode will be returned. More in detail can be found in the [onError](#onerror).
 
 ```
 onCancel(userKey, errCallback)
@@ -130,19 +128,19 @@ gccs.onCancel(userKey, (errorCode, errorMsg) => {
 |errorCode|Int|Error code|
 |errorMsg|String|Error message|
 
-If failed, error code and error message will be returned.  
+If cancel request fails, the error code and error message will be returned.  
 Possible error codes are like below.
 
 |ErrorCode|Description|Solution|
 |------|---|---|
-|3100|Unregistered user|Please check the user key requested|
+|3100|Unregistered user|Check the user key requested|
 |5019|No authentication in progress|Authentication has been already canceled, or not in progress now |
 
 ---
 
 ## Set Authentication Timer
 Add callback function to check valid GCCS authentication time.   
-The remaining time for authentication will be displayed and if expired, authentication should be requested again.
+The remaining time for authentication will be displayed and if expired, the user should request for authentication once again
 ```
 setAuthTimer(onCallBack)
 ```
@@ -164,13 +162,13 @@ gccs.setAuthTimer((time) => {
 |------|---|---|
 |time|Int|Valid authentication time|
 
-Valid authentication time will be returned as a result of callback function.
+Valid authentication time will be returned as the result of a callback function.
 
 ---
 
 ## Set Authentication Status
-Add callback function to check GCCS authentication status.
-Possible to check authentication status from the beginning till the end.
+Add callback function to check GCCS authentication status.   
+It is possible to see the authentication status during the whole process from authentication request to the final authentication.
 
 ```
 setAuthMessage(onCallBack)
@@ -191,6 +189,6 @@ gccs.setAuthMessage((message) => {
 ### onMessage
 |Key|Type|Description|
 |------|---|---|
-|message|String|Authentication progress status|
+|message|String|Authentication status|
 
-Authentication progress status will be returned as a result of callback function.
+Authentication status will be returned as the result of a callback function.

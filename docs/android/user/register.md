@@ -1,29 +1,31 @@
 ---
 sidebar_position: 2
 ---
-# Membership registration and integration
+# User registration and integration
 
-## Android
-This document introduces the way to implement membership registration and integration with Guardian SDK for Android.
+## Overview
+This document describes how to implement user registration and integration with the Android SDK.
 
 <br/>
 
 ## Feature Description
-GuardianSDK provides features to register and integrate user into GCCS system by using the user basic information.
+Android SDK provides features to register and integrate user into GCCS system by using the basic information of user.
 
-## Duplicated registration information check
-Before registering to GCCS, we have to check whether the user information GCCS is dupplicated by using the `hasRegisterDuplicateValue()` function from `GuardianSdk` to call the API.
-We can check whether the user information exist according the `verifyType`.
+## User Information Uniqueness Check
+Previous to GCCS registration, each user must have unique and original information and does not contain duplicate value.  
+Check uniqueness by using `hasRegisterDuplicateValue()` to call the API from `GuardianSdk`.   
+
+Whether user information is unique or not can be identified upon the `verifyType`. 
 
 ### Parameter
 |Key|Value|Description|
 |------|---|---|
 |verifyType|String|- CMMDUP001 : Email<br/> - CMMDUP002 : SMS|
-|verifyData|String|This is depending on the `verifyType`.<br/>- CMMDUP001 refers email, <br/>- CMMDUP002 refers to phone number|
+|verifyData|String|Depends on the `verifyType`<br/>- If verifyType is CMMDUP001, verifyData is email <br/>- If verifyType is CMMDUP002, verifyData is phone number|
 
 ### Example
 ```java
-// Duplicated registration information check
+// Checking user information uniqueness
 GuardianSdk.getInstance().hasRegisterDuplicateValue("CMMDUP001", "fnstest@fnsvalue.co.kr", new GuardianResponseCallback<RegisterDuplicateValueResponse>() {
     @Override
     public void onSuccess(RegisterDuplicateValueResponse result) {
@@ -41,20 +43,22 @@ GuardianSdk.getInstance().hasRegisterDuplicateValue("CMMDUP001", "fnstest@fnsval
 |------|---|---|
 |rtCode|0|Result code|
 |rtMsg|String|Result message|
-When the registration information duplication API will being called successfully, if there is no duplication, the `rtCode` will be `0`. Otherwise, if there is a duplication, the `rtCode` will be `2019`.
+
+When the API call to check registered information uniqueness is successful and there is no duplicate value, the `rtCode` will be `0` and if not, the `rtCode` will be `2019`.
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
 |errorCode|0|Error code|
 
-When we fail to call this API, we will receive an `errorCode`, which can be as follows.
+If API call fails, the user will receive an `errorCode`.
 
 ---
 
-## GCCS Registration
-As for GCCS registration request, please use the `registerClientUser()` function from `GuardianSdk` to call the API.   
-We will proceed the membership registration with the website ID (accountId) to be integrated with the user information.
+## GCCS Registration 
+Use `registerClientUser()` from `GuardianSdk` to call the API that can handle GCCS registration request.
+User registration will be done with website ID(account ID) that is integrated with the user information.
+
 ### Parameter
 |Key|Value|Description|
 |------|---|---|
@@ -62,8 +66,9 @@ We will proceed the membership registration with the website ID (accountId) to b
 |name|String|Name|
 |phoneNum|String|Phone number|
 |email|String|Email|
-|accountId|String|Website ID to be integrated
-The data type of the value should be in form of `Map<String, Object>`.
+|accountId|String|Website ID for integration|
+
+The value must be in `Map<String, Object>` type.
 
 ### Example
 ```java
@@ -72,7 +77,7 @@ Map<String, Object> params = new HashMap<>();
 params.put("userKey", "test123");
 params.put("name", "jhkim");
 params.put("email", "fnstest@fnsvalue.co.kr");
-params.put("phoneNum", "작성중");
+params.put("phoneNum", "010-1234-5678");
 params.put("accountId", "jhkim");
 
 GuardianSdk.getInstance().registerClientUser(params, new GuardianResponseCallback<RegisterClientUserResponse>() {
@@ -92,25 +97,32 @@ GuardianSdk.getInstance().registerClientUser(params, new GuardianResponseCallbac
 |------|---|---|
 |rtCode|0|Result code|
 |rtMsg|String|Result message|
-If the GCCS registration API is being called successfully, the `rtCode` will be `0` and the Membership registration and integration will be complete.
+
+When the API call for biometric authentication is successful, the `rtCode` will be `0`   
+The user registration and integration is complete then.
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
 |errorCode|0|Error code|
 
-If the GCCS registration API call fails, we will receive the `errorCode`, which can be as follows.
+If API call fails, the user will receive an `errorCode`
 
-## Membership Deactivation
-As for membership deactivation call, please use the `unRegisterClientUser()` function from `GuardianSdk` to call the API. 
-After becoming a deactivated member, the user can no longer use GCCS authentication. Also, it will appear as deactivated device when checking membership or status inquiry.  
-We can use the **[Membership Re-registration](https://developers.fnsvalue.co.kr/docs/user/reregister)** to re-activate our account.
+## User account deactivation
+To deactivate the account, use `unRegisterClientUser()` from `GuardianSdk` to call the API.   
+Deactivating the account means that the user won't be able to use GCCS authentication.   
+Furthermore, the device will be sorted out as a deactivated device at the user status.   
+Reactivating the user account is viable through re-registration. More in detail can be found in the **[Device Re-registration](https://developers.fnsvalue.co.kr/docs/user/reregister)**
+
 ### Parameter
+
+
+
 - none
 
 ### Example
 ```java
-// Membership Deactivation
+// User account deactivation
 GuardianSdk.getInstance().unRegisterClientUser(new GuardianResponseCallback<UnRegisterClientUserResponse>() {
     @Override
     public void onSuccess(UnRegisterClientUserResponse result) {
@@ -128,12 +140,14 @@ GuardianSdk.getInstance().unRegisterClientUser(new GuardianResponseCallback<UnRe
 |------|---|---|
 |rtCode|0|Result code|
 |rtMsg|String|Result message|
-If the membership deactivation is being called successfully, the `rtCode` will be `0` and the membership will be deactivated.
+
+When the API call for user deactivation is successful, the `rtCode` will be `0`.   
+The user account deactivation is complete then.
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
 |errorCode|0|Error code|
 
-If the membership deactivation call fails, we will receive an `error` code, which can be as follows.
+If API call fails, the user will receive an `errorCode`.
 

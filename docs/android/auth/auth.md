@@ -3,22 +3,26 @@ sidebar_position: 1
 ---
 # GCCS Authentication
 
-## Android
-This document introduces the way to implement GCCS authentication features with Guardian SDK for Android.
+## Overview
+This document describes how to implement GCCS authentication features with the Android SDK.
+
 <br/>
 
 ## Feature Description
-The GCCS authentication feature provides the authentication technology to verify GCCS member without any password.
-A token will be provided when the member proceed the authentication from authentication request until node verification  properly. The token is used for API functions such as authentication history inquiry.
+With GCCS authentication, the user can be verified without any password.   
+Throughout the whole process from authentication request to node verification, the token will be provided if the user has passed that without any trouble. The token is used for API features such as checking authentication history.
 
-## Authentication Request
-As for GCCS authentication request, we have to use the `requestAuth()` function from `GuardianSdk` to request the API. In addition, we can only request to the devices that are subscribed to GCCS.
+## Request Authentication
+Use `requestAuth()` from `GuardianSdk` to call the API.    
+It is only available for devices registered to GCCS.
+
 ### Parameter
 - none
+
 ### Example
 ```java
-// Authentication Request
-GuardianSdk.getInstance().requestAuth(new GuardianResponseCallback<AuthRequestResponse>() {
+// Authentication request
+GuardianSdk.getInstance().requestAuth(new GuardianResponseCallback<AuthRequestResponse>(){
     @Override
     public void onSuccess(AuthRequestResponse result) {
         Log.i(TAG, "Result code : " + result.rtCode);
@@ -36,23 +40,28 @@ GuardianSdk.getInstance().requestAuth(new GuardianResponseCallback<AuthRequestRe
 |------|---|---|
 |rtCode|0|Result code|
 |rtMsg|String|Result message|
-The `rtCode` will be `0` if the authentication request is successful.
+
+When the API call for authentication is successful, the `rtCode` will be `0`.
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
 |errorCode|Int|Error code|
-|ErrorMessage|String|Error message|
+|errorMessage|String|Error message|
 
-When the authentication request fails, we will receive the error code. Please refer to the **[error code](http://localhost:3000/docs/auth/errorcode)** for more information.
+If API call fails, the user will receive an `errorCode`.   
+More in detail can be found in the **[error code](https://developers.fnsvalue.co.kr/docs/auth/errorcode)**
 
 ---
 
-## Authentication Start
-After completing authentication request, we have to request for authentication start. We can call the API by using the `startAuth()` function from `GuardianSdk`.   
-We can check the status of the authentication request.
+## Start Authentication
+Once the `rtCode` returned as `0`, it is time to request for actual authentication to start.    
+Use `startAuth()` from `GuardianSdk` to call the API.   
+Authentication status is available to see throughout the process.
+
 ### Parameter
 - none
+
 ### Example
 ```java
 // Authentication Start
@@ -78,13 +87,16 @@ GuardianSdk.getInstance().startAuth(new GuardianAuthResponseCallback<AuthStartRe
 ### AuthProcessResponse
 |Key|Value|Description|
 |------|---|---|
-|status|String|Authentication progress status|
-After calling the authentication start, we will recieve the GCCS authentication progress status.   
-The explanations for the status value are as follows:
-- CreateChannel : The channel is created.
-- SelectNodes : The nodes are selected.
-- StartVerificationOfNodes : The verification of nodes is started
-- CompleteVerificationOfNodes : The verification of nodes is completed.
+|status|String|Authentication status|
+
+After calling for authentication, GCCS authentication status will appear in order.   
+
+Below are description of each status value : 
+
+- CreateChannel : Created the channel.
+- SelectNodes : Selected the nodes. 
+- StartVerificationOfNodes : Started the verification of nodes.
+- CompleteVerificationOfNodes : Completed the verification of nodes.
 
 ### AuthStartResponse
 |Key|Value|Description|
@@ -93,27 +105,33 @@ The explanations for the status value are as follows:
 |rtMsg|String|Result message|
 |authType|Int|Secondary authentication type|
 
-The `rtCode` will be `0` if the authentication start API is being called succesfully. We can check the authentication type and, with that, we can proceed the authentication process accordingly.
-- 작성 중.
+We can check the authentication type and, with that, we can proceed the authentication process accordingly.
+
+When the API call for starting authentication is successful, the `rtCode` will be `0`.   
+According to the `authType`, secondary authentication type can differ.
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
 |errorCode|Int|Error code|
-|ErrorMessage|String|Error message|
+|errorMessage|String|Error message|
 
-When the authentication start api call fails, we will receive the error code. Please refer to the  **[Error code](http://localhost:3000/docs/auth/errorcode)** for more information.
+If API call fails, the user will receive an `errorCode`   
+More in detail can be found in the **[error code](https://developers.fnsvalue.co.kr/docs/auth/errorcode)**
 
-## Authentication Completion
-This will check if the authentication is completed.We can call this API by using the `completeAuth()` function from `GuardianSdk`.    
-We call this Authentication Completion API after proceeding the additional/secondary authentication. We will need to call this API even though there is no additional authentication.
+## Complete Authentication
+This will check whether the authentication is completed.  
+We can call this API by using the `completeAuth()` function from `GuardianSdk`.   
+Call API by using the `completeAuth()` from `GuardianSdk` after proceeding the additional/secondary authentication.
+
 ### Parameter
 |Key|Value|Description|
 |------|---|---|
-|isAuth|Boolean|When there is no additional authentication or when the additional authentication is successful, it will return as `true`; otherwise, when the additional authentication fails, it will return as `false`|
+|isAuth|Boolean|When the additional authentication is successful, it will return as `true` <br/> Otherwise, it will return as `false`|
+
 ### Example
 ```java
-// Authentication Completion
+// Authentication completion
 GuardianSdk.getInstance().completeAuth(true, new GuardianResponseCallback<AuthCompleteResponse>() {
     @Override
     public void onSuccess(AuthCompleteResponse result) {
@@ -134,26 +152,30 @@ GuardianSdk.getInstance().completeAuth(true, new GuardianResponseCallback<AuthCo
 |rtCode|0|Result code|
 |rtMsg|String|Result message|
 
-The `rtCode` will be `0` if the authentication completion API is being called succesfully.
+When the API call for authentication completion is successful, the `rtCode` will be `0`.
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
 |errorCode|Int|Error code|
-|ErrorMessage|String|Error message|
+|errorMessage|String|Error message|
 
-When the authentication completion API call fails, we will receive the error code. Please refer to the  **[Error Code](http://localhost:3000/docs/auth/errorcode)** for more information.
+If API call fails, the user will receive an `errorCode`.   
+More in detail can be found in the **[error code](https://developers.fnsvalue.co.kr/docs/auth/errorcode)**
 
 ---
 
-## Authentication Result
-This will return the authentication result. We can call this API by using the `resultAuth()` function from `GuardianSdk`.
-When successful, we will recieve a token.
+## Authentication Result 
+
+Use `resultAuth()` from `GuardianSdk` to call the API.   
+The token will be given if API call is successfully done.
+
 ### Parameter
 - none
+
 ### Example
 ```java
-// Authentication Rresult
+// Authentication result
 GuardianSdk.getInstance().resultAuth(new GuardianResponseCallback<AuthResultResponse>() {
     @Override
     public void onSuccess(AuthResultResponse result) {
@@ -176,24 +198,27 @@ GuardianSdk.getInstance().resultAuth(new GuardianResponseCallback<AuthResultResp
 |rtMsg|String|Result message|
 |data|String|Token|
 
-If the authentication result API is being called succesfully, the `rtCode` will be `0` and a token will be provided.
-This token will be used to call the other APIs such as authentication history inquiry.
+When the API call for authentication result is successful, the `rtCode` will be `0` and the token will be given.   
+That token will be used for API calls such as checking authentication history.
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
 |errorCode|Int|Error code|
-|ErrorMessage|String|Error message|
+|errorMessage|String|Error message|
 
-When the authentication result API call fails, we will receive the error code. Please refer to the  **[Error Code](http://localhost:3000/docs/auth/errorcode)** for more information.
+If API call fails, the user will receive an `errorCode`.   
+More in detail can be found in the **[error code](https://developers.fnsvalue.co.kr/docs/auth/errorcode)**
 
 ---
 
-## Authentication Cancellation
-This will cancel the authentication. We can call this API by using `cancelAuth()` from `GuardianSdk`.
-We use this in order to cancel the invalid authentication or ongoing authentication process overall.
+## Cancel Authentication
+Call the API by using `cancelAuth()` from `GuardianSdk`.   
+Using this API enables cancellation of the invalid authentication/authentication in-process.
+
 ### Parameter
 - none
+
 ### Example
 ```java
 // Authentication Cancellation
@@ -217,31 +242,15 @@ GuardianSdk.getInstance().cancelAuth(new GuardianResponseCallback<AuthCancelResp
 |rtCode|0|Result code|
 |rtMsg|String|Result message|
 
-If the authentication cancellation API is being called succesfully, the `rtCode` will be `0` and the ongoing authentication process will be cancelled.
+When the API call for authentication cancellation is successful, the `rtCode` will be `0` and the authentication in-process will be canceled.   
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
 |errorCode|Int|Error code|
-|ErrorMessage|String|Error code|
+|errorMessage|String|Error code|
 
-When the authentication cancellationlation API call fails, we will receive the error code. Please refer to the  **[Error Code](http://localhost:3000/docs/auth/errorcode)** for more information.
+If API call fails, the user will receive an `errorCode`.   
+More in detail can be found in the **[error code](https://developers.fnsvalue.co.kr/docs/auth/errorcode)**
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

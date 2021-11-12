@@ -1,22 +1,24 @@
 ---
 sidebar_position: 1
 ---
-# Start
+# Get Started
 
 ## Android
-Guardian SDK for Android provides a development kits to implement Guardian-CCS authentication in Android Application.   
-This document illustrate how to use Android SDK.
+Guardian SDK for Android(hereafter 'Android SDK') provides the development kit to implement Guardian-CCS authentication in the Android app.   
+This document will describe how to make best use of the Android SDK.
 
-## Application Registration
+<br/>
+
+## App Registration
 ```
-Application Registration are required in order to use Guardian SDK for Android.   
-For more details, please check the client request and issuance page.
+In order to use the Android SDK, the app must be registered beforehand.
+We recommend you to check the app registration page in the next chapter for more details.
 ```
 
 ## Installation
 
-### Gradle Setting
-Please set up the Android SDK repository in `build.gradle` (Project) in order to implement the Android SDK.
+### Set Gradle
+Declare the Android SDK repository in the `build.gradle`(Project) to implement the Android SDK.
 
 ```gradle
 maven { 
@@ -24,23 +26,24 @@ maven {
 }
 ```
 
-### Module Setting
-Please set up neccessary module in `build.gradle`(Module).
+### Add Modules
+Add necessary modules in the `build.gradle`(Module).
+
 ```gradle
 dependencies {
     ...
 }
 ```
 
-#### External Library
-When you install our Android SDK, other neccessary libraries will also be installed automatically.
-
+#### External library dependency
+Upon the Android SDK installation, all the necessary libraries will be installed automatically.
 - Gson, Retrofit, Okhttp
-- Androidx Biometric
+- AndroidX Biometric
 
-### Internet Usage Permission Setting
-Internet permissions must be set on the app for API and communication through our Android SDK.
-We can set the internet permission inside `AndroidManifest.xml` as follows.
+### Internet Permission
+Internet permissions must be set on the app for API and communication through our Android SDK.   
+To communicate with the API through Android SDK, the app must have access to the internet.   
+It can be setup at the `AndroidManifest.xml` as follows.
 
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -54,9 +57,9 @@ We can set the internet permission inside `AndroidManifest.xml` as follows.
 </manifest>
 ```
 
-### JAVA 8 Setting
-It is neccessary to configure some settings so that we will be able to use `Java 8`.
-Please set the Java version in the build.gradle (Module) file, using the following example:
+### JAVA 8 Configuration
+Specify the Java version in the `build.gradle`(Module) file to use the `Java 8` features.  
+Refer to the following example:
 ```gradle
 android {
     compileOptions {
@@ -68,10 +71,12 @@ android {
 ```
 ---
 
-### Runtime permission
-Android 6.0 Marshmallow (API 23) and later require runtime permissions to use resources on the device.   
-The required permissions by Guardian SDK for Android are as follows.
+### Runtime Permission
+Android 6.0 Marshmallow (API 23), or higher version requires the runtime permission to use the resources of device.   
+The following are required permissions of the Android SDK to be declared.
 ```java
+
+
 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
     if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED ||
         ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED ||
@@ -80,14 +85,15 @@ if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
     }
 }
 ```
-The permissions are used for the following purposes.
-- `READ_PHONE_STATE` is being used when user authentication or mobile device is changed.
-- `ACCESS_FINE_LOCATION` and `ACCESS_COARSE_LOCATION` are being used to register membership or re-register devices through location information.
-- `CAMERA` is being used to run the scanner for QR authentication.
+Each of the permissions will be used for the following purposes.
+- `READ_PHONE_STATE` for user authentication and to detect changes of the mobile device.
+- `ACCESS_FINE_LOCATION` and `ACCESS_COARSE_LOCATION` for sign in/re-registration by using location information.
+- `CAMERA` for initializing a scanner to authenticate with the QR code.
 ---
 
 ### Initialization
-To use our Android SDK, you need to make an initialization. When using Application, you can initialize as follows:
+For initial setup, the Android SDK must be initialized after the installation.   
+It can be initialized as follows:
 ```java
 public class GlobalApplication extends Application {
     @Override

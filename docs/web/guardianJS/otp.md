@@ -1,20 +1,20 @@
 ---
-sidebar_label: OTP 인증
+sidebar_label: OTP Authentication
 sidebar_position: 4
 ---
 
-# OTP 인증
-이 문서는 Guardian-JS 에서 OTP 인증을 사용하기 위한 방법을 안내합니다.
+# OTP Authentication
+This document describes how to utilize the fOTP Authentication in the Guardian-JS
 
-## 기능 설명
-아이디를 입력하지 않고 otp code를 입력하여 인증하는 구현 방법을 설명합니다.   
-`Guardian-CCS` 앱에서 메인화면 => `OTP 인증` 을 선택하여 otp code를 생성 후  
-otp code를 입력하여 인증을 진행합니다.
+## Function Description
+OTP Authentication can be used via mobile devices without an ID by following the steps below.   
+First, click `OTP Authentication` from the main screen of `Guardian-CCS` app and then get the OTP code. Proceed on authentication by entering the OTP code.
 
-## OTP 인증 요청
-OTP 인증을 요청합니다.
-사용자가 otp code를 입력하면 `requestOtpCallback()` 로 API를 호출합니다.
-OTP 인증을 요청하면 앱으로 푸시 알림이 전달 되며, 앱을 통해 인증 성공 시 onSuccess 통해 결과가 반환됩니다.
+## OTP Authentication request
+
+When the user enters the OTP code to authenticate, the API call will be made with `requestOtpCallback()`.   
+Push notification will be sent to the app, and the result will be returned through `onSuccess` if successfully authenticated.
+
 
 ```
 requestOtpCallback(otpInput, successCallback, errCallback, codeSuccessCallback, codeErrCallback)
@@ -23,7 +23,7 @@ requestOtpCallback(otpInput, successCallback, errCallback, codeSuccessCallback, 
 ### Parameter
 |Name|Type|Description|
 |---|---|---|
-|otpInput|Element|사용자가 OTP CODE를 입력한 `<input/>` element|
+|otpInput|Element|`<input/>` element for user to enter the OTP code|
 
 ### Example
 ```html
@@ -52,63 +52,66 @@ gccs.requestOtpCallback(otpInput, (data) => {
 ### onSuccess
 |Key|Type|Description|
 |------|---|---|
-|data|String|token|
+|data|String|Token|
 
-인증이 성공 하면 `토큰`이 반환 되며, 토큰은 GCCS 기능 활용 시 사용 됩니다.
+The token will be returned if authentication succeeds, and it can be utilized for the GCCS authentication.
+
 
 ### onError
 |Key|Type|Description|
 |------|---|---|
-|errorCode|Int|에러코드|
-|errorMsg|String|에러 메시지|
+|errorCode|Int|Error code|
+|errorMsg|String|Error message|
 
-인증 실패 시 에러코드와 에러메시지가 반환됩니다.
-반환 될 수 있는 에러코드는 다음과 같습니다.
+If authentication fails, the error code and error message will be returned.   
+Possible error codes are as follows. 
 
 |ErrorCode|Description|Solution|
 |------|---|---|
-|2000|클라이언트 키가 잘못 된 경우|발급 받은 클라이언트 키를 확인합니다.|
-|2008|가입 되어 있지 않은 사용자 인 경우|GCCS 가입 여부를 확인바랍니다.|
-|3201|클라이언트 연동이 되어 있지 않은 경우|GCCS 가입 완료 후 메뉴 => 사이트 연동을 통해 연동을 진행해주시기 바립니다.|
-|3301|클라이언트 로그인 타입이 정해져 있지 않은 경우|클라이언트 설정 오류인 경우로 관리자에게 문의바랍니다.|
-|5001|인증 시간이 만료 된 경우|인증 시간이 만료 된 경우로 인증 재 요청이 필요합니다.|
-|5005|승인 되지 않은 사용자|승인 되지 않은 사용자로 관리자에게 문의바랍니다.|
-|5006|일시 정지 된 사용자|일시 정지 된 사용자로 관리자에게 문의바랍니다.|
-|5007|영구 정지 된 사용자|영구 정지 된 사용자로 관리자에게 문의바랍니다.|
-|5008|탈퇴 사용자|탈퇴 된 사용자로 일정 기간 내에 계정 복구 기능을 통해 복구가 가능합니다.|
-|2010|인증이 진행 중인 사용자 인 경우|인증이 진행 중인 사용자로 상황에 따라 인증취소 후 재 인증 요청 바랍니다. |
-|5011|인증이 취소 된 경우|재 인증 요청 바랍니다.|
-|5015|채널 생성 실패|파라미터가 부족한 경우 발생할 수 있습니다. <br/>지속적으로 발생하는 경우 문의바랍니다.|
-|5017|푸시 알림 전송 실패|FCM 등에 문제가 발생한 경우입니다. <br/>지속적으로 발생하는 경우 문의바랍니다.|
-|5022|검증이 실패 한 경우|노드 검증이 실패 한 경우 발생 할 수 있습니다. <br/>지속적으로 발생하는 경우 문의바랍니다.|
+|2000|Invalid client key|Check the client key|
+|2008|Unregistered user|Check GCCS sign in status|
+|3201|Not properly linked client|After signing up for GCCS, go through Menu => My BSA => Trusted Website => Site Link and connect with the client website|
+|3301|Unspecified client login type|Error with specifying the client, contact the person in charge to solve this matter|
+|5001|Authentication timeout|Make request for authentication once again, because previous authentication is no longer valid|
+|5005|Unauthorized user|Contact the person in charge to solve this matter|
+|5006|Temporarily suspended user|Contact the person in charge to solve this matter|
+|5007|Permanently suspended user|Contact the person in charge to solve this matter|
+|5008|Withdrawn user|User accounts can be reactivated within certain period of time by reactivation|
+|2010|User authentication in-progress|Depending on the circumstances, cancel previous authentication and request for new one|
+|5011|User authentication canceled|Make request for re-authentication|
+|5015|Failed to create channel|It can occur when the parameters are not enough <br/>If it happens constantly, please inquire the person in charge|
+|5017|Failed to send push notification|Problems have occurred with the FCM(Firebase Cloud Messaging), etc. <br/>If it happens constantly, please inquire the person in charge|
+|5022|Verification failure|Node verification failed<br/>If it happens constantly, please inquire the person in charge|
 
 ### onCodeSuccess
-otp code 검증에 성공하면 해당 함수를 호출합니다.
-null값 또는 생략이 가능합니다.
+If the OTP code verification is successful, this function will be called.   
+It can have null value or can be omitted.
+
+
 
 ### onCodeError
 |Key|Type|Description|
 |------|---|---|
-|errorCode|Int|에러코드|
-|errorMsg|String|에러 메시지|
+|errorCode|Int|Error code|
+|errorMsg|String|Error message|
 
-otp code 검증 실패 시 에러코드와 에러메시지가 반환됩니다.
-null값 또는 생략이 가능합니다.  
-반환 될 수 있는 에러코드는 다음과 같습니다.
+If the OTP code verification fails, the error code and error message will be returned.   
+It can have null value or can be omitted.   
+Possible error codes are as follows.
 
 |ErrorCode|Description|Solution|
 |------|---|---|
-|2000|클라이언트 키가 잘못 된 경우|발급 받은 클라이언트 키를 확인합니다.|
-|3005|OTP CODE 검증에 실패할 경우|OTP CODE 재 검증 요청 바랍니다.|
-|3201|클라이언트 연동이 되어 있지 않은 경우|GCCS 가입 완료 후 메뉴 => 사이트 연동을 통해 연동을 진행해주시기 바립니다.|
+|2000|Invalid client key|Check the client key|
+|3005|OTP code verification failure|Make request for re-verification|
+|3201|Not properly linked client|After signing up for GCCS, go through Menu => My BSA => Trusted Website => Site Link and connect with the client website|
 
 ---
 
-## OTP 인증 취소
-OTP 인증 취소를 요청합니다. 인증 취소를 한 경우 진행 중인 인증이 취소되며  
-다시 재인증을 요청할 수 있습니다.
+## Cancel OTP Authentication
 
-인증 취소 요청 성공 시 [인증 요청의 onError](#onerror)에 `5011` errorCode가 반환됩니다.
+Authentication in progress will be canceled if requested. Users can request for authentication again any time.   
+If the cancel request is successful, `5011` errorCode will be returned. More in detail can be found in the [onError](#onerror)
+
 
 ```
 onOtpCancel(otpInput, errCallback)
@@ -117,7 +120,7 @@ onOtpCancel(otpInput, errCallback)
 ### Parameter
 |Name|Type|Description|
 |---|---|---|
-|otpInput|Element|사용자가 otp code를 입력한 `<input/>` element|
+|otpInput|Element|`<input/>` element for user to enter the OTP code|
 
 ### Example
 ```html
@@ -137,23 +140,23 @@ gccs.onOtpCancel(otpInput, (errorCode, rtMsg) => {
 ### onError
 |Key|Type|Description|
 |------|---|---|
-|errorCode|Int|에러코드|
-|errorMsg|String|에러 메시지|
+|errorCode|Int|Error code|
+|errorMsg|String|Error message|
 
-인증 취소 요청 실패 시 에러코드와 에러메시지가 반환됩니다.
-반환 될 수 있는 에러코드는 다음과 같습니다.
+If cancel request fails, the error code and error message will be returned.
+Possible error codes are like below.
 
 |ErrorCode|Description|Solution|
 |------|---|---|
-|3100|가입 된 유저가 아닌 경우|요청한 유저키를 확인바랍니다.|
-|5019|진행 중인 인증이 없는 경우|이미 취소 된 인증이거나 해당 유저로 진행 중인 인증이 없습니다.|
+|3100|Unregistered user|Check the user key requested|
+|5019|No authentication in progress|Authentication has been already canceled, or not in progress now|
 
 ---
 
-## OTP 인증 타이머 등록
-OTP 인증 유효시간을 확인할 수 있는 Callback 을 등록합니다.   
-인증에 남은 시간을 확인할 수 있으며 유효 시간이 끝난 후에는 재 인증을 요청해야 합니다.
+## Set OTP Authentication Timer
 
+Add callback function to check valid OTP authentication time.   
+The remaining time for authentication will be displayed and if expired, the user should request for authentication again
 ```
 setOtpTimer(onCallBack)
 ```
@@ -173,14 +176,15 @@ gccs.setOtpTimer((time) => {
 ### onTime
 |Key|Value|Description|
 |------|---|---|
-|time|Int|인증 유효 시간|
+|time|Int|Valid authentication time|
 
-인증 유효 시간이 callback 으로 반환됩니다.
+Valid authentication time will be returned as the result of a callback function.
 
 ---
 
-## OTP 인증 상태 등록
-OTP 인증 상태 확인할 수 있는 Callback 을 등록합니다. 인증 요청 부터 완료 까지에 인증 상태를 확인할 수 있습니다.
+## Set OTP Authentication Status
+Add callback function to check GCCS authentication status.   
+It is possible to see the authentication status during the whole process from authentication request to the final authentication.
 
 ```
 setOtpMessage(onCallBack)
@@ -201,6 +205,6 @@ gccs.setOtpMessage((message) => {
 ### onMessage
 |Key|Value|Description|
 |------|---|---|
-|message|String|인증 진행 상태|
+|message|String|Authentication status|
 
-인증 진행 상태가 callback 으로 반환됩니다.
+Authentication status will be returned as the result of a callback function.

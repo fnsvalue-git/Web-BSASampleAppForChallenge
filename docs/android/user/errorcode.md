@@ -1,24 +1,24 @@
 ---
 sidebar_position: 4
 ---
-# Error code
+# Error Code
 
-## Description
-This is the description about possible error codes when implementing GCCS membership management system.
+## Overview
+Below are the possible errors that can occur when implementing GCCS user management.
 
 <br/>
 
-### Membership management related error
+### User management error
 |Error Code|Description|Solution|
 |------|---|---|
-|2000|Invalid Client Key|Please check the issued clienty key. <br/> During SDK initialization, it will verify if the client key has been used.|
-|2002|Required parameter not found|When calling the SDK, please check the parameter requirement.|
-|2008|Unregistered user|Please check if the user has been registered with GCCS. <br/> We can check if the user has been registered by using the `me` function from `GuardianSdk`. |
-|3202|Duplicated Client ID|This is an external site (client) user already in use. Please use another ID or re-register it.|
-|5005|Unauthorized user|We would like to recommend the unauthorized user contact the administrator.|
-|5006|Temporary suspended user|We would like to recommend the temporary suspended user contact the administrator.|
-|5007|Permanently suspanded user|We would like to recommend the permanently suspanded user contact the administrator.|
-|5008|Withdrawn user|We would like to recommend the withdrawn user to recover his/her account via the account recovery feature within a certain period of time.|
+|2000|Invalid client key|Check the client key <br/> When initializing the Android SDK, it verifies whether the client key has been used|
+|2002|Required parameter not found|Make sure that required parameters are all provided when calling the Android SDK|
+|2008|Unregistered user|Check GCCS sign in status <br/> To check whether the user has been registered or not, use `me()` from `GuardianSdk`|
+|3202|Client ID not unique|It can occur when the ID is already occupied by other external site(client) user. Using another ID or re-registration is recommended |
+|5005|Unauthorized user|Contact the person in charge to solve this matter|
+|5006|Temporarily suspended user|Contact the person in charge to solve this matter|
+|5007|Permanently suspended user|Contact the person in charge to solve this matter|
+|5008|Withdrawn user|User accounts can be reactivated within certain period of time by reactivation|
 
 ---
 
@@ -27,9 +27,9 @@ This is the description about possible error codes when implementing GCCS member
 ### Other error
 |Error Code|Description|Solution|
 |------|---|---|
-|10002|SDK error|An Exception occurs in the SDK. Please contact the administrator.|
-|10003|Server error|An Exception occurs in the API server. Please contact the administrator.|
-|10004|Cannot connect with the server|The server cannot be connected. Please check the internet connection and also check the server address when initializing.|
+|10002|SDK error|An Exception has occurred in the SDK <br/> Contact the person in charge to solve this matter|
+|10003|Server error|An Exception has occurred in the API server <br/> Contact the person in charge to solve this matter|
+|10004|Server connection error|Impossible to connect the server <br/> Check internet connection and the server address used for initialization|
 
 
 

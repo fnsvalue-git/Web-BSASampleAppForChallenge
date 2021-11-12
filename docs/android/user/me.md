@@ -1,22 +1,23 @@
 ---
 sidebar_position: 2
 ---
-# Member status and status inquiry
+# User status management
 
-## Android
-This document introduces the way to implement member status and status inquiry with Guardian SDK for Android.
+## Overview
+This document describes how to check and retrieve the user status from the Android SDK.
 
 <br/>
 
-## Member status inquiry
-As for inquiring the user's status, please use the `me()` from `GuardianSdk` to call the API.   
-The user status can be as follows: registered member or non-registered user, withdrawn member, temporary suspended user...etc.
+## Check user status
+To check the user status, `me()` from `GuardianSdk` can be used to call the API.   
+User status may be one of the following types : registered user, not registered user, withdrawn user, temporarily suspended user...etc.
+
 ### Parameter
 - none
 
 ### Example
 ```java
-// Member status inquiry
+// Check user status
 GuardianSdk.getInstance().me(new GuardianResponseCallback<MeResponse>() {
     @Override
     public void onSuccess(MeResponse result) {
@@ -41,24 +42,27 @@ GuardianSdk.getInstance().me(new GuardianResponseCallback<MeResponse>() {
 |------|---|---|
 |rtCode|0|Result code|
 |rtMsg|String|Result message|
-|data|map|. User ID<br/>. User's name<br/>. Email<br/>. Phone number<br/>. Additional authentication type<br/>. Last updated date|
+|data|map|. User ID<br/>. User name<br/>. Email<br/>. Phone number<br/>. Additional authentication type<br/>. Last updated date|
 
-If the user is a proper user, the `rtCode` will be `0`, and user information will be returned in `data`.   
-If the user does not exist, or has withdrawn his/her account, the result code will be as follows:
+The `rtCode` will be `0` if the user is properly registered, and the information of that user will come as a `data`.   
+However, if that specific user doesn't exist or a withdrawn user, the result code and message will appear as follows.
 
 ### ResultCode
 |Result Code|Description|Solution|
 |------|---|---|
-|2007 or 2008|Non-registered member or the device has been changed|- In case of non-registered member, membership registration is required. <br/> - In case the device has been changed, device registration is required.|
-|5005|Unauthorized user|We would like to recommend the unauthorized user contact the administrator.|
-|5006|Temporary suspended user|We would like to recommend the temporary suspended user contact the administrator.|
-|5007|Permanently suspanded user|We would like to recommend the permanently suspanded user contact the administrator.|
-|5008|Withdrawn user|We would like to recommend the withdrawn user to recover his/her account via the account recovery feature within a certain period of time.|
+|2007 or 2008|Unregistered user or different mobile device |- In case of unregistered user, check sign in status and register if necessary <br/> - If the mobile device has been changed, register new device|
+|5005|Unauthorized user|Contact the person in charge to solve this matter|
+|5006|Temporarily suspended user|Contact the person in charge to solve this matter|
+|5007|Permanently suspended user|Contact the person in charge to solve this matter|
+|5008|Withdrawn user|User accounts can be reactivated within a certain period of time|
 
 ### ErrorResult
 |Key|Value|Description|
 |------|---|---|
 |errorCode|Int|Error code|
-|ErrorMessage|String|Error message|
+|errorMessage|String|Error message|
 
-If we fail to call the member status inquiry API, we will recieve an `errorCode`. The error code can be as follows.
+If API call fails, the user will receive an `errorCode`
+
+
+

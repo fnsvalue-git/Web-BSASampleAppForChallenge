@@ -6,7 +6,7 @@ sidebar_position: 1
 This document describes how to utilize the Login-Component.
 
 ## Get Started
-`Login-Component` can be used for latest version of Guardian-JS
+The latest version of `Login-Component` is now available.
 
 ```html
 <head>
@@ -32,9 +32,8 @@ If necessary, specify the version on the `Login-Component` URL as below.
 ```
 
 ## Functions provided
-It is a description of how to get the authentication result(token) from Login-Component.
-`Reserved function declaration` and `Callback function setup` are two ways to get the result after the authentication is successful.   
-Please refer to the following for more detailed information 
+It is a description of how to get the authentication result(token) from the Login-Component.   
+`Reserved function declaration` and `Callback function setup` are two ways to get the result after the authentication is successfully done. Please refer to the following for more detailed information. 
 
 <!-- 
 ### 예약 함수 추가
@@ -54,10 +53,9 @@ Please refer to the following for more detailed information
 |constructor| LoginComponent에 콜백 함수를 등록 하기 위한 생성자 |
 |setSuccessCallback| GuardianCCS 인증 성공 시 CallBack을 호출 | -->
 
-### Declaration of Reserved Function
-
-Add `onGuardSuccess` function on the script for authentication result.   
-If successful, the result of authentication and a token will be given on `onGuardianSuccess` so that token can be used for GCCS functions.
+###  Specific Function Declaration
+To get the authentication result, add `onGuardianSuccess` function on the script.   
+If successful, authentication result and the token will be given through `onGuardianSuccess` so that the token can be used for GCCS functions.
 ```
 onGuardianSuccess(token)
 ```
@@ -72,12 +70,12 @@ function onGuardianSuccess(token) {
 #### onSuccess
 |Name|Type|Description|
 |---|---|---|
-|token|String|token|
+|token|String|Token|
 
-### Set Callback Function
+### Callback Function Declaration
 
 #### Constructor
-A constructor to add callback function on the LoginComponent.
+A constructor to add the callback function in the Login-Component.
 
 ```
 constructor()
@@ -91,8 +89,8 @@ const gccs = new Guardian();
 ---
 
 #### Callback Function Setup
-Set callback function to retrieve the result of authentication.
-After authentication is complete, the token will be returned and used for GCCS functions.
+Set callback function to get the authentication result.   
+After the authentication is complete, the token will be returned and used for GCCS functions.
 
 
 ```
@@ -110,4 +108,4 @@ gccs.setSuccessCallback((token) => {
 #### onSuccess
 |Name|Type|Description|
 |---|---|---|
-|token|String|token|
+|token|String|Token|
