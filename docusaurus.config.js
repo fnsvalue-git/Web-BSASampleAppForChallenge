@@ -31,6 +31,12 @@ module.exports = {
         },
         {
           type: 'doc',
+          docId: 'ios/intro',
+          position: 'left',
+          label: 'iOS',
+        },
+        {
+          type: 'doc',
           docId: 'web/intro',
           position: 'left',
           label: 'Web',
@@ -50,6 +56,10 @@ module.exports = {
             {
               label: 'Android',
               to: '/docs/android/intro',
+            },
+            {
+              label: 'iOS',
+              to: '/docs/ios/intro',
             },
             {
               label: 'Web',
