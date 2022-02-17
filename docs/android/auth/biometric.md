@@ -23,7 +23,7 @@ If the app that applied Android SDK is already in use, biometric information of 
 
 ## Biometric Information Registration
 Use `registerBiometric()` from `GuardianSdk` to call the API.   
-Biometric information needs to be registered first for the authentication.
+Biometric information needs to be registered for the authentication.
 
 ### Parameter
 - FragmentActivity :  If the class is extending `AppCompatActivity`, use `this` when passing a parameter.

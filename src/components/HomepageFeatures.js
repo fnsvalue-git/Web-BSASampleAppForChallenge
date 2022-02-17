@@ -23,7 +23,7 @@ const FeatureList = [
           to learn how to use GCCS features on <strong>iOS</strong> devices.
       </>
     ),
-    link: '/',
+    link: 'docs/ios/intro',
   },
 ];
 

@@ -50,13 +50,14 @@ GuardianSdk.getInstance().requestAuth(new GuardianResponseCallback<AuthRequestRe
 |errorCode|Int|에러코드|
 |errorMessage|String|에러메시지|
 
-인증 요청 API 호출 실패 시 에러코드가 수신됩니다.    
-에러 코드에 대한 정보는 **[에러 코드](https://developers.fnsvalue.co.kr/docs/auth/errorcode)** 를 참조 바랍니다.
+인증 요청 API 호출 실패 시 에러코드가 수신됩니다.   
+에러 코드에 대한 정보는 **[에러 코드](https://developers.fnsvalue.co.kr/docs/auth/errorcode)**를 참조 바랍니다.
+
 ---
 
 ## 인증 시작
 인증 요청이 완료된 후 인증 시작을 요청합니다. `GuardianSdk`의 `startAuth()`로 API를 호출합니다.   
-인증 요청 상태를 확인할 수 있습니다.
+인증 요청 상태를 함께 확인할 수 있습니다.
 
 ### Parameter
 - none
@@ -115,6 +116,8 @@ GuardianSdk.getInstance().startAuth(new GuardianAuthResponseCallback<AuthStartRe
 
 인증 시작 API 호출 실패 시 에러코드가 수신 됩니다.   
 에러 코드에 대한 정보는 **[에러 코드](https://developers.fnsvalue.co.kr/docs/auth/errorcode)** 를 참조 바랍니다.
+
+---
 
 ## 인증 완료
 `GuardianSdk` 의 `completeAuth()`로 API를 호출합니다.   

@@ -3,54 +3,53 @@ sidebar_position: 1
 ---
 
 # Get Started
-
 ## Overview
 
-Guardian SDK for iOS(이하 iOS SDK)는 iOS 애플리케이션에서 Guardian-CCS 인증을 사용하기 위해 제공됩니다.  
-이 문서를 통해 iOS SDK 사용 방법을 안내합니다.
+Guardian SDK for iOS(hereafter 'iOS SDK') provides the development kit to implement Guardian-CCS authentication in the iOS app.
+This document will describe how to make best use of the iOS SDK.
 
 <br/>
 
-## 애플리케이션 등록
+## App Registration
 ```
-iOS SDK를 사용하기 위해서는 애플리케이션 등록이 필요합니다.   
-자세한 사항은 애플리케이션 등록 페이지를 참고바랍니다.
-```
-
-## 요구사항
-```
-iOS SDK가 정상적으로 작동하기 위해 다음과 같은 요구사항을 권고합니다.
- - Xcode 12.0 이상
- - iOS 13.0 이상
+In order to use the iOS SDK, the app must be registered beforehand.
+We recommend you to check the app registration page in the next chapter for more details.
 ```
 
-## 설치하기
+## Requirements
+```
+ To fully operate the iOS SDK, requirements below are necessary.
+ - Xcode version 12.0 and above
+ - iOS version 13.0 and above
+```
 
-### Cocoapods를 통해 설치하기 
-[Cocoapods](https://guides.cocoapods.org/using/getting-started.html)을 활용하여 iOS SDK를 설치할 수 있으며 Cocoapods 버전은 1.1 이상이 필요합니다.
-이미 Cocoapods을 설치한 상태라면 터미널에서 iOS SDK를 적용할 프로젝트의 디렉토리로 이동 후, 아래와 같이 진행합니다.
+## Installation
+
+### Install with Cocoapods
+iOS SDK can be installed with [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) and Cocoapods version must be 1.1 and above.
+If Cocoapods is already installed, move to the directory of project that will use the iOS SDK, and proceed as following.
 
 ```
-1. pod init - podfile을 생성합니다.
-2. open podfile 
-3. podfile내에서 라이브러리를 추가
+1. pod init - create the podfile
+2. open podfile
+3. add library below in the podfile
     pod 'GuardianSDKiOS'
     pod 'Firebase/Analytics'
     pod 'Firebase/Messaging'
     pod 'TheAnimation'
     pod 'IQKeyboardManagerSwift'
-4. 다시 터미널로 돌아와서 pod install 실행
+4. come back to the terminal and do 'pod install'
+
 ```
 
-* GuardianSDKiOS를 설치함으로써 아래의 라이브러리는 자동으로 설치됩니다. 
+* Libraries below will be automatically installed with GuardianSDKiOS
 ```
 Alamofire, CryptoSwift, SwiftyJSON, StompClientLib, DeviceKit, SwiftOTP
 ```
 
-### 초기화
-iOS SDK를 사용하기 위해서는 해당 파일을 import해야 합니다. 또한 iOS SDK를 초기화하기 위해 AppDelegate.swift 파일에 아래와 같은 형식으로 추가합니다.
-
-```swift
+### Initialization
+To use iOS SDK, there are things needed to be imported. Also, to initialize iOS SDK, add in the AppDelegate.swift file like below.
+```java
 import Firebase
 import FirebaseMessaging
 import GuardianSDKiOS
@@ -68,4 +67,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 ```
-

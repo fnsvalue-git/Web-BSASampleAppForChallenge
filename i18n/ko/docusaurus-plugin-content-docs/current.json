@@ -28,11 +28,11 @@
     "description": "The label for category 회원관리 in sidebar tutorialSidebar"
   },
   "sidebar.androidSidebar.category.Client Registration": {
-    "message": "클라이언트 요청",
+    "message": "클라이언트 등록",
     "description": "The label for category 클라이언트 요청 in sidebar tutorialSidebar"
   },
   "sidebar.webSidebar.category.Client Registration": {
-    "message": "클라이언트 요청",
+    "message": "클라이언트 등록",
     "description": "The label for category 클라이언트 요청 in sidebar tutorialSidebar"
   }
 }

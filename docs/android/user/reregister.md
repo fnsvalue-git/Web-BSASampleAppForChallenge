@@ -10,12 +10,12 @@ This document describes how to implement GCCS device re-registration and integra
 ## Feature Description
 What can be done if the user wishes to continue using GCCS after changing his/her mobile device?   
 It is viable to start using GCCS features like before by user information verification and re-registration.   
-In this way, the user can use the GCCS with a new mobile device.   
-To do so, the Android SDK will first check the user history and then verify the user by sending the OTP code to their email or phone number.
+In this way, the user can use GCCS with a new mobile device.   
+To do so, the Android SDK will first check the user history and then verify the user by sending OTP code to their email or phone number.
 
 ## User verification and OTP delivery
 Use `verityUserToOtp()` from `GuardianSdk` to call the API.  
-If the user has been verified in the history, he/she will receive the OTP code via email or SMS. 
+If the user has been verified in the past, he/she will receive the OTP code via email or SMS. 
 
 ### Parameter
 |Key|Value|Description|
@@ -25,7 +25,7 @@ If the user has been verified in the history, he/she will receive the OTP code v
 |verifyType|String|- CMMDUP001 : Email<br/> - CMMDUP002 : SMS|
 |verifyData|String|Depends on the `verifyType`<br/>- If verifyType is CMMDUP001, verifyData is email <br/>- If verifyType is CMMDUP002, verifyData is phone number|
 
-The value must be in `Map<String, Object>` type.
+The value must be `Map<String, Object>` type.
 
 ### Example
 ```java
@@ -72,7 +72,7 @@ If API call fails, the user will receive an `errorCode`.
 
 ## OTP Verification
 Use `verityUserToOtp()` from `GuardianSdk` to call the API that can send OTP code to the user.  
-Then with `verityOtp()`, verify the user by comparing the OTP code.
+Then with `verityOtp()`, verify user by comparing the OTP code.
 
 ### Parameter
 |Key|Value|Description|
@@ -129,7 +129,8 @@ If API call fails, the user will receive an `errorCode`
 
 ## Device re-registration
 Use `reRegisterClientUser()` from `GuardianSdk` to call the API.   
-The token verified with `verityOtp()` is required and when the re-registration is complete, the user can utilize GCCS authentication as usual. 
+The token verified with `verityOtp()` is required.   
+When the re-registration is complete, the user can utilize GCCS authentication as usual. 
 
 ### Parameter
 |Key|Value|Description|

@@ -22,9 +22,9 @@ GCCS 가입을 진행하기 전 중복되는 사용자 정보가 존재하는지
 |verifyData|String|`verifyType` 에 따라<br/>- CMMDUP001 인 경우 이메일, <br/>- CMMDUP002 인 경우 핸드폰번호|
 
 ### Example
-```Swift
+```java
 // 가입 정보 중복 체크
- GuardianAPI().isDuplicatedEmailOrPhoneNumber(verifyType: "CMMDUP001",verifyData: email) { data in 
+GuardianAPI().isDuplicatedEmailOrPhoneNumber(verifyType: "CMMDUP001",verifyData: email) { data in 
     GuardianAPI().isDuplicatedEmailOrPhoneNumber(verifyType: "CMMDUP002",verifyData: fullNumber) { data in
             ...
         }
@@ -66,13 +66,6 @@ GCCS 가입을 진행하기 위해 `GuardianService` 의 `requestMemberRegister(
 ### Example
 ```java
 // GCCS 가입
-Map<String, Object> params = new HashMap<>();
-params.put("userKey", "test123");
-params.put("name", "jhkim");
-params.put("email", "fnstest@fnsvalue.co.kr");
-params.put("phoneNum", "010-1234-5678");
-params.put("accountId", "jhkim");
-
 public func requestMemberRegister(memberObject : Dictionary<String, Any>, onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
     ...
          if (rtCode == RtCode.AUTH_SUCCESS.rawValue){

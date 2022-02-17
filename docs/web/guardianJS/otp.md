@@ -4,7 +4,7 @@ sidebar_position: 4
 ---
 
 # OTP Authentication
-This document describes how to utilize the fOTP Authentication in the Guardian-JS
+This document describes how to utilize the OTP Authentication in the Guardian-JS
 
 ## Function Description
 OTP Authentication can be used via mobile devices without an ID by following the steps below.   

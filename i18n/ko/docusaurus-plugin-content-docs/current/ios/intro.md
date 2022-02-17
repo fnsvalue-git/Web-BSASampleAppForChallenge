@@ -50,7 +50,7 @@ Alamofire, CryptoSwift, SwiftyJSON, StompClientLib, DeviceKit, SwiftOTP
 ### 초기화
 iOS SDK를 사용하기 위해서는 해당 파일을 import해야 합니다. 또한 iOS SDK를 초기화하기 위해 AppDelegate.swift 파일에 아래와 같은 형식으로 추가합니다.
 
-```swift
+```java
 import Firebase
 import FirebaseMessaging
 import GuardianSDKiOS

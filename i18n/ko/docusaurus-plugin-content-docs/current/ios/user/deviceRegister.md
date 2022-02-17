@@ -14,7 +14,7 @@ iOS SDK의 GCCS 기기 재등록 방법을 안내합니다.
 회원 여부를 먼저 확인한 뒤 이메일 또는 SMS로 OTP 코드를 발송하여 회원 검증 후 재등록을 진행합니다.
 
 ## 사용자 체크 및 OTP 발송
-사용자 체크 및 OTP 발송을 요청 합니다. `GuardianAPI`의 `sendOTPInRegisterDevice()`로 API를 콜합니다.   
+사용자 체크 및 OTP 발송을 요청 합니다. `GuardianAPI`의 `sendOTPInRegisterDevice()`로 API를 호출합니다.   
 입력한 사용자 정보가 맞는 경우 이메일 또는 SMS로 OTP 코드가 전송됩니다.
 
 ### Parameter
@@ -24,31 +24,31 @@ iOS SDK의 GCCS 기기 재등록 방법을 안내합니다.
 |name|String|이름|
 |verifyType|String|- CMMDUP001 : 이메일<br/> - CMMDUP002 : SMS|
 |verifyData|String|`verifyType`에 따라<br/>- CMMDUP001 인 경우 이메일, <br/>- CMMDUP002 인 경우 핸드폰번호|
-|clientKey|String|클라이언트키|
+|clientKey|String|클라이언트 키|
 
 값은 `Dictionary<KeyType, ValueType>` 형태로 전달해야 합니다.
 
 ### Example
-```Swift
+```java
 // 사용자 체크 및 OTP 발송
- func sendOTPInRegisterDevice(userKey: String, name: String, verifyType: String, verifyData: String, onSuccess: @escaping (Int, Dictionary<String, Any>)->Void, onFailed: @escaping (Int)->Void) {
+func sendOTPInRegisterDevice(userKey: String, name: String, verifyType: String, verifyData: String, onSuccess: @escaping (Int, Dictionary<String, Any>)->Void, onFailed: @escaping (Int)->Void) {
         
-        let apiUrl = apiUrl
-        
-        var params = Dictionary<String,String>()
-        params["userKey"] = userKey
-        params["name"] = name
-        params["verifyType"] = verifyType
-        params["verifyData"] = verifyData
-        params["clientKey"] = K.MasterClientKey
+    let apiUrl = apiUrl
+    
+    var params = Dictionary<String,String>()
+    params["userKey"] = userKey
+    params["name"] = name
+    params["verifyType"] = verifyType
+    params["verifyData"] = verifyData
+    params["clientKey"] = K.MasterClientKey
 
-         apiCall(params: params, api: apiUrl, method: .post) { response in
-        ...
-            onSuccess(rtCode, data)
-        } errorCallBack: { errorCode, errorMsg in
-            onFailed(errorCode)
-        }
+     apiCall(params: params, api: apiUrl, method: .post) { response in
+    ...
+        onSuccess(rtCode, data)
+    } errorCallBack: { errorCode, errorMsg in
+        onFailed(errorCode)
     }
+}
 ```
 ### SendOTPInRegisterDevice
 |Key|Value|Description|
@@ -77,7 +77,7 @@ OTP 코드 검증을 요청합니다. `GuardianAPI` 의 `sendOTPInRegisterDevice
 ### Parameter
 |Key|Value|Description|
 |------|---|---|
-|clientKey|String|클라이언트키|
+|clientKey|String|클라이언트 키|
 |email, phoneNum|String|`verifyType`에 따라<br/>- CMMDUP001 인 경우 이메일, <br/>- CMMDUP002 인 경우 핸드폰번호|
 |authNum|String|이메일 또는 SMS로 수신된 OTP 코드 (6자리)|
 |seq|String|`sendOTPInRegisterDevice()` 결과 값 seq|
@@ -85,31 +85,27 @@ OTP 코드 검증을 요청합니다. `GuardianAPI` 의 `sendOTPInRegisterDevice
 값은 `Dictionary<KeyType, ValueType>` 형태로 전달해야 합니다.
 
 ### Example
-```Swift
+```java
 // OTP 검증
 func verifyOTPByEmail(email: String, authNum: String, onSuccess: @escaping(Int, Bool, Dictionary<String, Any>)->Void, onFailed: @escaping(Int, String)->Void){
-        
-        let apiUrl = "/mail/verify"
-        
-        var params = Dictionary<String, Any>()
-        params["clientKey"] = K.MasterClientKey
-        params["email"] = email
-        params["authNum"] = authNum
-        
-        if let seq = GuardianAPI.seq {
-            params["seq"] = seq
+                
+    var params = Dictionary<String, Any>()
+    params["clientKey"] = K.MasterClientKey
+    params["email"] = email
+    params["authNum"] = authNum
+    
+    if let seq = GuardianAPI.seq {
+        params["seq"] = seq
+    }
+            
+    apiCall(params: params, api: apiUrl, method: .post) { response in
+        ...
+        } else {
+            onSuccess(rtCode, false, data)
         }
-        
-        print("Param => \(params)")
-        
-        apiCall(params: params, api: apiUrl, method: .post) { response in
-            ...
-            } else {
-                onSuccess(rtCode, false, data)
-            }
-        } errorCallBack: { error, errorMsg in
-            onFailed(error, errorMsg)
-        }
+    } errorCallBack: { error, errorMsg in
+        onFailed(error, errorMsg)
+    }
 ```
 ### VerifyOtpByEmail, VerifyOtpBySms
 |Key|Value|Description|
@@ -119,7 +115,7 @@ func verifyOTPByEmail(email: String, authNum: String, onSuccess: @escaping(Int, 
 |data|String|재등록 OTP 검증 토큰|
 
 OTP 코드 검증 API 호출 성공 시 `rtCode`로 `0`이 수신 됩니다.  
-`data`의 토큰 값은 `requestReMemberRegister)`로 기기 재등록 시 사용됩니다.
+`data`의 토큰 값은 `requestReMemberRegister()`로 기기 재등록 시 사용됩니다.
 
 ### ErrorResult
 |Key|Value|Description|
@@ -144,18 +140,17 @@ OTP 코드 검증 API 호출 실패 시 `errorCode`가 수신됩니다.
 값은 `Dictionary<KeyType, ValueType>` 형태로 전달해야 합니다.
 
 ### Example
-```swift
+```java
 // 기기 재등록
- public func requestReMemberRegister(memberObject : Dictionary<String, Any>, onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-   
-        let packageName = getPackageName()
+public func requestReMemberRegister(memberObject : Dictionary<String, Any>, onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
+    let packageName = getPackageName()
 
-        DispatchQueue.main.async {
-            DeviceInfoService().getDeviceInfo{ (data:Dictionary<String, Any>) in
+    DispatchQueue.main.async {
+        DeviceInfoService().getDeviceInfo{ (data:Dictionary<String, Any>) in
         ...
-            }
         }
- }
+    }
+}
 ```
 ### ReRegisterClientUserResponse
 |Key|Value|Description|
