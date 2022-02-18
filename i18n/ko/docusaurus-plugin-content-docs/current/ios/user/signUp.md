@@ -64,10 +64,10 @@ GCCS 가입을 진행하기 위해 `GuardianSdk` 의 `requestMemberRegister()` �
 ### Example
 ```java
 // GCCS 가입
-public func requestMemberRegister(memberObject : Dictionary<String, Any>, 
-        onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, 
-        onFailed: @escaping(RtCode, String)-> Void) {
-        ...
+GuardianService.sharedInstance.requestMemberRegister(memberObject: self.params) { rtCode, rtMsg, data in
+    ...
+    } onFailed: { err, errMsg in
+    ...
     }
 ```
 ### RegisterClientUserResponse

@@ -22,8 +22,11 @@ GCCS에 가입된 기기만 요청이 가능합니다.
 ### Example
 ```java
 // 인증 요청
-public func requestAuthRequest(onSuccess: @escaping(RtCode, String, Int, String, String, String)-> Void, 
-        onProcess: @escaping(String) -> Void,  onFailed: @escaping(RtCode, String)-> Void) {
+GuardianService.sharedInstance.requestAuthRequest { rtCode, rtMsg, authType, connectIp, userKey, clientKey in
+        ...  
+    } onProcess: { status in
+        ...
+    } onFailed: { errCode, errMsg in
         ...
     }
 ```
@@ -56,8 +59,11 @@ public func requestAuthRequest(onSuccess: @escaping(RtCode, String, Int, String,
 
 ### Example
 ```java
-public func requestAuthRequest(onSuccess: @escaping(RtCode, String, Int, String, String, String)-> Void, 
-        onProcess: @escaping(String) -> Void,  onFailed: @escaping(RtCode, String)-> Void) {
+GuardianService.sharedInstance.requestAuthRequest { rtCode, rtMsg, authType, connectIp, userKey, clientKey in
+        ...  
+    } onProcess: { status in
+        ...
+    } onFailed: { errCode, errMsg in
         ...
     }
 ```
@@ -109,8 +115,9 @@ public func requestAuthRequest(onSuccess: @escaping(RtCode, String, Int, String,
 ### Example
 ```java
 // 인증 완료
-public func requestAuthResult(isSecondaryCertification : Bool, 
-        onSuccess: @escaping(RtCode, String)-> Void, onFailed: @escaping(RtCode, String)-> Void) {  
+GuardianService.sharedInstance.requestAuthResult(isSecondaryCertification: true) { rtCode, rtMsg in
+        ...
+    } onFailed: { errCode, errMsg in
         ...
     }
 ```
@@ -144,7 +151,9 @@ public func requestAuthResult(isSecondaryCertification : Bool,
 ### Example
 ```java
 // 인증 결과
-public func getAuthResultToken(onSuccess: @escaping(RtCode, [String:Any])-> Void, onFailed: @escaping(RtCode, String)-> Void){
+GuardianService.sharedInstance.getAuthResultToken { rtCode, result in
+        ...
+    } onFailed: { errCode, errMsg in
         ...
     }
 ```
@@ -180,8 +189,10 @@ public func getAuthResultToken(onSuccess: @escaping(RtCode, [String:Any])-> Void
 ### Example 
 ```java
 // 인증 취소
-public func requestAuthCancel(onSuccess: @escaping(RtCode, String)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-        ...
+GuardianService.sharedInstance.requestAuthCancel { rtCode, msg in
+    ...
+    } onFailed: { errCode, errMsg in
+    ...
     }
 ```
 

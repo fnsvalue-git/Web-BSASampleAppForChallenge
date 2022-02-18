@@ -26,8 +26,10 @@ Whether user information is unique or not can be identified upon the `verifyType
 ### Example
 ```java
 // Checking user information uniqueness
-GuardianAPI().isDuplicatedEmailOrPhoneNumber(verifyType: "CMMDUP001",verifyData: email){data in
+GuardianAPI().isDuplicatedEmailOrPhoneNumber(verifyType: "CMMDUP001",verifyData: email) { data in 
+    GuardianAPI().isDuplicatedEmailOrPhoneNumber(verifyType: "CMMDUP002",verifyData: fullNumber){data in
         ...
+        }
     }
 ```
 ### RegisterClientUserResponse
@@ -63,10 +65,10 @@ The value must be in `Dictionary<KeyType, ValueType>` type.
 ### Example
 ```java
 // GCCS registration
-public func requestMemberRegister(memberObject : Dictionary<String, Any>, 
-        onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, 
-        onFailed: @escaping(RtCode, String)-> Void) {
-        ...
+ GuardianService.sharedInstance.requestMemberRegister(memberObject: self.params) { rtCode, rtMsg, data in
+    ...
+    } onFailed: { err, errMsg in
+    ...
     }
 ```
 ### RegisterClientUserResponse

@@ -22,8 +22,11 @@ It is only available for devices registered to GCCS.
 ### Example
 ```java
 // Authentication request
-public func requestAuthRequest(onSuccess: @escaping(RtCode, String, Int, String, String, String)-> Void, 
-        onProcess: @escaping(String) -> Void,  onFailed: @escaping(RtCode, String)-> Void) {
+GuardianService.sharedInstance.requestAuthRequest { rtCode, rtMsg, authType, connectIp, userKey, clientKey in
+        ...  
+    } onProcess: { status in
+        ...
+    } onFailed: { errCode, errMsg in
         ...
     }
 ```
@@ -57,8 +60,11 @@ Authentication status is available to see throughout the process.
 ### Example
 ```java
 //Start authentication
-public func requestAuthRequest(onSuccess: @escaping(RtCode, String, Int, String, String, String)-> Void, 
-        onProcess: @escaping(String) -> Void,  onFailed: @escaping(RtCode, String)-> Void) {
+GuardianService.sharedInstance.requestAuthRequest { rtCode, rtMsg, authType, connectIp, userKey, clientKey in
+        ...  
+    } onProcess: { status in
+        ...
+    } onFailed: { errCode, errMsg in
         ...
     }
 ```
@@ -109,10 +115,11 @@ Call API by using the `requestAuthResult()` from `GuardianSdk` after proceeding 
 ### Example
 ```java
 // Complete authentication
-public func requestAuthResult(isSecondaryCertification : Bool, 
-        onSuccess: @escaping(RtCode, String)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
+GuardianService.sharedInstance.requestAuthResult(isSecondaryCertification: true) { rtCode, rtMsg in
         ...
-    }   
+    } onFailed: { errCode, errMsg in
+        ...
+    }
 ```
 
 ### AuthCompleteResponse
@@ -145,8 +152,9 @@ The token will be given if API call is successfully done.
 ### Example
 ```java
 // Authentication result
-public func getAuthResultToken(onSuccess: @escaping(RtCode, [String:Any])-> Void, 
-        onFailed: @escaping(RtCode, String)-> Void){
+GuardianService.sharedInstance.getAuthResultToken { rtCode, result in
+        ...
+    } onFailed: { errCode, errMsg in
         ...
     }
 ```
@@ -182,9 +190,10 @@ Using this API enables cancellation of the invalid authentication/authentication
 ### Example
 ```java
 //Cancel authentication
-public func requestAuthCancel(onSuccess: @escaping(RtCode, String)-> Void, 
-        onFailed: @escaping(RtCode, String)-> Void) {
-        ...
+GuardianService.sharedInstance.requestAuthCancel { rtCode, msg in
+    ...
+    } onFailed: { errCode, errMsg in
+    ...
     }
 ```
 

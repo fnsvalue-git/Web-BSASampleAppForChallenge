@@ -26,9 +26,10 @@ Use `registerBiometric()` from `GuardianSdk` to call the API.
 ### Example
 ```java
 //Biometric information registration
-public func registerBiometric(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, 
-        onFailed: @escaping(RtCode, String)-> Void) {
-        ...
+BiometricService.sharedInstance.registerBiometric { rtCode, rtMsg, biometricType in
+    ...
+    } onFailed: { errorCode, errMsg in
+    ...
     }
 ```
 ### AuthBiometricResponse
@@ -62,9 +63,10 @@ If there is no biometric information, PIN or pattern will be used as a substitut
 ### Example
 ```java
 // Biometric authentication
-public func authenticate(msg: String, onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, 
-        onFailed: @escaping(RtCode, String?)-> Void) {
-        ...
+ BiometricService.sharedInstance.authenticate(msg: "") { rtCode, rtMsg, biometricType in
+    ...
+    } onFailed: { errCode, errMsg in
+    ...
     }
 ```
 
@@ -99,9 +101,10 @@ That is to say the iOS SDK can figure out whether there has been a change or ano
 ### Example
 ```java
 // Biometric information change detection
-public func hasNewBiometricEnrolled(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, 
-        onFailed: @escaping(RtCode, String)-> Void) {
-        ...
+BiometricService.sharedInstance.hasNewBiometricEnrolled { rtCode, rtMsg, biometricType in
+    ...
+    } onFailed: { errorCode, errMsg in
+    ...
     }
 ```
 
@@ -138,9 +141,10 @@ when the authentication is done, the previous biometric information will be dele
 ### Example
 ```java
 // Biometric information reset
-public func resetBiometric(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, 
-        onFailed: @escaping(RtCode, String)-> Void) {
-        ...
+BiometricService.sharedInstance.resetBiometric { rtCode, rtMsg, biometricType in
+    ...
+    } onFailed: { errCode, errMsg in
+    ...
     }
 ```
 

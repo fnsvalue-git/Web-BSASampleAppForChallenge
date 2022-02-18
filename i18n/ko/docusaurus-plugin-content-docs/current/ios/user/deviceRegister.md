@@ -31,9 +31,13 @@ iOS SDK의 GCCS 기기 재등록 방법을 안내합니다.
 ### Example
 ```java
 // 사용자 체크 및 OTP 발송
-func sendOTPInRegisterDevice(userKey: String, name: String, verifyType: String, verifyData: String, 
-        onSuccess: @escaping (Int, Dictionary<String, Any>)->Void, onFailed: @escaping (Int)->Void) {
-        ...
+GuardianAPI.sharedInstance.sendOTPInRegisterDevice(userKey: userKey,
+                                                    name: name,
+                                                    verifyType: verifyType,
+                                                    verifyData: verifyData) { rtCode, response in
+    ...
+    } onFailed: { error in
+    ...
     }
 ```
 ### SendOTPInRegisterDevice
@@ -73,10 +77,11 @@ OTP 코드 검증을 요청합니다. `GuardianSdk` 의 `sendOTPInRegisterDevice
 ### Example
 ```java
 // OTP 검증
-func verifyOTPByEmail(email: String, authNum: String, 
-        onSuccess: @escaping(Int, Bool, Dictionary<String, Any>)->Void, 
-        onFailed: @escaping(Int, String)->Void){
-        ...
+GuardianAPI().verifyOTPByEmail(email: params["email"] as! String,
+                            authNum: otpNumber) { rtCode, result, data  in
+    ...              
+    } onFailed: { error, errorMsg in
+    ...
     }
 ```
 ### VerifyOtpByEmail, VerifyOtpBySms
@@ -114,10 +119,10 @@ OTP 코드 검증 API 호출 실패 시 `errorCode`가 수신됩니다.
 ### Example
 ```java
 // 기기 재등록
-public func requestReMemberRegister(memberObject : Dictionary<String, Any>, 
-        onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, 
-        onFailed: @escaping(RtCode, String)-> Void) {
-        ...
+GuardianService.sharedInstance.requestReMemberRegister(memberObject: self.params) { rtCode, rtMsg, data in
+    ...
+    } onFailed: { error, errMsg in
+    ...
     }
 ```
 ### ReRegisterClientUserResponse

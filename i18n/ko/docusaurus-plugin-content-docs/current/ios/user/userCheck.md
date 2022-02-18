@@ -18,9 +18,12 @@ iOS SDK의 회원 여부 및 상태 조회 방법을 안내합니다.
 ### Example
 ```java
 // 회원 상태 조회
-public func getMe(onSuccess: @escaping(Int, String, String, String, Int)->Void,
-                  onFailed: @escaping(Int, String)->Void) {
-        ...
+ GuardianAPI.sharedInstance.getMe { rtCode, name, userKey, date, authType in
+        DispatchQueue.main.async {
+            ...
+        }
+    } onFailed: { errCode, errMsg in
+            ...
     }
 ```
 

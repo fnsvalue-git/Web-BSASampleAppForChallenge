@@ -36,9 +36,10 @@ FCM push token can be changed due to expiration, etc. It should be updated by ca
 ### Example
 ```java
 // FCM Push notification token registered
-public func requestTokenUpdate(token : String, onSuccess: @escaping(RtCode, String)-> Void, 
-        onFailed: @escaping(RtCode, String)-> Void) {
-        ...
+GuardianService.sharedInstance.requestTokenUpdate(token: fcmToken!) { rtCode, rtMsg in
+    ...
+    } onFailed: { errCode, errMsg in
+    ...
     }
 ```
 ### TokenResponse

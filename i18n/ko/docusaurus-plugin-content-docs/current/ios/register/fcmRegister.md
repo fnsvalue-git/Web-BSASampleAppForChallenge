@@ -35,8 +35,10 @@ FCM 푸시 토큰이 유효기간 만료 등으로 변경되었을 때도 `reque
 ### Example
 ```java
 // FCM 푸시 토큰 등록
-public func requestTokenUpdate(token : String, onSuccess: @escaping(RtCode, String)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-        ...
+GuardianService.sharedInstance.requestTokenUpdate(token: fcmToken!) { rtCode, rtMsg in
+    ...
+    } onFailed: { errCode, errMsg in
+    ...
     }
 ```
 ### TokenResponse

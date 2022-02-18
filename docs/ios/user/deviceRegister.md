@@ -30,9 +30,13 @@ The value must be `Dictionary<KeyType, ValueType>` type.
 ### Example
 ```java
 // User check and OTP delivery
-func sendOTPInRegisterDevice(userKey: String, name: String, verifyType: String, verifyData: String, 
-        onSuccess: @escaping (Int, Dictionary<String, Any>)->Void, onFailed: @escaping (Int)->Void) {
-        ...
+GuardianAPI.sharedInstance.sendOTPInRegisterDevice(userKey: userKey,
+                                                    name: name,
+                                                    verifyType: verifyType,
+                                                    verifyData: verifyData) { rtCode, response in
+    ...
+    } onFailed: { error in
+    ...
     }
 ```
 ### SendOTPInRegisterDevice
@@ -72,9 +76,11 @@ The value must be in `Dictionary<KeyType, ValueType>` type.
 ### Example
 ```java
 // OTP Verification
-func verifyOTPByEmail(email: String, authNum: String, 
-        onSuccess: @escaping(Int, Bool, Dictionary<String, Any>)->Void, 
-        onFailed: @escaping(Int, String)->Void){
+GuardianAPI().verifyOTPByEmail(email: params["email"] as! String,
+                            authNum: otpNumber) { rtCode, result, data  in
+    ...              
+    } onFailed: { error, errorMsg in
+    ...
     }
 ```
 ### VerityOtpResponse
@@ -114,10 +120,10 @@ The value must be in `Dictionary<KeyType, ValueType>` type.
 ### Example
 ```java
 // Device registration
-public func requestReMemberRegister(memberObject : Dictionary<String, Any>, 
-        onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, 
-        onFailed: @escaping(RtCode, String)-> Void) {
-        ...
+GuardianService.sharedInstance.requestReMemberRegister(memberObject: self.params) { rtCode, rtMsg, data in
+    ...
+    } onFailed: { error, errMsg in
+    ...
     }
 ```
 ### ReRegisterClientUserResponse

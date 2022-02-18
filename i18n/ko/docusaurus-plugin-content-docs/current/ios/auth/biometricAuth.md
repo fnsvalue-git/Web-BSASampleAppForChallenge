@@ -27,8 +27,10 @@ GCCS 인증 후 추가 인증 수단으로 생체 인증을 활용합니다.
 ### Example
 ```java
 // 생체 정보 등록
-public func registerBiometric(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-        ...
+BiometricService.sharedInstance.registerBiometric { rtCode, rtMsg, biometricType in
+    ...
+    } onFailed: { errorCode, errMsg in
+    ...
     }
 ```
 
@@ -63,9 +65,10 @@ public func registerBiometric(onSuccess: @escaping(RtCode, String, Array<[String
 ### Example
 ```java
 // 생체 인증
-public func authenticate(msg: String, onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, 
-        onFailed: @escaping(RtCode, String?)-> Void) {
-        ...
+ BiometricService.sharedInstance.authenticate(msg: "") { rtCode, rtMsg, biometricType in
+    ...
+    } onFailed: { errCode, errMsg in
+    ...
     }
 ```
 
@@ -99,9 +102,10 @@ public func authenticate(msg: String, onSuccess: @escaping(RtCode, String, Array
 ### Example
 ```java
 // 생체 정보 변경 확인
-public func hasNewBiometricEnrolled(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, 
-        onFailed: @escaping(RtCode, String)-> Void) {
-        ...
+BiometricService.sharedInstance.hasNewBiometricEnrolled { rtCode, rtMsg, biometricType in
+    ...
+    } onFailed: { errorCode, errMsg in
+    ...
     }
 ```
 
@@ -136,9 +140,11 @@ public func hasNewBiometricEnrolled(onSuccess: @escaping(RtCode, String, Array<[
 ### Example
 ```java
 // 생체 정보 초기화
-public func resetBiometric(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-        ...
-}
+BiometricService.sharedInstance.resetBiometric { rtCode, rtMsg, biometricType in
+    ...
+    } onFailed: { errCode, errMsg in
+    ...
+    }
 ```
 
 ### AuthBiometricResponse

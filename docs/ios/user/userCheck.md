@@ -19,9 +19,12 @@ registered user, not registered user, withdrawn user, temporarily suspended user
 ### Example
 ```java
 // User status check
-public func getMe(onSuccess: @escaping(Int, String, String, String, Int)->Void, 
-        onFailed: @escaping(Int, String)->Void) {
-        ...
+ GuardianAPI.sharedInstance.getMe { rtCode, name, userKey, date, authType in
+        DispatchQueue.main.async {
+            ...
+        }
+    } onFailed: { errCode, errMsg in
+            ...
     }
 ```
 ### MeResponse
