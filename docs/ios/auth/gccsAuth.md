@@ -10,9 +10,9 @@ This document describes how to implement GCCS authentication features with the i
 
 ## Feature Description
 With GCCS authentication, the user can be verified without any password.   
-Throughout the whole process from authentication request to node verification, the token will be provided if the user has passed that without any trouble. The token is used for API features such as checking authentication history.
+Throughout the whole process from authentication request to node verification, the token will be provided if the user has passed without any trouble. The token is used for API features such as checking authentication history.
 
-## Request Authentication
+## Authentication Request
 Use `requestAuthRequest()` from `GuardianService` to call the API.    
 It is only available for devices registered to GCCS.
 
@@ -21,7 +21,7 @@ It is only available for devices registered to GCCS.
 
 ### Example
 ```java
-// 인증 요청
+// Authentication request
 public func requestAuthRequest(onSuccess: @escaping(RtCode, String, Int, String, String, String)-> Void, onProcess: @escaping(String) -> Void,  onFailed: @escaping(RtCode, String)-> Void) {
     ...
      self.callHttpMethod(params: params, api: apiUrl, method: .post) { (data: JSON) in
@@ -68,6 +68,7 @@ Authentication status is available to see throughout the process.
 
 ### Example
 ```java
+//Start authentication
 public func requestAuthRequest(onSuccess: @escaping(RtCode, String, Int, String, String, String)-> Void, onProcess: @escaping(String) -> Void,  onFailed: @escaping(RtCode, String)-> Void) {
     ...
     StompSocketService.sharedInstance.connect(dataMap: socketDataMap, connectCallback: {(isConnect: Bool) -> Void in
@@ -125,22 +126,23 @@ Call API by using the `requestAuthResult()` from `GuardianService` after proceed
 
 ### Example
 ```java
-// 인증 완료
-public func requestAuthResult(isSecondaryCertification : Bool, onSuccess: @escaping(RtCode, String)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-        var params = Dictionary<String, Any>()
-        
-        let commonParam = self.getCommonParam()
-        for key in commonParam.keys {
-            params[key] = commonParam[key]
-        }
-            ...
-        if (rtCode == RtCode.AUTH_SUCCESS.rawValue){
-            onSuccess(RtCode.AUTH_SUCCESS, rtMsg)
-        } else {
-            self.onCallbackFailed(rtCode: RtCode(rawValue: rtCode)!, onFailed: onFailed)
-        }
-            ...
-    }   
+// Complete authentication
+public func requestAuthResult(isSecondaryCertification : Bool, 
+        onSuccess: @escaping(RtCode, String)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
+    var params = Dictionary<String, Any>()
+    
+    let commonParam = self.getCommonParam()
+    for key in commonParam.keys {
+        params[key] = commonParam[key]
+    }
+        ...
+    if (rtCode == RtCode.AUTH_SUCCESS.rawValue){
+        onSuccess(RtCode.AUTH_SUCCESS, rtMsg)
+    } else {
+        self.onCallbackFailed(rtCode: RtCode(rawValue: rtCode)!, onFailed: onFailed)
+    }
+        ...
+}   
 ```
 
 ### AuthCompleteResponse
@@ -172,22 +174,22 @@ The token will be given if API call is successfully done.
 
 ### Example
 ```java
-  // Authentication result
-  public func getAuthResultToken(onSuccess: @escaping(RtCode, [String:Any])-> Void, onFailed: @escaping(RtCode, String)-> Void){
-        
-        var params = Dictionary<String,String>()
-        params["deviceId"] = getUUid()
-        params["clientKey"] = self.clientKey
-        params["channelKey"] = self.channelKey
-        
-        self.callHttpMethod(params: params, api: apiUrl) { (data: JSON) in
-            var resultData = [String:Any]()
-            resultData["data"] = data["data"].string ?? ""
-            onSuccess(RtCode.AUTH_SUCCESS, resultData)
-        } errorCallBack: { (errorCode, errorMsg) in
-            onFailed(RtCode.API_ERROR, errorMsg)
-        }
+// Authentication result
+public func getAuthResultToken(onSuccess: @escaping(RtCode, [String:Any])-> Void, onFailed: @escaping(RtCode, String)-> Void){
+    
+    var params = Dictionary<String,String>()
+    params["deviceId"] = getUUid()
+    params["clientKey"] = self.clientKey
+    params["channelKey"] = self.channelKey
+    
+    self.callHttpMethod(params: params, api: apiUrl) { (data: JSON) in
+        var resultData = [String:Any]()
+        resultData["data"] = data["data"].string ?? ""
+        onSuccess(RtCode.AUTH_SUCCESS, resultData)
+    } errorCallBack: { (errorCode, errorMsg) in
+        onFailed(RtCode.API_ERROR, errorMsg)
     }
+}
 ```
 
 ### AuthResultResponse
@@ -220,26 +222,26 @@ Using this API enables cancellation of the invalid authentication/authentication
 
 ### Example
 ```java
-    // 인증 취소
-    public func requestAuthCancel(onSuccess: @escaping(RtCode, String)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-       
-        var params = getCommonParam()
-        params["deviceId"] = getUUid()
-        ...
-        self.callHttpMethod(params: params, api: apiUrl, method: .delete) { (data: JSON) in
-            let rtCode = data["rtCode"].intValue
-            let rtMsg = data["rtMsg"].string ?? ""
-            
-            if (rtCode == RtCode.AUTH_SUCCESS.rawValue) {
-                onSuccess(RtCode.AUTH_SUCCESS, rtMsg)
-            } else {
-                self.onCallbackFailed(rtCode: RtCode(rawValue: rtCode)!, onFailed: onFailed)
-            }
-            
-        } errorCallBack: { (errorCode, errorMsg) in
-            onFailed(RtCode.API_ERROR, errorMsg)
+//Cancel authentication
+public func requestAuthCancel(onSuccess: @escaping(RtCode, String)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
+   
+    var params = getCommonParam()
+    params["deviceId"] = getUUid()
+    ...
+    self.callHttpMethod(params: params, api: apiUrl, method: .delete) { (data: JSON) in
+        let rtCode = data["rtCode"].intValue
+        let rtMsg = data["rtMsg"].string ?? ""
+        
+        if (rtCode == RtCode.AUTH_SUCCESS.rawValue) {
+            onSuccess(RtCode.AUTH_SUCCESS, rtMsg)
+        } else {
+            self.onCallbackFailed(rtCode: RtCode(rawValue: rtCode)!, onFailed: onFailed)
         }
+        
+    } errorCallBack: { (errorCode, errorMsg) in
+        onFailed(RtCode.API_ERROR, errorMsg)
     }
+}
 ```
 
 ### AuthCancelResponse

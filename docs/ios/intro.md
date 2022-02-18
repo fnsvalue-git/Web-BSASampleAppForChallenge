@@ -39,10 +39,9 @@ If Cocoapods is already installed, move to the directory of project that will us
     pod 'TheAnimation'
     pod 'IQKeyboardManagerSwift'
 4. come back to the terminal and do 'pod install'
-
 ```
 
-* Libraries below will be automatically installed with GuardianSDKiOS
+* Libraries below will be automatically installed with iOS SDK
 ```
 Alamofire, CryptoSwift, SwiftyJSON, StompClientLib, DeviceKit, SwiftOTP
 ```

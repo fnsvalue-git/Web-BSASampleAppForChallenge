@@ -9,11 +9,11 @@ This document describes how to implement GCCS device re-registration and integra
 
 ## Feature Description
 What can be done if the user wishes to continue using GCCS after changing his/her mobile device?   
-It is viable to start using GCCS features like before by user information verification and re-registration.   
+It is possible to use GCCS features like before by user information verification and re-registration.   
 In this way, the user can use GCCS with a new mobile device.   
 To do so, the Android SDK will first check the user history and then verify the user by sending OTP code to their email or phone number.
 
-## User verification and OTP delivery
+## User Verification and OTP Delivery
 Use `verityUserToOtp()` from `GuardianSdk` to call the API.  
 If the user has been verified in the past, he/she will receive the OTP code via email or SMS. 
 

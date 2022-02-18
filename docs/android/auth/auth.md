@@ -10,9 +10,9 @@ This document describes how to implement GCCS authentication features with the A
 
 ## Feature Description
 With GCCS authentication, the user can be verified without any password.   
-Throughout the whole process from authentication request to node verification, the token will be provided if the user has passed that without any trouble. The token is used for API features such as checking authentication history.
+Throughout the whole process from authentication request to node verification, the token will be provided if the user has passed without any trouble. The token is used for API features such as checking authentication history.
 
-## Request Authentication
+## Authentication Request
 Use `requestAuth()` from `GuardianSdk` to call the API.    
 It is only available for devices registered to GCCS.
 

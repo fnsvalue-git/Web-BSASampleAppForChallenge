@@ -9,7 +9,7 @@ This document describes how to implement user registration and integration with 
 <br/>
 
 ## Feature Description
-Android SDK provides features to register and integrate user into GCCS system by using the basic information of user.
+Android SDK provides features to register and integrate user into GCCS system by using the basic information.
 
 ## User Information Uniqueness Check
 Previous to GCCS registration, each user must have unique and original information and does not contain duplicate value.  

@@ -13,8 +13,6 @@ Please contact the person in charge regarding this matter.
 ## Request for Issuance
 Only the minimum information will be collected in the process of a client key generation as follows.
 - Company name
-- Android
-    - Package Name
 - iOS
     - Bundle ID
 

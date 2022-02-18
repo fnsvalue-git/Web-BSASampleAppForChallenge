@@ -6,7 +6,7 @@ sidebar_position: 1
 ## Overview
 
 In order to fully utilize the Android SDK, the client application must be registered to generate the client key.   
-Please contact the person in charge regarding this matter.
+Please contact the FNSVALUE development team regarding this matter.
 
 <br/>
 
@@ -15,8 +15,6 @@ Only the minimum information will be collected in the process of a client key ge
 - Company name
 - Android 
   - Package Name
-- IOS
-  - Bundle ID
   
 <pre>
 For non-mobile platform authentication (Web, Window...), Firebase Cloud Messaging (FCM) is required.

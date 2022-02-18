@@ -9,7 +9,7 @@ This document describes how to implement user registration and integration with 
 <br/>
 
 ## Feature Description
-iOS SDK provides features to register and integrate user into GCCS system by using the basic information of user.
+iOS SDK provides features to register and integrate user into GCCS system by using the basic information.
 
 ## User Information Uniqueness Check
 Previous to GCCS registration, each user must have unique and original information and does not contain duplicate value.  
@@ -26,13 +26,14 @@ Whether user information is unique or not can be identified upon the `verifyType
 ### Example
 ```java
 // Checking user information uniqueness
-GuardianAPI().isDuplicatedEmailOrPhoneNumber(verifyType: "CMMDUP001",verifyData: email) { data in 
-    GuardianAPI().isDuplicatedEmailOrPhoneNumber(verifyType: "CMMDUP002",verifyData: fullNumber) { data in
+GuardianAPI().isDuplicatedEmailOrPhoneNumber(verifyType: "CMMDUP001",verifyData: email){data in
+        GuardianAPI().isDuplicatedEmailOrPhoneNumber(verifyType:"CMMDUP002",verifyData:fullNumber){data in
             ...
         }
-            onFailed: { errCode, errMsg in
-        ...
+        onFailed:{errCode,errMsg in
+            ...
         }
+    }
 ```
 ### RegisterClientUserResponse
 |Key|Value|Description|
@@ -66,7 +67,7 @@ The value must be in `Dictionary<KeyType, ValueType>` type.
 
 ### Example
 ```java
-// GCCS 가입
+// GCCS registration
 public func requestMemberRegister(memberObject : Dictionary<String, Any>, onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
     ...
      if (rtCode == RtCode.AUTH_SUCCESS.rawValue){
@@ -77,6 +78,7 @@ public func requestMemberRegister(memberObject : Dictionary<String, Any>, onSucc
         } errorCallBack: { (errorCode, errorMsg) in
             onFailed(RtCode.API_ERROR, errorMsg)
         }
+    }
 ```
 ### RegisterClientUserResponse
 |Key|Value|Description|

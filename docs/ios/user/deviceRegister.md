@@ -9,11 +9,11 @@ This document describes how to implement GCCS device re-registration and integra
 
 ## Feature Description
 What can be done if the user wishes to continue using GCCS after changing his/her mobile device?   
-It is viable to start using GCCS features like before by user information verification and re-registration.   
+It is possible to use GCCS features like before by user information verification and re-registration.   
 In this way, the user can use GCCS with a new mobile device.   
 To do so, the iOS SDK will first check the user history and then verify the user by sending OTP code to their email or phone number.
 
-## User verification and OTP delivery
+## User Verification and OTP Delivery
 Use `sendOTPInRegisterDevice()` from `GuardianAPI` to call the API.  
 If the user has been verified in the past, he/she will receive the OTP code via email or SMS.
 
@@ -29,23 +29,23 @@ The value must be `Dictionary<KeyType, ValueType>` type.
 
 ### Example
 ```java
-    // User check and OTP delivery
-    func sendOTPInRegisterDevice(userKey: String, name: String, verifyType: String, verifyData: String, onSuccess: @escaping (Int, Dictionary<String, Any>)->Void, onFailed: @escaping (Int)->Void) {
-        
-        var params = Dictionary<String,String>()
-        params["userKey"] = userKey
-        params["name"] = name
-        params["verifyType"] = verifyType
-        params["verifyData"] = verifyData
-        params["clientKey"] = K.MasterClientKey
+// User check and OTP delivery
+func sendOTPInRegisterDevice(userKey: String, name: String, verifyType: String, verifyData: String, onSuccess: @escaping (Int, Dictionary<String, Any>)->Void, onFailed: @escaping (Int)->Void) {
+    
+    var params = Dictionary<String,String>()
+    params["userKey"] = userKey
+    params["name"] = name
+    params["verifyType"] = verifyType
+    params["verifyData"] = verifyData
+    params["clientKey"] = K.MasterClientKey
 
-         apiCall(params: params, api: apiUrl, method: .post) { response in
-        ...
-            onSuccess(rtCode, data)
-        } errorCallBack: { errorCode, errorMsg in
-            onFailed(errorCode)
-        }
+     apiCall(params: params, api: apiUrl, method: .post) { response in
+    ...
+        onSuccess(rtCode, data)
+    } errorCallBack: { errorCode, errorMsg in
+        onFailed(errorCode)
     }
+}
 ```
 ### SendOTPInRegisterDevice
 |Key|Value|Description|
@@ -83,26 +83,27 @@ The value must be in `Dictionary<KeyType, ValueType>` type.
 
 ### Example
 ```java
-    // OTP Verification
-    func verifyOTPByEmail(email: String, authNum: String, onSuccess: @escaping(Int, Bool, Dictionary<String, Any>)->Void, onFailed: @escaping(Int, String)->Void){
+// OTP Verification
+func verifyOTPByEmail(email: String, authNum: String, onSuccess: @escaping(Int, Bool, Dictionary<String, Any>)->Void, onFailed: @escaping(Int, String)->Void){
 
-        var params = Dictionary<String, Any>()
-        params["clientKey"] = K.MasterClientKey
-        params["email"] = email
-        params["authNum"] = authNum
+    var params = Dictionary<String, Any>()
+    params["clientKey"] = K.MasterClientKey
+    params["email"] = email
+    params["authNum"] = authNum
 
-        if let seq = GuardianAPI.seq {
-            params["seq"] = seq
+    if let seq = GuardianAPI.seq {
+        params["seq"] = seq
+    }
+    
+    apiCall(params: params, api: apiUrl, method: .post) { response in
+    ...
+        } else {
+            onSuccess(rtCode, false, data)
         }
-        
-        apiCall(params: params, api: apiUrl, method: .post) { response in
-        ...
-            } else {
-                onSuccess(rtCode, false, data)
-            }
-            } errorCallBack: { error, errorMsg in
-                onFailed(error, errorMsg)
-            }
+        } errorCallBack: { error, errorMsg in
+            onFailed(error, errorMsg)
+        }
+    }
 ```
 ### VerityOtpResponse
 |Key|Value|Description|
@@ -140,16 +141,16 @@ The value must be in `Dictionary<KeyType, ValueType>` type.
 
 ### Example
 ```java
-    // Device registration
-    public func requestReMemberRegister(memberObject : Dictionary<String, Any>, onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-        let packageName = getPackageName()
+// Device registration
+public func requestReMemberRegister(memberObject : Dictionary<String, Any>, onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
+    let packageName = getPackageName()
 
-        DispatchQueue.main.async {
-            DeviceInfoService().getDeviceInfo{ (data:Dictionary<String, Any>) in
-            ...
-            }
+    DispatchQueue.main.async {
+        DeviceInfoService().getDeviceInfo{ (data:Dictionary<String, Any>) in
+        ...
         }
     }
+}
 ```
 ### ReRegisterClientUserResponse
 |Key|Value|Description|

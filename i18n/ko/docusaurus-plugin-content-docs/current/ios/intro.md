@@ -42,7 +42,7 @@ iOS SDK가 정상적으로 작동하기 위해 다음과 같은 요구사항을 
 4. 다시 터미널로 돌아와서 pod install 실행
 ```
 
-* GuardianSDKiOS를 설치함으로써 아래의 라이브러리는 자동으로 설치됩니다. 
+* iOS SDK를 설치함으로써 아래의 라이브러리는 자동으로 설치됩니다. 
 ```
 Alamofire, CryptoSwift, SwiftyJSON, StompClientLib, DeviceKit, SwiftOTP
 ```

@@ -8,9 +8,10 @@ This document describes how to check and retrieve the user status from the Andro
 
 <br/>
 
-## Check user status
+## Check User Status
 To check the user status, `me()` from `GuardianSdk` can be used to call the API.   
-User status may be one of the following types : registered user, not registered user, withdrawn user, temporarily suspended user...etc.
+User status may be one of the following types :    
+registered user, not registered user, withdrawn user, temporarily suspended user...etc.
 
 ### Parameter
 - none
@@ -45,7 +46,7 @@ GuardianSdk.getInstance().me(new GuardianResponseCallback<MeResponse>() {
 |data|map|User ID<br/>. User name<br/>. Email<br/>. Phone number<br/>. Additional authentication type<br/>. Last updated date|
 
 The `rtCode` will be `0` if the user is properly registered, and the information of that user will come as a `data`.   
-However, if that specific user doesn't exist or a withdrawn user, the result code and message will appear as follows.
+However, if that specific user doesn't exist or is a withdrawn user, the result code and message will appear as follows.
 
 ### ResultCode
 |Result Code|Description|Solution|

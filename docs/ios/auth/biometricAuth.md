@@ -17,7 +17,7 @@ This version was developed base on the LAContext class provided by iOS.
 ```
 
 ## Biometric Information Registration
-Biometric information needs to be registered for the authentication.
+Biometric information needs to be registered for the authentication.   
 Use `registerBiometric()` from `BiometricService` to call the API.
 
 ### Parameter
@@ -25,7 +25,7 @@ Use `registerBiometric()` from `BiometricService` to call the API.
 
 ### Example
 ```java
-// 생체 정보 등록
+//Biometric information registration
    public func registerBiometric(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
         let initCode = initBiometric()
         if(initCode != .AUTH_SUCCESS) {
@@ -70,24 +70,24 @@ If there is no biometric information, PIN or pattern will be used as a substitut
 
 ### Example
 ```java
-    // Biometric authentication
-    public func authenticate(msg: String, onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String?)-> Void) {
-        let context = LAContext()
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil){
-            if let domainState = context.evaluatedPolicyDomainState {
-            ...
-                if success {
-                    DispatchQueue.main.async {
-                        onSuccess(RtCode.AUTH_SUCCESS, "", self.getBiometricTypeList())
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        onFailed(RtCode.BIOMETRIC_AUTH_FAILED, message)
-                    }
+// Biometric authentication
+public func authenticate(msg: String, onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String?)-> Void) {
+    let context = LAContext()
+    if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil){
+        if let domainState = context.evaluatedPolicyDomainState {
+        ...
+            if success {
+                DispatchQueue.main.async {
+                    onSuccess(RtCode.AUTH_SUCCESS, "", self.getBiometricTypeList())
+                }
+            } else {
+                DispatchQueue.main.async {
+                    onFailed(RtCode.BIOMETRIC_AUTH_FAILED, message)
                 }
             }
         }
     }
+}
 ```
 
 ### AuthBiometricResponse
@@ -120,20 +120,20 @@ That is to say the iOS SDK can figure out whether there has been a change or ano
 
 ### Example
 ```java
-    // Biometric information change detection
-    public func hasNewBiometricEnrolled(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-        let context = LAContext()
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil){
-            if let domainState = context.evaluatedPolicyDomainState {
-                ...
-                if(strData != cData) {
-                    onSuccess(RtCode.BIOMETRIC_CHANGE_ENROLLED, self.getLocalizationMessage(rtCode : RtCode.BIOMETRIC_CHANGE_ENROLLED), self.getBiometricTypeList())
-                } else {
-                    onSuccess(RtCode.BIOMETRIC_NORMAL, self.getLocalizationMessage(rtCode : RtCode.BIOMETRIC_NORMAL), self.getBiometricTypeList())
-                }
+// Biometric information change detection
+public func hasNewBiometricEnrolled(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
+    let context = LAContext()
+    if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil){
+        if let domainState = context.evaluatedPolicyDomainState {
+            ...
+            if(strData != cData) {
+                onSuccess(RtCode.BIOMETRIC_CHANGE_ENROLLED, self.getLocalizationMessage(rtCode : RtCode.BIOMETRIC_CHANGE_ENROLLED), self.getBiometricTypeList())
+            } else {
+                onSuccess(RtCode.BIOMETRIC_NORMAL, self.getLocalizationMessage(rtCode : RtCode.BIOMETRIC_NORMAL), self.getBiometricTypeList())
             }
         }
     }
+}
 ```
 
 ### AuthBiometricResponse
@@ -168,18 +168,18 @@ when the authentication is done, the previous biometric information will be dele
 
 ### Example
 ```java
-    // 생체 정보 초기화
-    public func resetBiometric(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-        let context = LAContext()
-        DispatchQueue.main.async {
-            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
-                if let domainState = context.evaluatedPolicyDomainState {
-                    ...
-                        onSuccess(RtCode.AUTH_SUCCESS, "", self.getBiometricTypeList())
-                    }
+// Biometric information reset
+public func resetBiometric(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
+    let context = LAContext()
+    DispatchQueue.main.async {
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+            if let domainState = context.evaluatedPolicyDomainState {
+                ...
+                    onSuccess(RtCode.AUTH_SUCCESS, "", self.getBiometricTypeList())
                 }
             }
         }
+    }
 ```
 
 ### AuthBiometricResponse

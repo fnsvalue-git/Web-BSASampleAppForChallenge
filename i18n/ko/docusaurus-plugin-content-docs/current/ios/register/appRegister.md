@@ -15,7 +15,7 @@ iOS SDK를 사용하기 위해서는 애플리케이션 등록 요청 및 클라
 - 회사명
 - iOS
   - Bundle ID
-  ****
+
 <pre>
 모바일이 아닌 타 플랫폼 (Web, Window ...)에서 인증을 할 경우
 Firebase Cloud Messaging(FCM) 등록 요청이 필요합니다.

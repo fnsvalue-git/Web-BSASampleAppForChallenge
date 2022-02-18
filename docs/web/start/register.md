@@ -6,7 +6,7 @@ sidebar_position: 1
 ## Overview
 
 In order to fully utilize the Guardian Web, the client must be registered to generate the client key.   
-Please contact the person in charge regarding this matter.
+Please contact the FNSVALUE development team regarding this matter.
 
 ## Request for Issuance
 Only the minimum information will be collected in the process of client key generation as follows.
