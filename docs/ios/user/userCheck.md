@@ -9,7 +9,7 @@ This document describes how to check and retrieve the user status from the iOS S
 <br/>
 
 ## Check User Status
-To check the user status, `getMe()` from `GuardianAPI` can be used to call the API.   
+To check the user status, `getMe()` from `GuardianSdk` can be used to call the API.   
 User status may be one of the following types :    
 registered user, not registered user, withdrawn user, temporarily suspended user...etc.
 
@@ -19,24 +19,10 @@ registered user, not registered user, withdrawn user, temporarily suspended user
 ### Example
 ```java
 // User status check
-public func getMe(onSuccess: @escaping(Int, String, String, String, Int)->Void, onFailed: @escaping(Int, String)->Void) {
-    let apiUrl = "/me"
-    let params = Dictionary<String, Any>()
-
-    apiCall(params: params, api: apiUrl) { response in
-        print("getMe => \(response)")
-        let rtCode = response["rtCode"].intValue
-        let data = response["data"].dictionaryObject!
-        let userKey = data["userKey"] as? String ?? ""
-        let name = data["name"] as? String ?? ""
-        let authType = data["authType"] as? Int ?? 3
-        let rawRegDt = data["regDt"] as? String
-
-    } errorCallBack: { errCode, errMsg in
-        print("Error getMe => \(errCode) \(errMsg)")
-        onFailed(errCode, errMsg)
+public func getMe(onSuccess: @escaping(Int, String, String, String, Int)->Void, 
+        onFailed: @escaping(Int, String)->Void) {
+        ...
     }
-}
 ```
 ### MeResponse
 |Key|Value|Description|

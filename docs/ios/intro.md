@@ -60,9 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         ...
-        
-        GuardianService.sharedInstance.initDomain(baseUrl: baseUrl,apiUrl: apiUrl)
-        GuardianService.sharedInstance.initClientKey(clientKey: MasterClientKey)
     }
 
 ```

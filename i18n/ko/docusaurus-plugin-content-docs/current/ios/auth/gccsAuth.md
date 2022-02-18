@@ -13,7 +13,7 @@ GCCS 회원 검증을 위한 인증 기능을 별도의 패스워드 없이 활�
 인증 요청부터 노드 검증 등의 과정을 거쳐 정상적으로 회원임을 검증되면 토큰을 제공합니다. 해당 토큰은 인증 이력 조회 등 API 기능에 활용됩니다.
 
 ## 인증 요청
-GCCS 인증 요청을 합니다. `GuardianService` 의 `requestAuthRequest()`로 API를 요청합니다.   
+GCCS 인증 요청을 합니다. `GuardianSdk` 의 `requestAuthRequest()`로 API를 요청합니다.   
 GCCS에 가입된 기기만 요청이 가능합니다.
 
 ### Parameter
@@ -22,22 +22,10 @@ GCCS에 가입된 기기만 요청이 가능합니다.
 ### Example
 ```java
 // 인증 요청
-public func requestAuthRequest(onSuccess: @escaping(RtCode, String, Int, String, String, String)-> Void, onProcess: @escaping(String) -> Void,  onFailed: @escaping(RtCode, String)-> Void) {
-    ...
-     self.callHttpMethod(params: params, api: apiUrl, method: .post) { (data: JSON) in
-        let rtCode = data["rtCode"].intValue
-        let rtMsg = data["rtMsg"].string ?? ""
-        if (rtCode == RtCode.AUTH_SUCCESS.rawValue){
-                guard let authData = data["data"] as? JSON else {
-                    onFailed(RtCode.API_ERROR, rtMsg)
-                    return
-                }
-        } errorCallBack: { (errorCode, errorMsg) in
-        print("onFailed(RtCode.API_ERROR, errorMsg)")
-        onFailed(RtCode.API_ERROR, errorMsg)
-        }
-    } 
-}
+public func requestAuthRequest(onSuccess: @escaping(RtCode, String, Int, String, String, String)-> Void, 
+        onProcess: @escaping(String) -> Void,  onFailed: @escaping(RtCode, String)-> Void) {
+        ...
+    }
 ```
 
 ### AuthRequestResponse
@@ -60,7 +48,7 @@ public func requestAuthRequest(onSuccess: @escaping(RtCode, String, Int, String,
 ---
 
 ## 인증 시작
-인증 요청이 완료된 후 인증 시작을 요청합니다. `GuardianService`의 `requestAuthRequest()`로 API를 호출합니다.   
+인증 요청이 완료된 후 인증 시작을 요청합니다. `GuardianSdk`의 `requestAuthRequest()`로 API를 호출합니다.   
 인증 요청 상태를 함께 확인할 수 있습니다.
 
 ### Parameter
@@ -68,16 +56,10 @@ public func requestAuthRequest(onSuccess: @escaping(RtCode, String, Int, String,
 
 ### Example
 ```java
-public func requestAuthRequest(onSuccess: @escaping(RtCode, String, Int, String, String, String)-> Void, onProcess: @escaping(String) -> Void,  onFailed: @escaping(RtCode, String)-> Void) {
-    ...
-    StompSocketService.sharedInstance.connect(dataMap: socketDataMap, connectCallback: {(isConnect: Bool) -> Void in
+public func requestAuthRequest(onSuccess: @escaping(RtCode, String, Int, String, String, String)-> Void, 
+        onProcess: @escaping(String) -> Void,  onFailed: @escaping(RtCode, String)-> Void) {
         ...
-            switch status! {
-            case AuthStatus.COMPLETE_VERIFICATION_OF_NODES.rawValue:
-                self._authRequestSuccess(RtCode.AUTH_SUCCESS, status!, self.authType, self.connectIp, self.userKey, self.clientKey)
-                break
-        ...
-}
+    }
 ```
 
 ### AuthProcessResponse
@@ -116,7 +98,7 @@ public func requestAuthRequest(onSuccess: @escaping(RtCode, String, Int, String,
 ---
 
 ## 인증 완료
-`GuardianService` 의 `requestAuthResult()`로 API를 호출합니다.   
+`GuardianSdk` 의 `requestAuthResult()`로 API를 호출합니다.   
 추가 인증을 진행한 다음 인증 완료를 요청합니다.
 
 ### Parameter
@@ -127,19 +109,8 @@ public func requestAuthRequest(onSuccess: @escaping(RtCode, String, Int, String,
 ### Example
 ```java
 // 인증 완료
-public func requestAuthResult(isSecondaryCertification : Bool, onSuccess: @escaping(RtCode, String)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-    var params = Dictionary<String, Any>()
-    
-    let commonParam = self.getCommonParam()
-    for key in commonParam.keys {
-        params[key] = commonParam[key]
-    }
-        ...
-    if (rtCode == RtCode.AUTH_SUCCESS.rawValue){
-        onSuccess(RtCode.AUTH_SUCCESS, rtMsg)
-        } else {
-            self.onCallbackFailed(rtCode: RtCode(rawValue: rtCode)!, onFailed: onFailed)
-        }
+public func requestAuthResult(isSecondaryCertification : Bool, 
+        onSuccess: @escaping(RtCode, String)-> Void, onFailed: @escaping(RtCode, String)-> Void) {  
         ...
     }
 ```
@@ -164,7 +135,7 @@ public func requestAuthResult(isSecondaryCertification : Bool, onSuccess: @escap
 ---
 
 ## 인증 결과
-`GuardianService` 의 `getAuthResultToken()`로 API를 호출합니다.   
+`GuardianSdk` 의 `getAuthResultToken()`로 API를 호출합니다.   
 요청 성공 시 토큰을 받습니다.
 
 ### Parameter
@@ -174,20 +145,8 @@ public func requestAuthResult(isSecondaryCertification : Bool, onSuccess: @escap
 ```java
 // 인증 결과
 public func getAuthResultToken(onSuccess: @escaping(RtCode, [String:Any])-> Void, onFailed: @escaping(RtCode, String)-> Void){
-    
-    var params = Dictionary<String,String>()
-    params["deviceId"] = getUUid()
-    params["clientKey"] = self.clientKey
-    params["channelKey"] = self.channelKey
-    
-    self.callHttpMethod(params: params, api: apiUrl) { (data: JSON) in
-        var resultData = [String:Any]()
-        resultData["data"] = data["data"].string ?? ""
-        onSuccess(RtCode.AUTH_SUCCESS, resultData)
-    } errorCallBack: { (errorCode, errorMsg) in
-        onFailed(RtCode.API_ERROR, errorMsg)
+        ...
     }
-}
 ```
 
 ### AuthResultResponse
@@ -212,7 +171,7 @@ public func getAuthResultToken(onSuccess: @escaping(RtCode, [String:Any])-> Void
 ---
 
 ## 인증 취소
-`GuardianService`의 `requestAuthCancel()`로 API를 호출합니다.   
+`GuardianSdk`의 `requestAuthCancel()`로 API를 호출합니다.   
 잘못된 인증이 요청된 경우나 이미 인증이 진행중인 상황에서 취소하기 위해 사용합니다.
 
 ### Parameter
@@ -222,24 +181,8 @@ public func getAuthResultToken(onSuccess: @escaping(RtCode, [String:Any])-> Void
 ```java
 // 인증 취소
 public func requestAuthCancel(onSuccess: @escaping(RtCode, String)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-   
-    var params = getCommonParam()
-    params["deviceId"] = getUUid()
-    ...
-    self.callHttpMethod(params: params, api: apiUrl, method: .delete) { (data: JSON) in
-        let rtCode = data["rtCode"].intValue
-        let rtMsg = data["rtMsg"].string ?? ""
-        
-        if (rtCode == RtCode.AUTH_SUCCESS.rawValue) {
-            onSuccess(RtCode.AUTH_SUCCESS, rtMsg)
-        } else {
-            self.onCallbackFailed(rtCode: RtCode(rawValue: rtCode)!, onFailed: onFailed)
-        }
-        
-    } errorCallBack: { (errorCode, errorMsg) in
-        onFailed(RtCode.API_ERROR, errorMsg)
+        ...
     }
-}
 ```
 
 ### AuthCancelResponse

@@ -73,22 +73,15 @@ The value must be in `Map<String, Object>` type.
 ### Example
 ```java
 // GCCS Registration
-Map<String, Object> params = new HashMap<>();
-params.put("userKey", "test123");
-params.put("name", "jhkim");
-params.put("email", "fnstest@fnsvalue.co.kr");
-params.put("phoneNum", "010-1234-5678");
-params.put("accountId", "jhkim");
-
 GuardianSdk.getInstance().registerClientUser(params, new GuardianResponseCallback<RegisterClientUserResponse>() {
     @Override
     public void onSuccess(RegisterClientUserResponse result) {
-
+        ...
     }
-
+    
     @Override
     public void onFailed(ErrorResult errorResult) {
-
+        ...
     }
 });
 ```

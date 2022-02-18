@@ -30,17 +30,10 @@ The value must be `Map<String, Object>` type.
 ### Example
 ```java
 // User check and OTP delivery
-Map<String, Object> params = new HashMap<>();
-params.put("userKey", "fnstest");
-params.put("name", "test");
-params.put("verifyType", "CMMDUP001");
-params.put("verifyData", "fnstest@fnsvalue.co.kr");
-
 GuardianSdk.getInstance().verityUserToOtp(params, new GuardianResponseCallback<VerityUserToOtpResponse>() {
     @Override
     public void onSuccess(VerityUserToOtpResponse result) {
-        Log.i(TAG, "Result code : " + result.rtCode);
-        Log.i(TAG, "seq : " + result.data.seq);
+        ...
     }
 
     @Override
@@ -87,17 +80,10 @@ The value must be in `Map<String, Object>` type.
 ### Example
 ```java
 // OTP Verification
-Map<String, Object> params = new HashMap<>();
-params.put("authNum", "567232");
-params.put("seq", 3);
-params.put("verifyType", "CMMDUP001");
-params.put("verifyData", "fnstest@fnsvalue.co.kr");
-
 GuardianSdk.getInstance().verityOtp(params, new GuardianResponseCallback<VerityOtpResponse>() {
     @Override
     public void onSuccess(VerityOtpResponse result) {
-        Log.i(TAG, "Result code : " + result.rtCode);
-        Log.i(TAG, "data token : " + result.data);
+        ...
     }
 
     @Override
@@ -143,15 +129,11 @@ The value must be in `Map<String, Object>` type.
 ### Example
 ```java
 // OTP Verification
-Map<String, Object> params = new HashMap<>();
-params.put("disposeToken", "eyJhbGciOiJIUzM4NCJ9.eyJ1c2VyS2V5Ijoid2Fyc2hpcCIsImNsaWVudFNlcSI6MiwiY2xpZW50S2V5IjoidGVzdF9jbGllbnQiLCJ1c2VyVHlwZSI6IkNNTU1DTDAwMSIsImV4cCI6MzQ4Njk1MjgwOH0.jgsqNOJUoGm2BkphMyXqpS9PGud96HIPlade_SJ8GInVKSKbnE303KTLm-AUkA5g");
-params.put("otpType", "CMMDUP001");
-
 GuardianSdk.getInstance().reRegisterClientUser(params, new GuardianResponseCallback<ReRegisterClientUserResponse>() {
     @Override
     public void onSuccess(ReRegisterClientUserResponse result) {
         Log.i(TAG, "Result code : " + result.rtCode);
-}
+    }
 
     @Override
     public void onFailed(ErrorResult errorResult) {

@@ -12,7 +12,7 @@ iOS SDK의 회원 가입 및 연동 방법을 안내합니다.
 회원정보를 이용하여 GCCS에 가입 및 연동 기능을 제공합니다.
 
 ## 가입 정보 중복 체크
-GCCS 가입을 진행하기 전 중복되는 사용자 정보가 존재하는지 확인합니다. `GuardianAPI` 의 `isDuplicatedEmailOrPhoneNumber()` 로 API를 요청합니다.
+GCCS 가입을 진행하기 전 중복되는 사용자 정보가 존재하는지 확인합니다. `GuardianSdk` 의 `isDuplicatedEmailOrPhoneNumber()` 로 API를 요청합니다.
 `verifyType`에 따라 기존에 가입된 회원정보가 있는지 이메일 또는 SMS 검증을 통해 확인이 가능합니다.
 
 ### Parameter
@@ -25,12 +25,10 @@ GCCS 가입을 진행하기 전 중복되는 사용자 정보가 존재하는지
 ```java
 // 가입 정보 중복 체크
 GuardianAPI().isDuplicatedEmailOrPhoneNumber(verifyType: "CMMDUP001",verifyData: email) { data in 
-    GuardianAPI().isDuplicatedEmailOrPhoneNumber(verifyType: "CMMDUP002",verifyData: fullNumber) { data in
-            ...
-        }
-            onFailed: { errCode, errMsg in
+    GuardianAPI().isDuplicatedEmailOrPhoneNumber(verifyType: "CMMDUP002",verifyData: fullNumber){data in
         ...
         }
+    }
 ```
 ### RegisterClientUserResponse
 |Key|Value|Description|
@@ -51,7 +49,7 @@ GuardianAPI().isDuplicatedEmailOrPhoneNumber(verifyType: "CMMDUP001",verifyData:
 ---
 
 ## GCCS 가입
-GCCS 가입을 진행하기 위해 `GuardianService` 의 `requestMemberRegister()` 로 API를 요청합니다.
+GCCS 가입을 진행하기 위해 `GuardianSdk` 의 `requestMemberRegister()` 로 API를 요청합니다.
 
 ### Parameter
 |Key|Value|Description|
@@ -66,16 +64,11 @@ GCCS 가입을 진행하기 위해 `GuardianService` 의 `requestMemberRegister(
 ### Example
 ```java
 // GCCS 가입
-public func requestMemberRegister(memberObject : Dictionary<String, Any>, onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-    ...
-         if (rtCode == RtCode.AUTH_SUCCESS.rawValue){
-                    onSuccess(RtCode.AUTH_SUCCESS, rtMsg, data)
-                } else {
-                    self.onCallbackFailed(rtCode: RtCode(rawValue: rtCode)!, onFailed: onFailed)
-                }
-            } errorCallBack: { (errorCode, errorMsg) in
-                onFailed(RtCode.API_ERROR, errorMsg)
-            }
+public func requestMemberRegister(memberObject : Dictionary<String, Any>, 
+        onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, 
+        onFailed: @escaping(RtCode, String)-> Void) {
+        ...
+    }
 ```
 ### RegisterClientUserResponse
 |Key|Value|Description|

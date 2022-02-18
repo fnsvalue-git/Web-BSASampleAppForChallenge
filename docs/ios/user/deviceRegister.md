@@ -14,7 +14,7 @@ In this way, the user can use GCCS with a new mobile device.
 To do so, the iOS SDK will first check the user history and then verify the user by sending OTP code to their email or phone number.
 
 ## User Verification and OTP Delivery
-Use `sendOTPInRegisterDevice()` from `GuardianAPI` to call the API.  
+Use `sendOTPInRegisterDevice()` from `GuardianSdk` to call the API.  
 If the user has been verified in the past, he/she will receive the OTP code via email or SMS.
 
 ### Parameter
@@ -30,22 +30,10 @@ The value must be `Dictionary<KeyType, ValueType>` type.
 ### Example
 ```java
 // User check and OTP delivery
-func sendOTPInRegisterDevice(userKey: String, name: String, verifyType: String, verifyData: String, onSuccess: @escaping (Int, Dictionary<String, Any>)->Void, onFailed: @escaping (Int)->Void) {
-    
-    var params = Dictionary<String,String>()
-    params["userKey"] = userKey
-    params["name"] = name
-    params["verifyType"] = verifyType
-    params["verifyData"] = verifyData
-    params["clientKey"] = K.MasterClientKey
-
-     apiCall(params: params, api: apiUrl, method: .post) { response in
-    ...
-        onSuccess(rtCode, data)
-    } errorCallBack: { errorCode, errorMsg in
-        onFailed(errorCode)
+func sendOTPInRegisterDevice(userKey: String, name: String, verifyType: String, verifyData: String, 
+        onSuccess: @escaping (Int, Dictionary<String, Any>)->Void, onFailed: @escaping (Int)->Void) {
+        ...
     }
-}
 ```
 ### SendOTPInRegisterDevice
 |Key|Value|Description|
@@ -68,7 +56,7 @@ If API call fails, the user will receive an `errorCode`.
 ---
 
 ## OTP Verification
-Use `sendOTPInRegisterDevice()` from `GuardianAPI` to call the API that can send OTP code to the user.  
+Use `sendOTPInRegisterDevice()` from `GuardianSdk` to call the API that can send OTP code to the user.  
 Then with `verifyOTPByEmail()` and `verifyOTPBySms()`, verify user by comparing the OTP code.
 
 ### Parameter
@@ -84,25 +72,9 @@ The value must be in `Dictionary<KeyType, ValueType>` type.
 ### Example
 ```java
 // OTP Verification
-func verifyOTPByEmail(email: String, authNum: String, onSuccess: @escaping(Int, Bool, Dictionary<String, Any>)->Void, onFailed: @escaping(Int, String)->Void){
-
-    var params = Dictionary<String, Any>()
-    params["clientKey"] = K.MasterClientKey
-    params["email"] = email
-    params["authNum"] = authNum
-
-    if let seq = GuardianAPI.seq {
-        params["seq"] = seq
-    }
-    
-    apiCall(params: params, api: apiUrl, method: .post) { response in
-    ...
-        } else {
-            onSuccess(rtCode, false, data)
-        }
-        } errorCallBack: { error, errorMsg in
-            onFailed(error, errorMsg)
-        }
+func verifyOTPByEmail(email: String, authNum: String, 
+        onSuccess: @escaping(Int, Bool, Dictionary<String, Any>)->Void, 
+        onFailed: @escaping(Int, String)->Void){
     }
 ```
 ### VerityOtpResponse
@@ -126,7 +98,7 @@ If API call fails, the user will receive an `errorCode`
 ---
 
 ## Device re-registration
-Use `requestReMemberRegister()` from `GuardianService` to call the API. 
+Use `requestReMemberRegister()` from `GuardianSdk` to call the API. 
 The token verified with `VerifyOtpByEmail()` and `VerifyOtpBySms()` is required.   
 When the re-registration is complete, the user can utilize GCCS authentication as usual.
 
@@ -142,15 +114,11 @@ The value must be in `Dictionary<KeyType, ValueType>` type.
 ### Example
 ```java
 // Device registration
-public func requestReMemberRegister(memberObject : Dictionary<String, Any>, onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-    let packageName = getPackageName()
-
-    DispatchQueue.main.async {
-        DeviceInfoService().getDeviceInfo{ (data:Dictionary<String, Any>) in
+public func requestReMemberRegister(memberObject : Dictionary<String, Any>, 
+        onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, 
+        onFailed: @escaping(RtCode, String)-> Void) {
         ...
-        }
     }
-}
 ```
 ### ReRegisterClientUserResponse
 |Key|Value|Description|

@@ -18,7 +18,7 @@ This version was developed base on the LAContext class provided by iOS.
 
 ## Biometric Information Registration
 Biometric information needs to be registered for the authentication.   
-Use `registerBiometric()` from `BiometricService` to call the API.
+Use `registerBiometric()` from `GuardianSdk` to call the API.
 
 ### Parameter
 - none
@@ -26,18 +26,9 @@ Use `registerBiometric()` from `BiometricService` to call the API.
 ### Example
 ```java
 //Biometric information registration
-   public func registerBiometric(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-        let initCode = initBiometric()
-        if(initCode != .AUTH_SUCCESS) {
-            onFailed(initCode, getLocalizationMessage(rtCode : initCode))
-        } else {
-            try {
-                ...
-                onSuccess(RtCode.AUTH_SUCCESS, "", self.getBiometricTypeList())
-                }catch {
-                onFailed(RtCode.BIOMETRIC_ERROR, "")
-            }
-        }
+public func registerBiometric(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, 
+        onFailed: @escaping(RtCode, String)-> Void) {
+        ...
     }
 ```
 ### AuthBiometricResponse
@@ -61,7 +52,7 @@ More in detail can be found in the **[error code](https://developers.fnsvalue.co
 ---
 
 ## Biometric Authentication
-Use `authenticate()` from `BiometricService` to call the API.   
+Use `authenticate()` from `GuardianSdk` to call the API.   
 Fingerprint or facial information that is registered in the device will be used for authentication.   
 If there is no biometric information, PIN or pattern will be used as a substitute.
 
@@ -71,23 +62,10 @@ If there is no biometric information, PIN or pattern will be used as a substitut
 ### Example
 ```java
 // Biometric authentication
-public func authenticate(msg: String, onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String?)-> Void) {
-    let context = LAContext()
-    if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil){
-        if let domainState = context.evaluatedPolicyDomainState {
+public func authenticate(msg: String, onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, 
+        onFailed: @escaping(RtCode, String?)-> Void) {
         ...
-            if success {
-                DispatchQueue.main.async {
-                    onSuccess(RtCode.AUTH_SUCCESS, "", self.getBiometricTypeList())
-                }
-            } else {
-                DispatchQueue.main.async {
-                    onFailed(RtCode.BIOMETRIC_AUTH_FAILED, message)
-                }
-            }
-        }
     }
-}
 ```
 
 ### AuthBiometricResponse
@@ -111,7 +89,7 @@ More in detail can be found in the **[error code](https://developers.fnsvalue.co
 ---
 
 ## Biometric Information Change Detection
-Use `hasNewBiometricEnrolled()` from `BiometricService` to call the API.   
+Use `hasNewBiometricEnrolled()` from `GuardianSdk` to call the API.   
 By calling this API, changes made to the biometric information of the device can be detected.   
 That is to say the iOS SDK can figure out whether there has been a change or another biometric added to it.
 
@@ -121,19 +99,10 @@ That is to say the iOS SDK can figure out whether there has been a change or ano
 ### Example
 ```java
 // Biometric information change detection
-public func hasNewBiometricEnrolled(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-    let context = LAContext()
-    if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil){
-        if let domainState = context.evaluatedPolicyDomainState {
-            ...
-            if(strData != cData) {
-                onSuccess(RtCode.BIOMETRIC_CHANGE_ENROLLED, self.getLocalizationMessage(rtCode : RtCode.BIOMETRIC_CHANGE_ENROLLED), self.getBiometricTypeList())
-            } else {
-                onSuccess(RtCode.BIOMETRIC_NORMAL, self.getLocalizationMessage(rtCode : RtCode.BIOMETRIC_NORMAL), self.getBiometricTypeList())
-            }
-        }
+public func hasNewBiometricEnrolled(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, 
+        onFailed: @escaping(RtCode, String)-> Void) {
+        ...
     }
-}
 ```
 
 ### AuthBiometricResponse
@@ -158,7 +127,7 @@ More in detail can be found in the **[error code](https://developers.fnsvalue.co
 ---
 
 ## Biometric Information Reset
-Use `initBiometric()` from `BiometricService` to call the API.
+Use `initBiometric()` from `GuardianSdk` to call the API.
 If any biometric information has been changed, `resetBiometric()` can be used for resetting the previous biometric information.   
 In order to proceed, the user must be authenticated with his/her biometric information beforehand.   
 when the authentication is done, the previous biometric information will be deleted accordingly.
@@ -169,16 +138,9 @@ when the authentication is done, the previous biometric information will be dele
 ### Example
 ```java
 // Biometric information reset
-public func resetBiometric(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-    let context = LAContext()
-    DispatchQueue.main.async {
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
-            if let domainState = context.evaluatedPolicyDomainState {
-                ...
-                    onSuccess(RtCode.AUTH_SUCCESS, "", self.getBiometricTypeList())
-                }
-            }
-        }
+public func resetBiometric(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, 
+        onFailed: @escaping(RtCode, String)-> Void) {
+        ...
     }
 ```
 

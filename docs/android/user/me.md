@@ -21,16 +21,9 @@ registered user, not registered user, withdrawn user, temporarily suspended user
 // Check user status
 GuardianSdk.getInstance().me(new GuardianResponseCallback<MeResponse>() {
     @Override
-    public void onSuccess(MeResponse result) {
-        Log.i(TAG, "Result code : " + result.rtCode);
-        Log.i(TAG, "Member ID : " + result.data.userKey);
-        Log.i(TAG, "Member's name : " + result.data.name);
-        Log.i(TAG, "Member's email : " + result.data.email);
-        Log.i(TAG, "Member's phone number : " + result.data.phoneNum);
-        Log.i(TAG, "Member's additional authentication type : " + result.data.authType);
-        Log.i(TAG, "Member last updated date : " + result.data.uptDt);
+    public void onSuccess(MeResponse result){
+        ...
     }
-
     @Override
     public void onFailed(ErrorResult errorResult) {
         Log.e(TAG, "Error code : " + errorResult.getErrorCode());

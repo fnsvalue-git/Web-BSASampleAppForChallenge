@@ -14,7 +14,7 @@ iOS SDK의 GCCS 기기 재등록 방법을 안내합니다.
 회원 여부를 먼저 확인한 뒤 이메일 또는 SMS로 OTP 코드를 발송하여 회원 검증 후 재등록을 진행합니다.
 
 ## 사용자 체크 및 OTP 발송
-사용자 체크 및 OTP 발송을 요청 합니다. `GuardianAPI`의 `sendOTPInRegisterDevice()`로 API를 호출합니다.   
+사용자 체크 및 OTP 발송을 요청 합니다. `GuardianSdk`의 `sendOTPInRegisterDevice()`로 API를 호출합니다.   
 입력한 사용자 정보가 맞는 경우 이메일 또는 SMS로 OTP 코드가 전송됩니다.
 
 ### Parameter
@@ -31,24 +31,10 @@ iOS SDK의 GCCS 기기 재등록 방법을 안내합니다.
 ### Example
 ```java
 // 사용자 체크 및 OTP 발송
-func sendOTPInRegisterDevice(userKey: String, name: String, verifyType: String, verifyData: String, onSuccess: @escaping (Int, Dictionary<String, Any>)->Void, onFailed: @escaping (Int)->Void) {
-        
-    let apiUrl = apiUrl
-    
-    var params = Dictionary<String,String>()
-    params["userKey"] = userKey
-    params["name"] = name
-    params["verifyType"] = verifyType
-    params["verifyData"] = verifyData
-    params["clientKey"] = K.MasterClientKey
-
-     apiCall(params: params, api: apiUrl, method: .post) { response in
-    ...
-        onSuccess(rtCode, data)
-    } errorCallBack: { errorCode, errorMsg in
-        onFailed(errorCode)
+func sendOTPInRegisterDevice(userKey: String, name: String, verifyType: String, verifyData: String, 
+        onSuccess: @escaping (Int, Dictionary<String, Any>)->Void, onFailed: @escaping (Int)->Void) {
+        ...
     }
-}
 ```
 ### SendOTPInRegisterDevice
 |Key|Value|Description|
@@ -71,7 +57,7 @@ func sendOTPInRegisterDevice(userKey: String, name: String, verifyType: String, 
 ---
 
 ## OTP 검증
-OTP 코드 검증을 요청합니다. `GuardianAPI` 의 `sendOTPInRegisterDevice()`로 OTP 코드 전송 API를 요청합니다.   
+OTP 코드 검증을 요청합니다. `GuardianSdk` 의 `sendOTPInRegisterDevice()`로 OTP 코드 전송 API를 요청합니다.   
 그 다음 `verifyOTPByEmail()`와 `verifyOTPBySms()`를 통해 사용자가 입력한 OTP를 검증합니다.
 
 ### Parameter
@@ -87,24 +73,10 @@ OTP 코드 검증을 요청합니다. `GuardianAPI` 의 `sendOTPInRegisterDevice
 ### Example
 ```java
 // OTP 검증
-func verifyOTPByEmail(email: String, authNum: String, onSuccess: @escaping(Int, Bool, Dictionary<String, Any>)->Void, onFailed: @escaping(Int, String)->Void){
-                
-    var params = Dictionary<String, Any>()
-    params["clientKey"] = K.MasterClientKey
-    params["email"] = email
-    params["authNum"] = authNum
-    
-    if let seq = GuardianAPI.seq {
-        params["seq"] = seq
-    }
-            
-    apiCall(params: params, api: apiUrl, method: .post) { response in
+func verifyOTPByEmail(email: String, authNum: String, 
+        onSuccess: @escaping(Int, Bool, Dictionary<String, Any>)->Void, 
+        onFailed: @escaping(Int, String)->Void){
         ...
-        } else {
-            onSuccess(rtCode, false, data)
-        }
-    } errorCallBack: { error, errorMsg in
-        onFailed(error, errorMsg)
     }
 ```
 ### VerifyOtpByEmail, VerifyOtpBySms
@@ -128,7 +100,7 @@ OTP 코드 검증 API 호출 실패 시 `errorCode`가 수신됩니다.
 ---
 
 ## 기기 재등록
-`GuardianService`의 `requestReMemberRegister()`로 기기 재등록 API를 요청합니다.   
+`GuardianSdk`의 `requestReMemberRegister()`로 기기 재등록 API를 요청합니다.   
 `VerifyOtpByEmail()`와 `VerifyOtpBySms()`를 통해 검증된 토큰 값이 필요하며, 재등록 절차가 완료되면 기존과 동일하게 GCCS 인증을 사용할 수 있습니다.
 
 ### Parameter
@@ -142,15 +114,11 @@ OTP 코드 검증 API 호출 실패 시 `errorCode`가 수신됩니다.
 ### Example
 ```java
 // 기기 재등록
-public func requestReMemberRegister(memberObject : Dictionary<String, Any>, onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-    let packageName = getPackageName()
-
-    DispatchQueue.main.async {
-        DeviceInfoService().getDeviceInfo{ (data:Dictionary<String, Any>) in
+public func requestReMemberRegister(memberObject : Dictionary<String, Any>, 
+        onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, 
+        onFailed: @escaping(RtCode, String)-> Void) {
         ...
-        }
     }
-}
 ```
 ### ReRegisterClientUserResponse
 |Key|Value|Description|

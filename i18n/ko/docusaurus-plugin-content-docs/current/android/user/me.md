@@ -21,13 +21,7 @@ Android SDK의 회원 여부 및 상태 조회 방법을 안내합니다.
 GuardianSdk.getInstance().me(new GuardianResponseCallback<MeResponse>() {
     @Override
     public void onSuccess(MeResponse result) {
-        Log.i(TAG, "결과코드 : " + result.rtCode);
-        Log.i(TAG, "회원 아이디 : " + result.data.userKey);
-        Log.i(TAG, "회원 이름 : " + result.data.name);
-        Log.i(TAG, "회원 이메일 : " + result.data.email);
-        Log.i(TAG, "회원 핸드폰 번호 : " + result.data.phoneNum);
-        Log.i(TAG, "회원 추가 인증 타입 : " + result.data.authType);
-        Log.i(TAG, "회원 마지막 업데이트 일자 : " + result.data.uptDt);
+        ...
     }
 
     @Override

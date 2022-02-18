@@ -24,7 +24,7 @@ If the client needs registration, note that the FCM server key is indispensable.
 
 ## FCM Push notification token registration
 FCM push token should be registered so that it can be used for notifying authentication request.
-By using the `requestTokenUpdate()` from `GuardianService`, the FCM push token that was generated from the iOS device can be called to be registered and updated.
+By using the `requestTokenUpdate()` from `GuardianSdk`, the FCM push token that was generated from the iOS device can be called to be registered and updated.
 
 FCM push token can be changed due to expiration, etc. It should be updated by calling `requestTokenUpdate()`.
 
@@ -36,26 +36,9 @@ FCM push token can be changed due to expiration, etc. It should be updated by ca
 ### Example
 ```java
 // FCM Push notification token registered
-public func requestTokenUpdate(token : String, onSuccess: @escaping(RtCode, String)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-    let apiUrl = "me/token"
-
-    var params = getCommonParam()
-    params["deviceId"] = getUUid()
-    params["token"] = token
-    params["osVersion"] = getOSVersion()
-    params["appVersion"] = getAppVersion()
-
-    self.callHttpMethod(params: params, api: apiUrl, method: .put) { (data: JSON) in
-        let rtCode = data["rtCode"].intValue
-        let rtMsg = data["rtMsg"].string ?? ""
-        if(rtCode == RtCode.AUTH_SUCCESS.rawValue) {
-            onSuccess(RtCode(rawValue: rtCode)!, rtMsg)
-        } else {
-            self.onCallbackFailed(rtCode: RtCode(rawValue: rtCode)!, onFailed: onFailed)
-        }
-    } errorCallBack: { (errorCode, errorMsg) in
-            onFailed(RtCode.API_ERROR, errorMsg)
-        }
+public func requestTokenUpdate(token : String, onSuccess: @escaping(RtCode, String)-> Void, 
+        onFailed: @escaping(RtCode, String)-> Void) {
+        ...
     }
 ```
 ### TokenResponse

@@ -9,7 +9,7 @@ iOS SDK의 회원 여부 및 상태 조회 방법을 안내합니다.
 <br/>
 
 ## 회원 상태 조회
-가입된 회원의 상태를 조회합니다. `GuardianAPI`의 `getMe()`로 API를 요청합니다.   
+가입된 회원의 상태를 조회합니다. `GuardianSdk`의 `getMe()`로 API를 요청합니다.   
 우선적으로 회원 여부를 확인할 수 있으며, 탈퇴 및 일시정지와 같은 회원 상태를 포함하여 종합적으로 조회합니다.
 
 ### Parameter
@@ -20,23 +20,8 @@ iOS SDK의 회원 여부 및 상태 조회 방법을 안내합니다.
 // 회원 상태 조회
 public func getMe(onSuccess: @escaping(Int, String, String, String, Int)->Void,
                   onFailed: @escaping(Int, String)->Void) {
-    let apiUrl = "/me"
-    let params = Dictionary<String, Any>()
-    
-    apiCall(params: params, api: apiUrl) { response in
-        print("getMe => \(response)")
-        let rtCode = response["rtCode"].intValue
-        let data = response["data"].dictionaryObject!
-        let userKey = data["userKey"] as? String ?? ""
-        let name = data["name"] as? String ?? ""
-        let authType = data["authType"] as? Int ?? 3
-        let rawRegDt = data["regDt"] as? String
-        
-    } errorCallBack: { errCode, errMsg in
-        print("Error getMe => \(errCode) \(errMsg)")
-        onFailed(errCode, errMsg)
+        ...
     }
-}
 ```
 
 ### MeResponse

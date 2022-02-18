@@ -19,7 +19,7 @@ GCCS 인증 후 추가 인증 수단으로 생체 인증을 활용합니다.
 
 ## 생체 정보 등록
 생체 인증을 사용하기 위해서는 우선적으로 생체 정보 등록이 필요합니다.   
-생체 정보를 등록하기 위해 `BiometricService`의 `registerBiometric()`로 API를 호출합니다.   
+생체 정보를 등록하기 위해 `GuardianSdk`의 `registerBiometric()`로 API를 호출합니다.   
 
 ### Parameter
 - none
@@ -27,18 +27,8 @@ GCCS 인증 후 추가 인증 수단으로 생체 인증을 활용합니다.
 ### Example
 ```java
 // 생체 정보 등록
-   public func registerBiometric(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-        let initCode = initBiometric()
-        if(initCode != .AUTH_SUCCESS) {
-            onFailed(initCode, getLocalizationMessage(rtCode : initCode))
-        } else {
-            try {
-                ...
-                onSuccess(RtCode.AUTH_SUCCESS, "", self.getBiometricTypeList())
-                }catch {
-                onFailed(RtCode.BIOMETRIC_ERROR, "")
-            }
-        }
+public func registerBiometric(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
+        ...
     }
 ```
 
@@ -63,7 +53,7 @@ GCCS 인증 후 추가 인증 수단으로 생체 인증을 활용합니다.
 ---
 
 ## 생체 인증
-생체 인증을 위해 `BiometricService` 의 `authenticate()`로 API를 호출합니다.   
+생체 인증을 위해 `GuardianSdk` 의 `authenticate()`로 API를 호출합니다.   
 사용자 디바이스에 등록된 지문 또는 얼굴 정보로 인증합니다.  
 만약 생체 정보를 사용하지 않는 경우 등록된 패턴 또는 비밀번호를 사용하여 인증합니다.
 
@@ -73,23 +63,10 @@ GCCS 인증 후 추가 인증 수단으로 생체 인증을 활용합니다.
 ### Example
 ```java
 // 생체 인증
-public func authenticate(msg: String, onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String?)-> Void) {
-    let context = LAContext()
-    if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil){
-        if let domainState = context.evaluatedPolicyDomainState {
+public func authenticate(msg: String, onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, 
+        onFailed: @escaping(RtCode, String?)-> Void) {
         ...
-            if success {
-                DispatchQueue.main.async {
-                    onSuccess(RtCode.AUTH_SUCCESS, "", self.getBiometricTypeList())
-                }
-            } else {
-                DispatchQueue.main.async {
-                    onFailed(RtCode.BIOMETRIC_AUTH_FAILED, message)
-                }
-            }
-        }
     }
-}
 ```
 
 ### AuthBiometricResponse
@@ -113,7 +90,7 @@ public func authenticate(msg: String, onSuccess: @escaping(RtCode, String, Array
 ---
 
 ## 생체 정보 변경 확인
-생체 인증 정보의 변경 유무를 확인합니다. `BiometricService`의 `hasNewBiometricEnrolled()`로 API를 호출합니다.  
+생체 인증 정보의 변경 유무를 확인합니다. `GuardianSdk`의 `hasNewBiometricEnrolled()`로 API를 호출합니다.  
 사용자가 디바이스에 등록한 생체 정보를 변경하거나 추가로 등록한 경우, 생체 정보 변경을 확인합니다.
 
 ### Parameter
@@ -122,19 +99,10 @@ public func authenticate(msg: String, onSuccess: @escaping(RtCode, String, Array
 ### Example
 ```java
 // 생체 정보 변경 확인
-public func hasNewBiometricEnrolled(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-    let context = LAContext()
-    if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil){
-        if let domainState = context.evaluatedPolicyDomainState {
-            ...
-            if(strData != cData) {
-                onSuccess(RtCode.BIOMETRIC_CHANGE_ENROLLED, self.getLocalizationMessage(rtCode : RtCode.BIOMETRIC_CHANGE_ENROLLED), self.getBiometricTypeList())
-            } else {
-                onSuccess(RtCode.BIOMETRIC_NORMAL, self.getLocalizationMessage(rtCode : RtCode.BIOMETRIC_NORMAL), self.getBiometricTypeList())
-            }
-        }
+public func hasNewBiometricEnrolled(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, 
+        onFailed: @escaping(RtCode, String)-> Void) {
+        ...
     }
-}
 ```
 
 ### AuthBiometricResponse
@@ -159,7 +127,7 @@ public func hasNewBiometricEnrolled(onSuccess: @escaping(RtCode, String, Array<[
 ---
 
 ## 생체 정보 초기화
-`BiometricService`의 `initBiometric()`로 API를 호출하여 만약 생체 정보가 변경된 경우 `resetBiometric()`로 초기화를 진행합니다.    
+`GuardianSdk`의 `initBiometric()`로 API를 호출하여 만약 생체 정보가 변경된 경우 `resetBiometric()`로 초기화를 진행합니다.    
 기존의 생체 정보로 먼저 생체 인증이 성공한 경우에만 생체 정보 초기화가 가능합니다.
 
 ### Parameter
@@ -169,15 +137,7 @@ public func hasNewBiometricEnrolled(onSuccess: @escaping(RtCode, String, Array<[
 ```java
 // 생체 정보 초기화
 public func resetBiometric(onSuccess: @escaping(RtCode, String, Array<[String:String]>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-    let context = LAContext()
-    DispatchQueue.main.async {
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
-            if let domainState = context.evaluatedPolicyDomainState {
-                ...
-                    onSuccess(RtCode.AUTH_SUCCESS, "", self.getBiometricTypeList())
-            }
-        }
-    }
+        ...
 }
 ```
 

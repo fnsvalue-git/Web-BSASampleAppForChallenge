@@ -30,12 +30,6 @@ Android SDK의 GCCS 기기 재등록 방법을 안내합니다.
 ### Example
 ```java
 // 사용자 체크 및 OTP 발송
-Map<String, Object> params = new HashMap<>();
-params.put("userKey", "fnstest");
-params.put("name", "test");
-params.put("verifyType", "CMMDUP001");
-params.put("verifyData", "fnstest@fnsvalue.co.kr");
-
 GuardianSdk.getInstance().verityUserToOtp(params, new GuardianResponseCallback<VerityUserToOtpResponse>() {
     @Override
     public void onSuccess(VerityUserToOtpResponse result) {
@@ -87,12 +81,6 @@ OTP 코드 검증을 요청합니다. `GuardianSdk` 의 `verityOtp()`로 OTP 코
 ### Example
 ```java
 // OTP 검증
-Map<String, Object> params = new HashMap<>();
-params.put("authNum", "567232");
-params.put("seq", 3);
-params.put("verifyType", "CMMDUP001");
-params.put("verifyData", "fnstest@fnsvalue.co.kr");
-
 GuardianSdk.getInstance().verityOtp(params, new GuardianResponseCallback<VerityOtpResponse>() {
     @Override
     public void onSuccess(VerityOtpResponse result) {
@@ -142,15 +130,11 @@ OTP 코드 검증 API 호출 실패 시 `errorCode`가 수신됩니다.
 ### Example
 ```java
 // OTP 검증
-Map<String, Object> params = new HashMap<>();
-params.put("disposeToken", "eyJhbGciOiJIUzM4NCJ9.eyJ1c2VyS2V5Ijoid2Fyc2hpcCIsImNsaWVudFNlcSI6MiwiY2xpZW50S2V5IjoidGVzdF9jbGllbnQiLCJ1c2VyVHlwZSI6IkNNTU1DTDAwMSIsImV4cCI6MzQ4Njk1MjgwOH0.jgsqNOJUoGm2BkphMyXqpS9PGud96HIPlade_SJ8GInVKSKbnE303KTLm-AUkA5g");
-params.put("otpType", "CMMDUP001");
-
 GuardianSdk.getInstance().reRegisterClientUser(params, new GuardianResponseCallback<ReRegisterClientUserResponse>() {
     @Override
     public void onSuccess(ReRegisterClientUserResponse result) {
         Log.i(TAG, "결과코드 : " + result.rtCode);
-}
+    }
 
     @Override
     public void onFailed(ErrorResult errorResult) {

@@ -13,7 +13,7 @@ iOS SDK provides features to register and integrate user into GCCS system by usi
 
 ## User Information Uniqueness Check
 Previous to GCCS registration, each user must have unique and original information and does not contain duplicate value.  
-Check uniqueness by using `isDuplicatedEmailOrPhoneNumber()` to call the API from `GuardianAPI`.
+Check uniqueness by using `isDuplicatedEmailOrPhoneNumber()` to call the API from `GuardianSdk`.
 
 Whether user information is unique or not can be identified upon the `verifyType`.
 
@@ -27,12 +27,7 @@ Whether user information is unique or not can be identified upon the `verifyType
 ```java
 // Checking user information uniqueness
 GuardianAPI().isDuplicatedEmailOrPhoneNumber(verifyType: "CMMDUP001",verifyData: email){data in
-        GuardianAPI().isDuplicatedEmailOrPhoneNumber(verifyType:"CMMDUP002",verifyData:fullNumber){data in
-            ...
-        }
-        onFailed:{errCode,errMsg in
-            ...
-        }
+        ...
     }
 ```
 ### RegisterClientUserResponse
@@ -53,7 +48,7 @@ If API call fails, the user will receive an `errorCode`.
 ---
 
 ## GCCS Registration
-Use `requestMemberRegister()` from `GuardianService` to call the API that can handle GCCS registration request.
+Use `requestMemberRegister()` from `GuardianSdk` to call the API that can handle GCCS registration request.
 
 ### Parameter
 |Key|Value|Description|
@@ -68,16 +63,10 @@ The value must be in `Dictionary<KeyType, ValueType>` type.
 ### Example
 ```java
 // GCCS registration
-public func requestMemberRegister(memberObject : Dictionary<String, Any>, onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, onFailed: @escaping(RtCode, String)-> Void) {
-    ...
-     if (rtCode == RtCode.AUTH_SUCCESS.rawValue){
-                onSuccess(RtCode.AUTH_SUCCESS, rtMsg, data)
-            } else {
-                self.onCallbackFailed(rtCode: RtCode(rawValue: rtCode)!, onFailed: onFailed)
-            }
-        } errorCallBack: { (errorCode, errorMsg) in
-            onFailed(RtCode.API_ERROR, errorMsg)
-        }
+public func requestMemberRegister(memberObject : Dictionary<String, Any>, 
+        onSuccess: @escaping(RtCode, String, Dictionary<String, String>)-> Void, 
+        onFailed: @escaping(RtCode, String)-> Void) {
+        ...
     }
 ```
 ### RegisterClientUserResponse
