@@ -42,6 +42,12 @@ module.exports = {
           label: 'Web',
         },
         {
+          type: 'doc',
+          docId: 'windows/intro',
+          position: 'left',
+          label: 'Windows',
+        },
+        {
           type: 'localeDropdown',
           position: 'right',
         },
@@ -64,6 +70,10 @@ module.exports = {
             {
               label: 'Web',
               to: '/docs/web/intro',
+            },
+            {
+              label: 'Windows',
+              to: '/docs/windows/intro',
             },
           ],
         },
