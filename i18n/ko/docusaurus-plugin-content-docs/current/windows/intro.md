@@ -4,7 +4,7 @@ sidebar_position: 1
 ---
 # 시작하기
 
-## Guardian Windows (윈도우 로그온)
+## Guardian Windows (윈도우 로그인)
 Guardian Windows Login은 윈도우 OS에서 Guardian-CCS 인증을 이용하기 위해 제공됩니다.   
 이 문서는 Guardian Windows Login 사용 방법을 안내 합니다.   
 
@@ -22,6 +22,12 @@ Guardian Windows Login은 윈도우 OS에서 Guardian-CCS 인증을 이용하기
 
 ---
 
-## 설치 및 사용자 메뉴얼
+## 설치 매뉴얼
 
-설치 메뉴얼 문서를 다운로드하려면 [여기를 클릭](http://192.168.0.60/GFW/etc/Guardian_for_Windows_매뉴얼_v1.8.pdf) 하세요.
+설치 매뉴얼 문서를 다운로드하려면 [여기를 클릭](http://192.168.0.60/GFW/etc/Guardian_Windows_설치_매뉴얼_v1.9.pdf) 하세요.
+
+---
+
+## 사용자 매뉴얼
+
+사용자 매뉴얼 문서를 다운로드하려면 [여기를 클릭](http://192.168.0.60/GFW/etc/Guardian_Windows_사용자_매뉴얼_v1.0.pdf) 하세요.

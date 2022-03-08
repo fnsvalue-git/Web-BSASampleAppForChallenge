@@ -3,7 +3,7 @@ sidebar_position: 1
 ---
 # Get Started
 
-## Guardian Windows (GCCS Windows Logon)
+## Guardian Windows (GCCS Windows Login)
 With the Guardian Windows Login, Guardian-CCS Authentication can be used on the Windows OS.  
 This document will describe how to make best use of the Guardian for Windows.
 
@@ -21,6 +21,12 @@ Make sure to use at least Windows 10 OS.
 
 ---
 
-## Installation and User Manual
+## Installation Manual
 
-Installation manual can be downloaded through this [link](http://192.168.0.60/GFW/etc/Guardian_for_Windows_매뉴얼_v1.8.pdf)
+Installation manual can be downloaded through this [link](http://192.168.0.60/GFW/etc/Guardian_Windows_설치_매뉴얼_v1.9.pdf)
+
+---
+
+## User Manual
+
+User manual can be downloaded through this [link](http://192.168.0.60/GFW/etc/Guardian_Windows_사용자_매뉴얼_v1.0.pdf)
