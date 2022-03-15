@@ -22,8 +22,9 @@ sidebar_position: 2
 ## 변경 이력
 버전별 변경 이력은 다음과 같습니다.
 
-|버전|변경 날짜|변경 이력|Asset URL|
-|---|---|---|---|
-|1.0.2| 2021.11.05 | - 버그 수정 및 안정화<br/>- OTP 인증 제공<br/>- TOTP 인증 제공 | `https://developers.fnsvalue.co.kr/login-component/1.0.2/guardian.js` |
-|1.0.1| 2021.09.10 | - 버그 수정 및 안정화 | `https://developers.fnsvalue.co.kr/login-component/1.0.1/guardian.js` |
-|1.0.0| 2021.07.30 | - 초기 배포<br/>- 패스워드 리스 인증 제공<br/> - QR 인증 제공 | `https://developers.fnsvalue.co.kr/login-component/1.0.0/guardian.js` |
+| 버전     |변경 날짜| 변경 이력                                          | Asset URL                                                             |
+|--------|---|------------------------------------------------|-----------------------------------------------------------------------|
+| 1.0.3  | 2022.01.25 | - web socket 버그 수정 및 안정화                       | `https://developers.fnsvalue.co.kr/login-component/1.0.3/guardian.js` |
+| 1.0.2  | 2021.11.05 | - 버그 수정 및 안정화<br/>- OTP 인증 제공<br/>- TOTP 인증 제공 | `https://developers.fnsvalue.co.kr/login-component/1.0.2/guardian.js` |
+| 1.0.1  | 2021.09.10 | - 버그 수정 및 안정화                                  | `https://developers.fnsvalue.co.kr/login-component/1.0.1/guardian.js` |
+| 1.0.0  | 2021.07.30 | - 초기 배포<br/>- 패스워드 리스 인증 제공<br/> - QR 인증 제공    | `https://developers.fnsvalue.co.kr/login-component/1.0.0/guardian.js` |
