@@ -3,9 +3,9 @@ sidebar_label: GCCS Authentication
 sidebar_position: 2
 ---
 
-# GCCS Authentication
+# BSA Authentication
 
-This document describes how to utilize GCCS authentication in the Guardian-JS
+This document describes how to utilize BSA authentication in the BSA-JS
 
 <!-- ### requestAuth
 인증 요청을 합니다.
@@ -47,7 +47,7 @@ requestAuthCallback(userKey, successCallback, errCallback)
 ### Parameter
 |Name|Type|Description|
 |---|---|---|
-|userKey|String|Guardian CCS user account|
+|userKey|String|BSA user account|
 
 ### Example
 ```javascript
@@ -67,7 +67,7 @@ gccs.requestAuthCallback(userKey, (data) => {
 |---|---|---|
 |data|String|Token|
 
-The token will be returned if authentication succeeds, and it can be utilized for the GCCS authentication.
+The token will be returned if authentication succeeds, and it can be utilized for the BSA authentication.
 
 
 ### onError
@@ -83,8 +83,8 @@ Possible error codes are as follows.
 |ErrorCode|Description|Solution|
 |------|---|---|
 |2000|Invalid client key|Check the client key|
-|2008|Unregistered user|Check GCCS sign in status|
-|3201|Not properly linked client|After signing up for GCCS, go through Menu => My BSA => Trusted Website => Site Link and then connect with the client website|
+|2008|Unregistered user|Check BSA sign in status|
+|3201|Not properly linked client|After signing up for BSA, go through Menu => My BSA => Trusted Website => Site Link and then connect with the client website|
 |3301|Unspecified client login type|Error in specifying the client, contact the person in charge to solve this matter|
 |5001|Authentication timeout|Make request for authentication once again because previous authentication is no longer valid|
 |5005|Unauthorized user|Contact the person in charge to solve this matter|
@@ -110,7 +110,7 @@ onCancel(userKey, errCallback)
 ### Parameter
 |Name|Type|Description|
 |---|---|---|
-|userKey|String|Guardian CCS user account|
+|userKey|String|BSA user account|
 
 ### Example
 ```javascript
@@ -139,7 +139,7 @@ Possible error codes are like below.
 ---
 
 ## Set Authentication Timer
-Add callback function to check valid GCCS authentication time.   
+Add callback function to check valid BSA authentication time.   
 The remaining time for authentication will be displayed and if expired, the user should request for authentication once again
 ```
 setAuthTimer(onCallBack)
@@ -167,7 +167,7 @@ Valid authentication time will be returned as the result of a callback function.
 ---
 
 ## Set Authentication Status
-Add callback function to check GCCS authentication status.   
+Add callback function to check BSA authentication status.   
 It is possible to see the authentication status during the whole process from authentication request to the final authentication.
 
 ```

@@ -4,11 +4,11 @@ sidebar_position: 4
 ---
 
 # OTP Authentication
-This document describes how to utilize the OTP Authentication in the Guardian-JS
+This document describes how to utilize the OTP Authentication in the BSA-JS
 
 ## Function Description
 OTP Authentication can be used via mobile devices without an ID by following the steps below.   
-First, click `OTP Authentication` from the main screen of `Guardian-CCS` app and then get the OTP code. Proceed on authentication by entering the OTP code.
+First, click `OTP Authentication` from the main screen of `BSA` app and then get the OTP code. Proceed on authentication by entering the OTP code.
 
 ## OTP Authentication request
 
@@ -54,7 +54,7 @@ gccs.requestOtpCallback(otpInput, (data) => {
 |------|---|---|
 |data|String|Token|
 
-The token will be returned if authentication succeeds, and it can be utilized for the GCCS authentication.
+The token will be returned if authentication succeeds, and it can be utilized for the BSA authentication.
 
 
 ### onError
@@ -69,8 +69,8 @@ Possible error codes are as follows.
 |ErrorCode|Description|Solution|
 |------|---|---|
 |2000|Invalid client key|Check the client key|
-|2008|Unregistered user|Check GCCS sign in status|
-|3201|Not properly linked client|After signing up for GCCS, go through Menu => My BSA => Trusted Website => Site Link and connect with the client website|
+|2008|Unregistered user|Check BSA sign in status|
+|3201|Not properly linked client|After signing up for BSA, go through Menu => My BSA => Trusted Website => Site Link and connect with the client website|
 |3301|Unspecified client login type|Error with specifying the client, contact the person in charge to solve this matter|
 |5001|Authentication timeout|Make request for authentication once again, because previous authentication is no longer valid|
 |5005|Unauthorized user|Contact the person in charge to solve this matter|
@@ -103,7 +103,7 @@ Possible error codes are as follows.
 |------|---|---|
 |2000|Invalid client key|Check the client key|
 |3005|OTP code verification failure|Make request for re-verification|
-|3201|Not properly linked client|After signing up for GCCS, go through Menu => My BSA => Trusted Website => Site Link and connect with the client website|
+|3201|Not properly linked client|After signing up for BSA, go through Menu => My BSA => Trusted Website => Site Link and connect with the client website|
 
 ---
 
@@ -183,7 +183,7 @@ Valid authentication time will be returned as the result of a callback function.
 ---
 
 ## Set OTP Authentication Status
-Add callback function to check GCCS authentication status.   
+Add callback function to check BSA authentication status.   
 It is possible to see the authentication status during the whole process from authentication request to the final authentication.
 
 ```

@@ -4,12 +4,12 @@ sidebar_position: 5
 ---
 
 # TOTP Authentication
-This document describes how to utilize the TOTP authentication in the Guardian-JS.   
+This document describes how to utilize the TOTP authentication in the BSA-JS.   
 TOTP authentication can be used when the mobile device cannot access the internet.
 
 ## Function Description
 TOTP authentication can be used via mobile devices with the ID and TOTP code by following the steps below.   
-First, click `TOTP Authentication` from the main screen of `Guardian-CCS` app and then get the TOTP code. Proceed on authentication by entering the ID and TOTP code.
+First, click `TOTP Authentication` from the main screen of `BSA` app and then get the TOTP code. Proceed on authentication by entering the ID and TOTP code.
 
 ## TOTP Authentication Request
 When the user enters the TOTP code to authenticate, the API call will be made with `requestTotpCallback()`.
@@ -22,7 +22,7 @@ requestTotpCallback(userKey, totpCode, successCallback, errCallback)
 ### Parameter
 |Name|Type|Description|
 |---|---|---|
-|userKey|String|Guardian CCS user account|
+|userKey|String|BSA user account|
 |totpCode|String|TOTP code that user entered|
 
 ### Example
@@ -43,7 +43,7 @@ gccs.requestTotpCallback(userKey, totpCode, (data) => {
 |------|---|---|
 |data|String|Token|
 
-The token will be returned if authentication succeeds, and it can be utilized for the GCCS authentication.
+The token will be returned if authentication succeeds, and it can be utilized for the BSA authentication.
 
 
 ### onError
@@ -58,9 +58,9 @@ Possible error codes are as follows.
 |ErrorCode|Description|Solution|
 |------|---|---|
 |2000|Invalid client key|Check the client key|
-|2008|Unregistered user|Check GCCS sign in status|
+|2008|Unregistered user|Check BSA sign in status|
 |3005|TOTP code verification failure|Make request for re-verification|
-|3201|Not properly linked client|After signing up for GCCS, go through Menu => My BSA => Trusted Website => Site Link and connect with the client website|
+|3201|Not properly linked client|After signing up for BSA, go through Menu => My BSA => Trusted Website => Site Link and connect with the client website|
 |3301|Unspecified client login type|Error with specifying the client, contact the person in charge to solve this matter|
 |5001|Authentication timeout|Make request for authentication once again because previous authentication is no longer valid|
 |5005|Unauthorized user|Contact the person in charge to solve this matter|

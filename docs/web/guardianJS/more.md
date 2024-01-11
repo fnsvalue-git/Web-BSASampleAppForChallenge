@@ -2,13 +2,13 @@
 sidebar_label: Learn more
 sidebar_position: 6
 ---
-# Learn more about Guardian-JS
+# Learn more about BSA-JS
 
 ## Demo page
 
 Some functions are available to experience in the [Demo page link](https://developers.fnsvalue.co.kr/guardian-js/demo/)
 
-The demo page uses the latest version of Guardian-JS
+The demo page uses the latest version of BSA-JS
 
 - Asset URL
 ```

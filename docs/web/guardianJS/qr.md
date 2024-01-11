@@ -4,16 +4,16 @@ sidebar_position: 3
 ---
 
 # QR Authentication
-This document describes how to utilize QR authentication in the Guardian-JS
+This document describes how to utilize QR authentication in the BSA-JS
 
 ## Function Description
 QR Authentication can be used via mobile devices without an ID by following the steps below.   
-First, create a QR code implemented by `guardian.js` and then click `QR Authentication` on the main screen of `Guardian-CCS` app to activate the QR Scanner. 
+First, create a QR code implemented by `bsa.js` and then click `QR Authentication` on the main screen of `BSA` app to activate the QR Scanner. 
 
 
 ## QR Authentication Request
 When authentication is requested, API calls are made with `requestQrCallback()`.   
-Upon the request of QR authentication, a QR code will be created on the `<canvas/> tag` that has been set up with `Guardian-JS`. The result will be returned with `onSuccess` if successfully authenticated.
+Upon the request of QR authentication, a QR code will be created on the `<canvas/> tag` that has been set up with `BSA-JS`. The result will be returned with `onSuccess` if successfully authenticated.
 
 ```
 requestQrCallback(qrCanvas, successCallback, errCallback)
@@ -22,7 +22,7 @@ requestQrCallback(qrCanvas, successCallback, errCallback)
 ### Parameter
 |Name|Type|Description|
 |---|---|---|
-|qrCanvas|Element|`<canvas/>` element to create Guardian CCS QR code|
+|qrCanvas|Element|`<canvas/>` element to create BSA QR code|
 
 ### Example
 ```javascript
@@ -42,7 +42,7 @@ gccs.requestQrCallback(qrCanvas, (data) => {
 |------|---|---|
 |data|String|Token|
 
-The token will be returned if authentication succeeds, and it can be utilized for the GCCS authentication.
+The token will be returned if authentication succeeds, and it can be utilized for the BSA authentication.
 
 ### onError
 |Key|Type|Description|
@@ -56,8 +56,8 @@ Possible error codes are as follows.
 |ErrorCode|Description|Solution|
 |------|---|---|
 |2000|Invalid client key|Check the client key|
-|2008|Unregistered user|Check GCCS sign in status|
-|3201|Not properly linked client|After signing up for GCCS, go through Menu => My BSA => Trusted Website => Site Link and connect with the client website|
+|2008|Unregistered user|Check BSA sign in status|
+|3201|Not properly linked client|After signing up for BSA, go through Menu => My BSA => Trusted Website => Site Link and connect with the client website|
 |5001|Authentication timeout|Make request for authentication once again, because previous authentication is no longer valid|
 |5005|Unauthorized user|Contact the person in charge to solve this matter|
 |5006|Temporarily suspended user|Contact the person in charge to solve this matter|
@@ -69,7 +69,7 @@ Possible error codes are as follows.
 |5017|Failed to send push notification|Problems have occurred with the FCM(Firebase Cloud Messaging), etc. <br/>If it happens constantly, please inquire the person in charge|
 |5022|Verification failure|Node verification failed<br/>If it happens constantly, please inquire the person in charge|
 |5023|Invalid QR ID|It can occur when the authentication has expired. In this case, re-authentication should be requested |
-|5024|Invalid QR URL CLIENT|It can occur when the QR code was scanned through another app other than Guardian CCS. It must be scanned by Guardian-CCS app only |
+|5024|Invalid QR URL CLIENT|It can occur when the QR code was scanned through another app other than BSA. It must be scanned by BSA app only |
 
 ---
 
@@ -85,7 +85,7 @@ onQrCancel(qrCanvas, errCallback)
 ### Parameter
 |Name|Type|Description|
 |---|---|---|
-|qrCanvas|Element|`<canvas/>` element to create Guardian CCS QR code|
+|qrCanvas|Element|`<canvas/>` element to create BSA QR code|
 
 ### Example
 ```html
@@ -119,7 +119,7 @@ Possible error codes are like below.
 ---
 
 ## Set QR Authentication Timer
-Add callback function to check valid GCCS QR Authentication time.   
+Add callback function to check valid BSA QR Authentication time.   
 The remaining time for authentication will be displayed and if expired, the user should request for authentication again.
 
 ```
@@ -147,7 +147,7 @@ Valid authentication time will be returned as the result of a callback function.
 ---
 
 ## Set QR Authentication Status
-Add callback function to check GCCS authentication status.   
+Add callback function to check BSA authentication status.   
 It is possible to see the authentication status during the whole process from authentication request to the final authentication.
 
 ```

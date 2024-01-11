@@ -55,7 +55,7 @@ It is a description of how to get the authentication result(token) from the Logi
 
 ###  Specific Function Declaration
 To get the authentication result, add `onGuardianSuccess` function on the script.   
-If successful, authentication result and the token will be given through `onGuardianSuccess` so that the token can be used for GCCS functions.
+If successful, authentication result and the token will be given through `onGuardianSuccess` so that the token can be used for BSA functions.
 ```
 onGuardianSuccess(token)
 ```
@@ -90,7 +90,7 @@ const gccs = new Guardian();
 
 #### Callback Function Setup
 Set callback function to get the authentication result.   
-After the authentication is complete, the token will be returned and used for GCCS functions.
+After the authentication is complete, the token will be returned and used for BSA functions.
 
 
 ```
